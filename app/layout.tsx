@@ -29,7 +29,12 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <SidebarProvider>
+        <SidebarProvider
+        style={
+          {
+            "--sidebar-width": "350px",
+          } as React.CSSProperties
+        }>
           <AppSidebar />
           <main>
             <SidebarTrigger />
