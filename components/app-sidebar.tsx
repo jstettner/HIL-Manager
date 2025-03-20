@@ -1,3 +1,7 @@
+"use client"
+
+import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { BedDouble, LayoutDashboard, FlaskConical, Split, LifeBuoy, Settings } from "lucide-react"
 
 import {
@@ -46,20 +50,22 @@ const items = [
 ]
 
 export function AppSidebar() {
+  const pathname = usePathname()
+
   return (
     <Sidebar variant="sidebar" collapsible="offcanvas" side="left">
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel className="text-4xl">Halidom</SidebarGroupLabel>
+          <SidebarGroupLabel className="text-lg blue-shiny">Halidom</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
-                    <a href={item.url}>
+                    <Link href={item.url}>
                       <item.icon />
                       <span>{item.title}</span>
-                    </a>
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}

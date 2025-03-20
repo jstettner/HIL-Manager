@@ -76,6 +76,15 @@
   --sidebar-accent-foreground: oklch(0.21 0.006 285.885);
   --sidebar-border: oklch(0.92 0.004 286.32);
   --sidebar-ring: oklch(0.705 0.015 286.067);
+  --shiny-1: rgba(1, 115, 255, 1);
+  --shiny-2: rgba(87, 160, 253, 1);
+  --shiny-3: rgba(49, 197, 249, 1);
+  --shiny-4: rgba(87, 160, 253, 1);
+  --shiny-5: rgba(16, 179, 248, 1);
+  --shiny-6: rgba(87, 160, 253, 1);
+  --shiny-7: rgba(49, 197, 249, 1);
+  --shiny-8: rgba(87, 160, 253, 1);
+  --shiny-9: rgba(1, 115, 255, 1);
 }
 
 .dark {
@@ -119,4 +128,30 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.blue-shiny{
+  background: linear-gradient(
+    85deg,
+    var(--shiny-1) 10%,
+    var(--shiny-2) 20%,
+    var(--shiny-3) 30%,
+    var(--shiny-4) 40%,
+    var(--shiny-5) 50%, 
+    var(--shiny-6) 60%,
+    var(--shiny-7) 70%,
+    var(--shiny-8) 80%,
+    var(--shiny-9) 90%
+  );
+  background-size: 300% 140%;
+  animation: gradient-shift 15s ease infinite;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent !important;
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
