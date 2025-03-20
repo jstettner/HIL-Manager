@@ -15,32 +15,32 @@ import {
 const items = [
   {
     title: "Overview",
-    url: "#",
+    url: "/overview",
     icon: LayoutDashboard,
   },
   {
     title: "Testcases",
-    url: "#",
+    url: "/testcases",
     icon: FlaskConical,
   },
   {
     title: "Testbeds",
-    url: "#",
+    url: "/testbeds",
     icon: BedDouble,
   },
   {
     title: "MCP",
-    url: "#",
+    url: "/mcp",
     icon: Split,
   },
   {
     title: "Support",
-    url: "#",
+    url: "/support",
     icon: LifeBuoy,
   },
   {
     title: "Settings",
-    url: "#",
+    url: "/settings",
     icon: Settings,
   },
 ]
