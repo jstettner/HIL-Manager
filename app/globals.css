@@ -131,6 +131,9 @@
 }
 
 .blue-shiny{
+  stroke: var(--shiny-1);
+  stroke-width: 2;
+  color: var(--shiny-1);
   background: linear-gradient(
     85deg,
     var(--shiny-1) 10%,

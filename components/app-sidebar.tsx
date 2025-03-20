@@ -1,8 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { BedDouble, LayoutDashboard, FlaskConical, Split, LifeBuoy, Settings } from "lucide-react"
+import { BedDouble, LayoutDashboard, FlaskConical, Split, LifeBuoy, Settings, Radar } from "lucide-react"
 
 import {
   Sidebar,
@@ -13,6 +12,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarHeader,
 } from "@/components/ui/sidebar"
 
 // Menu items.
@@ -50,13 +50,18 @@ const items = [
 ]
 
 export function AppSidebar() {
-  const pathname = usePathname()
 
   return (
     <Sidebar variant="sidebar" collapsible="offcanvas" side="left">
+      <SidebarHeader>
+        <div className="flex flex-row items-center gap-2 p-2">
+          <Radar className="w-6 h-6 blue-shiny" />
+          <h1 className="text-lg blue-shiny">Halidom</h1>
+        </div>
+      </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel className="text-lg blue-shiny">Halidom</SidebarGroupLabel>
+          <SidebarGroupLabel>Brain</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {items.map((item) => (
