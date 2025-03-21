@@ -3,17 +3,14 @@
 import * as React from "react"
 import {
   LifeBuoy,
-  Command,
+  Castle,
   Send,
   LayoutDashboard,
   FlaskConical,
   BedDouble,
-  Split,
 } from "lucide-react"
 
 import { NavMain } from "@/components/nav-main"
-import { NavProjects } from "@/components/nav-projects"
-import { NavSecondary } from "@/components/nav-secondary"
 import { NavUser } from "@/components/nav-user"
 import {
   Sidebar,
@@ -43,8 +40,8 @@ const data = {
           url: "/dashboard",
         },
         {
-          title: "History",
-          url: "/history",
+          title: "Changesets",
+          url: "/changesets",
         },
       ]
     },
@@ -107,11 +104,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
               <a href="#">
-                <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
-                  <Command className="size-4" />
+                <div className="blue-shiny flex aspect-square size-8 items-center justify-center rounded-lg">
+                  <Castle className="size-5 text-white" />
                 </div>
                 <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-medium">Acme Inc</span>
+                  <span className="truncate font-medium">HalidomAI</span>
                   <span className="truncate text-xs">Enterprise</span>
                 </div>
               </a>
