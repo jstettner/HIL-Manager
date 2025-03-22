@@ -56,8 +56,8 @@ export default async function TestcasesPage({
     <div className="p-6">
       <div className="flex flex-row items-center gap-2 mb-6">
         <FlaskConical className="w-6 h-6" />
-        <div className="flex flex-row items-end gap-2">
-          <h1 className="text-2xl font-semibold">Test Library</h1>
+        <div className="flex flex-row items-baseline gap-2">
+          <h1 className="text-2xl font-dotgothic">Test Library</h1>
           <h3 className="text-xl font-muted-foreground">Your Go-To Tests</h3>
         </div>
       </div>
@@ -74,7 +74,7 @@ export default async function TestcasesPage({
         <TableBody>
           {currentTestCases.map((testCase) => (
             <TableRow key={testCase.id} className="border-b">
-              <TableCell className="p-3 font-medium">{testCase.name}</TableCell>
+              <TableCell className="p-3">{testCase.name}</TableCell>
               <TableCell className="p-3 text-muted-foreground">
                 {testCase.description}
               </TableCell>
