@@ -3,7 +3,7 @@
 import * as React from "react"
 import {
   LifeBuoy,
-  Castle,
+  Heading,
   Send,
   LayoutDashboard,
   FlaskConical,
@@ -104,8 +104,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
               <a href="#">
-                <div className="blue-shiny flex aspect-square size-8 items-center justify-center rounded-lg">
-                  <Castle className="size-5 text-white" />
+                <div className="flex aspect-square size-8 items-center justify-center rounded-lg" style={{ background: `url('/images/square-grad.png')`, backgroundSize: 'cover' }}>
+                  <Heading className="size-5 text-white" />
                 </div>
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-medium">HalidomAI</span>
