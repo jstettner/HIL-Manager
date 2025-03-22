@@ -95,7 +95,7 @@ const data = {
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar
-      className="border-r border-stone-500"
+      className="border-r"
       variant="inset"
       {...props}
     >
