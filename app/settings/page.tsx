@@ -1,4 +1,4 @@
-import { Settings } from "lucide-react"
+import { Settings } from "lucide-react";
 
 export default function SettingsPage() {
   return (
@@ -12,5 +12,5 @@ export default function SettingsPage() {
         <p>Configure your Halidom dashboard settings</p>
       </div>
     </div>
-  )
+  );
 }

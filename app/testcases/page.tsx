@@ -1,15 +1,14 @@
-import { FlaskConical } from "lucide-react"
-import { testCases } from "@/data/sample-data"
+import { FlaskConical } from "lucide-react";
+import { testCases } from "@/data/sample-data";
 
 import {
   Pagination,
   PaginationContent,
-  PaginationEllipsis,
   PaginationItem,
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from "@/components/ui/pagination"
+} from "@/components/ui/pagination";
 
 import {
   Table,
@@ -19,46 +18,46 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table"
-
+} from "@/components/ui/table";
 
 export default async function TestcasesPage({
   searchParams,
 }: {
-  searchParams?: { [key: string]: string | string[] | undefined }
+  searchParams?: { [key: string]: string | string[] | undefined };
 }) {
-  const page = typeof searchParams?.page === 'string' ? parseInt(searchParams.page) : 1
-  const itemsPerPage = 10
-  const totalItems = testCases.length
-  const totalPages = Math.ceil(totalItems / itemsPerPage)
-  
-  const startIndex = (page - 1) * itemsPerPage
-  const endIndex = startIndex + itemsPerPage
-  const currentTestCases = testCases.slice(startIndex, endIndex)
+  const searchParamsObj = await searchParams;
+  const page =
+    typeof searchParamsObj?.page === "string"
+      ? parseInt(searchParamsObj.page)
+      : 1;
+  const itemsPerPage = 10;
+  const totalItems = testCases.length;
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+  const startIndex = (page - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentTestCases = testCases.slice(startIndex, endIndex);
 
   const generatePaginationItems = () => {
-    const items = []
+    const items = [];
     for (let i = 1; i <= totalPages; i++) {
       items.push(
         <PaginationItem key={i}>
-          <PaginationLink 
-            href={`/testcases?page=${i}`}
-            isActive={page === i}
-          >
+          <PaginationLink href={`/testcases?page=${i}`} isActive={page === i}>
             {i}
           </PaginationLink>
-        </PaginationItem>
-      )
+        </PaginationItem>,
+      );
     }
-    return items
-  }
+    return items;
+  };
 
   return (
     <div className="p-6">
       <div className="flex flex-row items-center gap-2 mb-6">
         <FlaskConical className="w-6 h-6" />
         <div className="flex flex-row items-end gap-2">
-          <h1 className="text-2xl font-semibold">Standard Suite</h1>
+          <h1 className="text-2xl font-semibold">Test Library</h1>
           <h3 className="text-xl font-muted-foreground">Your Go-To Tests</h3>
         </div>
       </div>
@@ -76,35 +75,39 @@ export default async function TestcasesPage({
           {currentTestCases.map((testCase) => (
             <TableRow key={testCase.id} className="border-b">
               <TableCell className="p-3 font-medium">{testCase.name}</TableCell>
-              <TableCell className="p-3 text-muted-foreground">{testCase.description}</TableCell>
+              <TableCell className="p-3 text-muted-foreground">
+                {testCase.description}
+              </TableCell>
               <TableCell className="p-3 text-muted-foreground">
                 {new Date(testCase.lastRun).toLocaleString()}
               </TableCell>
-              <TableCell className="p-3 text-muted-foreground">{testCase.duration}s</TableCell>
+              <TableCell className="p-3 text-muted-foreground">
+                {testCase.duration}s
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
-      
+
       <div className="mt-4">
         <Pagination>
           <PaginationContent>
             <PaginationItem>
-              <PaginationPrevious 
-                href={page > 1 ? `/testcases?page=${page - 1}` : '#'}
+              <PaginationPrevious
+                href={page > 1 ? `/testcases?page=${page - 1}` : "#"}
               />
             </PaginationItem>
-            
+
             {generatePaginationItems()}
-            
+
             <PaginationItem>
-              <PaginationNext 
-                href={page < totalPages ? `/testcases?page=${page + 1}` : '#'}
+              <PaginationNext
+                href={page < totalPages ? `/testcases?page=${page + 1}` : "#"}
               />
             </PaginationItem>
           </PaginationContent>
         </Pagination>
       </div>
     </div>
-  )
+  );
 }

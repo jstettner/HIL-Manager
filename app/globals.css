@@ -130,14 +130,14 @@
   }
 }
 
-.blue-shiny{
+.blue-shiny {
   background: linear-gradient(
     85deg,
     var(--shiny-1) 10%,
     var(--shiny-2) 20%,
     var(--shiny-3) 30%,
     var(--shiny-4) 40%,
-    var(--shiny-5) 50%, 
+    var(--shiny-5) 50%,
     var(--shiny-6) 60%,
     var(--shiny-7) 70%,
     var(--shiny-8) 80%,
@@ -148,7 +148,13 @@
 }
 
 @keyframes gradient-shift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }

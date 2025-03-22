@@ -1,4 +1,4 @@
-import { TestCase, TestBed } from "@/types"
+import { TestCase, TestBed } from "@/types";
 
 export const testCases: TestCase[] = [
   {
@@ -8,16 +8,17 @@ export const testCases: TestCase[] = [
     status: "passed",
     lastRun: "2025-03-22T09:30:00Z",
     duration: 30,
-    priority: "high"
+    priority: "high",
   },
   {
     id: "tc-002",
     name: "Overheating Stress Test",
-    description: "Run processes until the device feels like it could fry an egg.",
+    description:
+      "Run processes until the device feels like it could fry an egg.",
     status: "pending",
     lastRun: "2025-03-22T08:15:00Z",
     duration: 120,
-    priority: "high"
+    priority: "high",
   },
   {
     id: "tc-003",
@@ -26,7 +27,7 @@ export const testCases: TestCase[] = [
     status: "passed",
     lastRun: "2025-03-22T07:45:00Z",
     duration: 45,
-    priority: "medium"
+    priority: "medium",
   },
   {
     id: "tc-004",
@@ -35,7 +36,7 @@ export const testCases: TestCase[] = [
     status: "failed",
     lastRun: "2025-03-21T14:30:00Z",
     duration: 240,
-    priority: "high"
+    priority: "high",
   },
   {
     id: "tc-005",
@@ -44,7 +45,7 @@ export const testCases: TestCase[] = [
     status: "passed",
     lastRun: "2025-03-21T13:15:00Z",
     duration: 60,
-    priority: "medium"
+    priority: "medium",
   },
   {
     id: "tc-006",
@@ -53,7 +54,7 @@ export const testCases: TestCase[] = [
     status: "pending",
     lastRun: "2025-03-21T12:00:00Z",
     duration: 30,
-    priority: "low"
+    priority: "low",
   },
   {
     id: "tc-007",
@@ -62,7 +63,7 @@ export const testCases: TestCase[] = [
     status: "passed",
     lastRun: "2025-03-21T11:30:00Z",
     duration: 15,
-    priority: "medium"
+    priority: "medium",
   },
   {
     id: "tc-008",
@@ -71,7 +72,7 @@ export const testCases: TestCase[] = [
     status: "failed",
     lastRun: "2025-03-21T10:45:00Z",
     duration: 90,
-    priority: "high"
+    priority: "high",
   },
   {
     id: "tc-009",
@@ -80,7 +81,7 @@ export const testCases: TestCase[] = [
     status: "passed",
     lastRun: "2025-03-21T09:30:00Z",
     duration: 45,
-    priority: "medium"
+    priority: "medium",
   },
   {
     id: "tc-010",
@@ -89,7 +90,7 @@ export const testCases: TestCase[] = [
     status: "pending",
     lastRun: "2025-03-21T08:15:00Z",
     duration: 20,
-    priority: "low"
+    priority: "low",
   },
   {
     id: "tc-011",
@@ -98,7 +99,7 @@ export const testCases: TestCase[] = [
     status: "passed",
     lastRun: "2025-03-20T16:30:00Z",
     duration: 60,
-    priority: "high"
+    priority: "high",
   },
   {
     id: "tc-012",
@@ -107,7 +108,7 @@ export const testCases: TestCase[] = [
     status: "failed",
     lastRun: "2025-03-20T15:15:00Z",
     duration: 30,
-    priority: "medium"
+    priority: "medium",
   },
   {
     id: "tc-013",
@@ -116,7 +117,7 @@ export const testCases: TestCase[] = [
     status: "passed",
     lastRun: "2025-03-20T14:30:00Z",
     duration: 25,
-    priority: "low"
+    priority: "low",
   },
   {
     id: "tc-014",
@@ -125,7 +126,7 @@ export const testCases: TestCase[] = [
     status: "pending",
     lastRun: "2025-03-20T13:45:00Z",
     duration: 15,
-    priority: "high"
+    priority: "high",
   },
   {
     id: "tc-015",
@@ -134,7 +135,7 @@ export const testCases: TestCase[] = [
     status: "passed",
     lastRun: "2025-03-20T13:00:00Z",
     duration: 40,
-    priority: "medium"
+    priority: "medium",
   },
   {
     id: "tc-016",
@@ -143,7 +144,7 @@ export const testCases: TestCase[] = [
     status: "failed",
     lastRun: "2025-03-20T12:15:00Z",
     duration: 60,
-    priority: "medium"
+    priority: "medium",
   },
   {
     id: "tc-017",
@@ -152,7 +153,7 @@ export const testCases: TestCase[] = [
     status: "passed",
     lastRun: "2025-03-20T11:30:00Z",
     duration: 45,
-    priority: "high"
+    priority: "high",
   },
   {
     id: "tc-018",
@@ -161,7 +162,7 @@ export const testCases: TestCase[] = [
     status: "pending",
     lastRun: "2025-03-20T10:45:00Z",
     duration: 480,
-    priority: "high"
+    priority: "high",
   },
   {
     id: "tc-019",
@@ -170,7 +171,7 @@ export const testCases: TestCase[] = [
     status: "passed",
     lastRun: "2025-03-20T10:00:00Z",
     duration: 120,
-    priority: "high"
+    priority: "high",
   },
   {
     id: "tc-020",
@@ -179,7 +180,7 @@ export const testCases: TestCase[] = [
     status: "failed",
     lastRun: "2025-03-20T09:15:00Z",
     duration: 30,
-    priority: "medium"
+    priority: "medium",
   },
   {
     id: "tc-021",
@@ -188,7 +189,7 @@ export const testCases: TestCase[] = [
     status: "passed",
     lastRun: "2025-03-20T08:30:00Z",
     duration: 20,
-    priority: "low"
+    priority: "low",
   },
   {
     id: "tc-022",
@@ -197,7 +198,7 @@ export const testCases: TestCase[] = [
     status: "pending",
     lastRun: "2025-03-20T07:45:00Z",
     duration: 180,
-    priority: "high"
+    priority: "high",
   },
   {
     id: "tc-023",
@@ -206,7 +207,7 @@ export const testCases: TestCase[] = [
     status: "passed",
     lastRun: "2025-03-19T16:30:00Z",
     duration: 45,
-    priority: "medium"
+    priority: "medium",
   },
   {
     id: "tc-024",
@@ -215,7 +216,7 @@ export const testCases: TestCase[] = [
     status: "failed",
     lastRun: "2025-03-19T15:45:00Z",
     duration: 30,
-    priority: "medium"
+    priority: "medium",
   },
   {
     id: "tc-025",
@@ -224,7 +225,7 @@ export const testCases: TestCase[] = [
     status: "passed",
     lastRun: "2025-03-19T15:00:00Z",
     duration: 25,
-    priority: "high"
+    priority: "high",
   },
   {
     id: "tc-026",
@@ -233,7 +234,7 @@ export const testCases: TestCase[] = [
     status: "pending",
     lastRun: "2025-03-19T14:15:00Z",
     duration: 15,
-    priority: "high"
+    priority: "high",
   },
   {
     id: "tc-027",
@@ -242,7 +243,7 @@ export const testCases: TestCase[] = [
     status: "passed",
     lastRun: "2025-03-19T13:30:00Z",
     duration: 20,
-    priority: "medium"
+    priority: "medium",
   },
   {
     id: "tc-028",
@@ -251,7 +252,7 @@ export const testCases: TestCase[] = [
     status: "failed",
     lastRun: "2025-03-19T12:45:00Z",
     duration: 30,
-    priority: "low"
+    priority: "low",
   },
   {
     id: "tc-029",
@@ -260,7 +261,7 @@ export const testCases: TestCase[] = [
     status: "passed",
     lastRun: "2025-03-19T12:00:00Z",
     duration: 25,
-    priority: "medium"
+    priority: "medium",
   },
   {
     id: "tc-030",
@@ -269,7 +270,7 @@ export const testCases: TestCase[] = [
     status: "pending",
     lastRun: "2025-03-19T11:15:00Z",
     duration: 60,
-    priority: "low"
+    priority: "low",
   },
   {
     id: "tc-031",
@@ -278,7 +279,7 @@ export const testCases: TestCase[] = [
     status: "passed",
     lastRun: "2025-03-19T10:30:00Z",
     duration: 15,
-    priority: "low"
+    priority: "low",
   },
   {
     id: "tc-032",
@@ -287,7 +288,7 @@ export const testCases: TestCase[] = [
     status: "failed",
     lastRun: "2025-03-19T09:45:00Z",
     duration: 45,
-    priority: "high"
+    priority: "high",
   },
   {
     id: "tc-033",
@@ -296,9 +297,9 @@ export const testCases: TestCase[] = [
     status: "pending",
     lastRun: "2025-03-19T09:00:00Z",
     duration: 30,
-    priority: "high"
-  }
-]
+    priority: "high",
+  },
+];
 
 export const testBeds: TestBed[] = [
   {
@@ -311,8 +312,8 @@ export const testBeds: TestBed[] = [
     resources: {
       cpu: 8,
       memory: 32,
-      storage: 512
-    }
+      storage: 512,
+    },
   },
   {
     id: "tb-002",
@@ -324,8 +325,8 @@ export const testBeds: TestBed[] = [
     resources: {
       cpu: 4,
       memory: 16,
-      storage: 256
-    }
+      storage: 256,
+    },
   },
   {
     id: "tb-003",
@@ -337,7 +338,7 @@ export const testBeds: TestBed[] = [
     resources: {
       cpu: 4,
       memory: 8,
-      storage: 128
-    }
-  }
-]
+      storage: 128,
+    },
+  },
+];

@@ -1,4 +1,4 @@
-import { LifeBuoy } from "lucide-react"
+import { LifeBuoy } from "lucide-react";
 
 export default function SupportPage() {
   return (
@@ -12,5 +12,5 @@ export default function SupportPage() {
         <p>Get help and support for Halidom</p>
       </div>
     </div>
-  )
+  );
 }

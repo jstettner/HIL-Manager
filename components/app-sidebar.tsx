@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import * as React from "react"
+import * as React from "react";
 import {
   LifeBuoy,
   Heading,
@@ -8,10 +8,10 @@ import {
   LayoutDashboard,
   FlaskConical,
   BedDouble,
-} from "lucide-react"
+} from "lucide-react";
 
-import { NavMain } from "@/components/nav-main"
-import { NavUser } from "@/components/nav-user"
+import { NavMain } from "@/components/nav-main";
+import { NavUser } from "@/components/nav-user";
 import {
   Sidebar,
   SidebarContent,
@@ -20,7 +20,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components/ui/sidebar"
+} from "@/components/ui/sidebar";
 
 const data = {
   user: {
@@ -43,7 +43,7 @@ const data = {
           title: "Changesets",
           url: "/changesets",
         },
-      ]
+      ],
     },
     {
       title: "Testcases",
@@ -59,7 +59,7 @@ const data = {
           title: "Lab",
           url: "/testcases",
         },
-      ]
+      ],
     },
     {
       title: "Testbeds",
@@ -75,7 +75,7 @@ const data = {
           title: "Builder",
           url: "/testbeds",
         },
-      ]
+      ],
     },
   ],
   navSecondary: [
@@ -90,21 +90,23 @@ const data = {
       icon: Send,
     },
   ],
-}
+};
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
-    <Sidebar
-      className="border-r"
-      variant="inset"
-      {...props}
-    >
+    <Sidebar className="border-r" variant="inset" {...props}>
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
               <a href="#">
-                <div className="flex aspect-square size-8 items-center justify-center rounded-lg" style={{ background: `url('/images/square-grad.png')`, backgroundSize: 'cover' }}>
+                <div
+                  className="flex aspect-square size-8 items-center justify-center rounded-lg"
+                  style={{
+                    background: `url('/images/square-grad.png')`,
+                    backgroundSize: "cover",
+                  }}
+                >
                   <Heading className="size-5 text-white" />
                 </div>
                 <div className="grid flex-1 text-left text-sm leading-tight">
@@ -123,5 +125,5 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <NavUser user={data.user} />
       </SidebarFooter>
     </Sidebar>
-  )
+  );
 }

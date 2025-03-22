@@ -1,4 +1,4 @@
-import { LayoutDashboard } from "lucide-react"
+import { LayoutDashboard } from "lucide-react";
 
 export default function DashboardPage() {
   return (
@@ -12,5 +12,5 @@ export default function DashboardPage() {
         <p>Welcome to the Halidom Dashboard</p>
       </div>
     </div>
-  )
+  );
 }

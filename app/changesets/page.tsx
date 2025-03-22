@@ -1,5 +1,5 @@
-import { FlaskConical, Circle } from "lucide-react"
-import { testCases } from "@/data/sample-data"
+import { FlaskConical, Circle } from "lucide-react";
+import { testCases } from "@/data/sample-data";
 
 import {
   Pagination,
@@ -9,7 +9,7 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from "@/components/ui/pagination"
+} from "@/components/ui/pagination";
 
 import {
   Table,
@@ -19,8 +19,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table"
-
+} from "@/components/ui/table";
 
 export default function ChangesetsPage() {
   return (
@@ -47,27 +46,41 @@ export default function ChangesetsPage() {
               <TableCell className="p-3">
                 <div className="flex items-center gap-2">
                   <Circle
-                    className={`w-3 h-3 ${testCase.status === 'passed' ? 'fill-green-500 text-green-500' : 
-                      testCase.status === 'failed' ? 'fill-red-500 text-red-500' : 
-                      'fill-yellow-500 text-yellow-500'}`}
+                    className={`w-3 h-3 ${
+                      testCase.status === "passed"
+                        ? "fill-green-500 text-green-500"
+                        : testCase.status === "failed"
+                          ? "fill-red-500 text-red-500"
+                          : "fill-yellow-500 text-yellow-500"
+                    }`}
                   />
                   <span className="capitalize">{testCase.status}</span>
                 </div>
               </TableCell>
               <TableCell className="p-3 font-medium">{testCase.name}</TableCell>
-              <TableCell className="p-3 text-muted-foreground">{testCase.description}</TableCell>
+              <TableCell className="p-3 text-muted-foreground">
+                {testCase.description}
+              </TableCell>
               <TableCell className="p-3">
-                <span className={`inline-block px-2 py-1 rounded-full text-xs font-medium
-                  ${testCase.priority === 'high' ? 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300' :
-                  testCase.priority === 'medium' ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300' :
-                  'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300'}`}>
+                <span
+                  className={`inline-block px-2 py-1 rounded-full text-xs font-medium
+                  ${
+                    testCase.priority === "high"
+                      ? "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300"
+                      : testCase.priority === "medium"
+                        ? "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300"
+                        : "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300"
+                  }`}
+                >
                   {testCase.priority}
                 </span>
               </TableCell>
               <TableCell className="p-3 text-muted-foreground">
                 {new Date(testCase.lastRun).toLocaleString()}
               </TableCell>
-              <TableCell className="p-3 text-muted-foreground">{testCase.duration}s</TableCell>
+              <TableCell className="p-3 text-muted-foreground">
+                {testCase.duration}s
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
@@ -89,5 +102,5 @@ export default function ChangesetsPage() {
         </PaginationContent>
       </Pagination>
     </div>
-  )
+  );
 }

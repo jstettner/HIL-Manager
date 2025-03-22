@@ -1,4 +1,4 @@
-import { Split } from "lucide-react"
+import { Split } from "lucide-react";
 
 export default function McpPage() {
   return (
@@ -12,5 +12,5 @@ export default function McpPage() {
         <p>Monitor and control your MCP settings</p>
       </div>
     </div>
-  )
+  );
 }
