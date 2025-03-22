@@ -1,4 +1,4 @@
-import { FlaskConical, Circle } from "lucide-react"
+import { FlaskConical } from "lucide-react"
 import { testCases } from "@/data/sample-data"
 
 import {
@@ -22,7 +22,37 @@ import {
 } from "@/components/ui/table"
 
 
-export default function TestcasesPage() {
+export default async function TestcasesPage({
+  searchParams,
+}: {
+  searchParams?: { [key: string]: string | string[] | undefined }
+}) {
+  const page = typeof searchParams?.page === 'string' ? parseInt(searchParams.page) : 1
+  const itemsPerPage = 10
+  const totalItems = testCases.length
+  const totalPages = Math.ceil(totalItems / itemsPerPage)
+  
+  const startIndex = (page - 1) * itemsPerPage
+  const endIndex = startIndex + itemsPerPage
+  const currentTestCases = testCases.slice(startIndex, endIndex)
+
+  const generatePaginationItems = () => {
+    const items = []
+    for (let i = 1; i <= totalPages; i++) {
+      items.push(
+        <PaginationItem key={i}>
+          <PaginationLink 
+            href={`/testcases?page=${i}`}
+            isActive={page === i}
+          >
+            {i}
+          </PaginationLink>
+        </PaginationItem>
+      )
+    }
+    return items
+  }
+
   return (
     <div className="p-6">
       <div className="flex flex-row items-center gap-2 mb-6">
@@ -43,7 +73,7 @@ export default function TestcasesPage() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {testCases.map((testCase) => (
+          {currentTestCases.map((testCase) => (
             <TableRow key={testCase.id} className="border-b">
               <TableCell className="p-3 font-medium">{testCase.name}</TableCell>
               <TableCell className="p-3 text-muted-foreground">{testCase.description}</TableCell>
@@ -55,22 +85,26 @@ export default function TestcasesPage() {
           ))}
         </TableBody>
       </Table>
-      <Pagination className="mt-6">
-        <PaginationContent>
-          <PaginationItem>
-            <PaginationPrevious href="#" />
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationLink href="#">1</PaginationLink>
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationEllipsis />
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationNext href="#" />
-          </PaginationItem>
-        </PaginationContent>
-      </Pagination>
+      
+      <div className="mt-4">
+        <Pagination>
+          <PaginationContent>
+            <PaginationItem>
+              <PaginationPrevious 
+                href={page > 1 ? `/testcases?page=${page - 1}` : '#'}
+              />
+            </PaginationItem>
+            
+            {generatePaginationItems()}
+            
+            <PaginationItem>
+              <PaginationNext 
+                href={page < totalPages ? `/testcases?page=${page + 1}` : '#'}
+              />
+            </PaginationItem>
+          </PaginationContent>
+        </Pagination>
+      </div>
     </div>
   )
 }
