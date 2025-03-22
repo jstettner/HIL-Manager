@@ -15,7 +15,9 @@ export default function TestbedsPage() {
         <BedDouble className="w-6 h-6" />
         <div className="flex flex-row items-baseline gap-2">
           <h1 className="text-2xl">Testbeds</h1>
-          <h3 className="text-xl text-muted-foreground">Your Fleet of Test Assets</h3>
+          <h3 className="text-xl text-muted-foreground">
+            Your Fleet of Test Assets
+          </h3>
         </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -54,7 +56,9 @@ export default function TestbedsPage() {
               </div>
 
               <div className="pt-3 border-t">
-                <p className="text-sm text-muted-foreground pb-3">{testbed.description}</p>
+                <p className="text-sm text-muted-foreground pb-3">
+                  {testbed.description}
+                </p>
               </div>
 
               <div className="pt-3 border-t space-y-2">

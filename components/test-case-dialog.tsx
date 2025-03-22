@@ -8,6 +8,7 @@ import {
   DialogTrigger,
   DialogDescription,
 } from "@/components/ui/dialog";
+import { Separator } from "@/components/ui/separator";
 import { TableRow, TableCell } from "@/components/ui/table";
 
 interface TestCase {
@@ -49,10 +50,11 @@ export function TestCaseDialog({ testCase }: TestCaseDialogRowProps) {
       <DialogContent className="">
         <DialogHeader>
           <DialogTitle>{testCase.name}</DialogTitle>
+          <DialogDescription className="text-sm font-medium">
+            {testCase.description}
+          </DialogDescription>
         </DialogHeader>
-        <DialogDescription className="text-sm font-medium">
-          {testCase.description}
-        </DialogDescription>
+        <Separator />
         <div className="grid gap-4">
           <div className="grid grid-cols-2 gap-4">
             <div>
@@ -63,29 +65,39 @@ export function TestCaseDialog({ testCase }: TestCaseDialogRowProps) {
             </div>
             <div>
               <h4 className="text-sm font-medium">Average Duration</h4>
-              <p className="text-sm text-muted-foreground">{testCase.duration}s</p>
+              <p className="text-sm text-muted-foreground">
+                {testCase.duration}s
+              </p>
             </div>
           </div>
-          <div>
-            <h4 className="text-sm font-medium mb-3">Compatible Testbeds</h4>
-            <div className="flex flex-wrap gap-2">
+          <div className="rounded-lg p-4 relative bg-gray-100/50 overflow-hidden">
+            <div
+              className="absolute inset-0"
+              style={{
+                backgroundImage: "url(/images/banner-med-grad.png)",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+              }}
+            />
+            <h4 className="text-md font-medium mb-3 text-black relative z-10">
+              Compatible Testbeds
+            </h4>
+            <div className="flex flex-wrap gap-2 relative z-10">
               {testCase.compatibleTestbeds?.map((testbed) => (
                 <button
                   key={testbed}
-                  className="relative min-w-[120px] max-w-[200px] px-3 py-1.5 text-xs font-medium text-white rounded-md transition-all overflow-hidden hover:scale-105 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-white/20"
-                  style={{
-                    backgroundImage: 'url(/images/square-grad.png)',
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                  }}
+                  className="group relative min-w-[120px] max-w-[200px] px-3 py-1.5 text-xs font-medium text-white rounded-md transition-all overflow-hidden hover:scale-105 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-white/20 bg-black/80 mix-blend-screen"
                 >
-                  <span className="relative z-10 block truncate">{testbed}</span>
-                  <div 
-                    className="absolute inset-0 bg-white/20 opacity-0 hover:opacity-100 transition-opacity"
+                  <span className="relative block truncate mix-blend-difference">
+                    {testbed}
+                  </span>
+                  <div
+                    className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity"
                     style={{
-                      background: 'linear-gradient(45deg, transparent 45%, rgba(255,255,255,0.2) 50%, transparent 55%)',
-                      backgroundSize: '200% 200%',
-                      animation: 'shine 1s ease-in-out infinite',
+                      background:
+                        "linear-gradient(45deg, transparent 45%, rgba(255,255,255,0.2) 50%, transparent 55%)",
+                      backgroundSize: "200% 200%",
+                      animation: "shine 1s ease-in-out infinite",
                     }}
                   />
                 </button>
@@ -94,8 +106,12 @@ export function TestCaseDialog({ testCase }: TestCaseDialogRowProps) {
           </div>
           <style jsx>{`
             @keyframes shine {
-              0% { background-position: -100% -100%; }
-              100% { background-position: 100% 100%; }
+              0% {
+                background-position: -100% -100%;
+              }
+              100% {
+                background-position: 100% 100%;
+              }
             }
           `}</style>
         </div>

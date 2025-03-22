@@ -4,7 +4,8 @@ export const testCases: TestCase[] = [
   {
     id: "tc-001",
     name: "Temporal Activation Button Test",
-    description: "Does the start button initiate time travel, or just existential dread?",
+    description:
+      "Does the start button initiate time travel, or just existential dread?",
     status: "passed",
     lastRun: "2025-03-22T09:30:00Z",
     duration: 30,
@@ -35,7 +36,8 @@ export const testCases: TestCase[] = [
   {
     id: "tc-004",
     name: "Power Cell Endurance Through Ages",
-    description: "Does the battery survive 1,000 years or wimp out in 20 minutes?",
+    description:
+      "Does the battery survive 1,000 years or wimp out in 20 minutes?",
     status: "failed",
     lastRun: "2025-03-21T14:30:00Z",
     duration: 240,
@@ -45,7 +47,8 @@ export const testCases: TestCase[] = [
   {
     id: "tc-005",
     name: "Port Stability in Multi-Epoch Use",
-    description: "Do the connectors hold after 300 plug cycles across different centuries?",
+    description:
+      "Do the connectors hold after 300 plug cycles across different centuries?",
     status: "passed",
     lastRun: "2025-03-21T13:15:00Z",
     duration: 60,
@@ -75,7 +78,8 @@ export const testCases: TestCase[] = [
   {
     id: "tc-008",
     name: "Visual Calibration for Dino-Eras",
-    description: "Are colors rendered correctly even when surrounded by angry T-Rexes?",
+    description:
+      "Are colors rendered correctly even when surrounded by angry T-Rexes?",
     status: "failed",
     lastRun: "2025-03-21T10:45:00Z",
     duration: 90,
@@ -85,7 +89,8 @@ export const testCases: TestCase[] = [
   {
     id: "tc-009",
     name: "Control Panel Rage Resistance",
-    description: "Can it survive a frustrated chrononaut punching the buttons repeatedly?",
+    description:
+      "Can it survive a frustrated chrononaut punching the buttons repeatedly?",
     status: "passed",
     lastRun: "2025-03-21T09:30:00Z",
     duration: 45,
@@ -105,7 +110,8 @@ export const testCases: TestCase[] = [
   {
     id: "tc-011",
     name: "Chrono-Field Signal Acquisition",
-    description: "Does it sync to spacetime GPS or ask for directions like your dad?",
+    description:
+      "Does it sync to spacetime GPS or ask for directions like your dad?",
     status: "passed",
     lastRun: "2025-03-20T16:30:00Z",
     duration: 60,
@@ -115,7 +121,8 @@ export const testCases: TestCase[] = [
   {
     id: "tc-012",
     name: "Bluetooth Pairing Across Timelines",
-    description: "Can it stay paired through time ripples or ghost like a bad ex?",
+    description:
+      "Can it stay paired through time ripples or ghost like a bad ex?",
     status: "failed",
     lastRun: "2025-03-20T15:15:00Z",
     duration: 30,
@@ -125,7 +132,8 @@ export const testCases: TestCase[] = [
   {
     id: "tc-013",
     name: "Shutdown Speed in Emergency Recall",
-    description: "Does it retreat from a collapsing timeline in under 10 seconds?",
+    description:
+      "Does it retreat from a collapsing timeline in under 10 seconds?",
     status: "passed",
     lastRun: "2025-03-20T14:30:00Z",
     duration: 25,
@@ -145,7 +153,8 @@ export const testCases: TestCase[] = [
   {
     id: "tc-015",
     name: "Hatch Open/Close Test",
-    description: "Does the door seal hold against both vacuum and Victorian fog?",
+    description:
+      "Does the door seal hold against both vacuum and Victorian fog?",
     status: "passed",
     lastRun: "2025-03-20T13:00:00Z",
     duration: 40,
@@ -155,7 +164,8 @@ export const testCases: TestCase[] = [
   {
     id: "tc-016",
     name: "Temporal Interface Compatibility Check",
-    description: "Does it accept relic peripherals like steam keyboards and bone dice?",
+    description:
+      "Does it accept relic peripherals like steam keyboards and bone dice?",
     status: "failed",
     lastRun: "2025-03-20T12:15:00Z",
     duration: 60,
@@ -215,7 +225,8 @@ export const testCases: TestCase[] = [
   {
     id: "tc-022",
     name: "Memory Retention Through Wormholes",
-    description: "Do settings survive 12-dimensional wormholes, or just give up?",
+    description:
+      "Do settings survive 12-dimensional wormholes, or just give up?",
     status: "pending",
     lastRun: "2025-03-20T07:45:00Z",
     duration: 180,
@@ -245,7 +256,8 @@ export const testCases: TestCase[] = [
   {
     id: "tc-025",
     name: "Charging Connector Stability",
-    description: "Does it charge properly even when haunted by past versions of itself?",
+    description:
+      "Does it charge properly even when haunted by past versions of itself?",
     status: "passed",
     lastRun: "2025-03-19T15:00:00Z",
     duration: 25,
@@ -338,7 +350,8 @@ export const testBeds: TestBed[] = [
   {
     id: "TM-POD-001",
     name: "TM-POD-001",
-    description: "Personal Time Pod – compact, single-user time travel capsule with biometric access and fusion core.",
+    description:
+      "Personal Time Pod – compact, single-user time travel capsule with biometric access and fusion core.",
     status: "active",
     type: "physical",
     ipAddress: "192.168.1.100",
@@ -352,7 +365,8 @@ export const testBeds: TestBed[] = [
   {
     id: "TM-POD-002",
     name: "TM-POD-002",
-    description: "Budget time pod with basic controls, no touchscreen, powered by plutonium (sometimes).",
+    description:
+      "Budget time pod with basic controls, no touchscreen, powered by plutonium (sometimes).",
     status: "active",
     type: "physical",
     ipAddress: "192.168.1.101",
@@ -366,7 +380,8 @@ export const testBeds: TestBed[] = [
   {
     id: "TM-RIG-001",
     name: "TM-RIG-001",
-    description: "Stationary room-sized time rig with full cockpit, dual-core chrono processors, and wormhole stabilizers.",
+    description:
+      "Stationary room-sized time rig with full cockpit, dual-core chrono processors, and wormhole stabilizers.",
     status: "active",
     type: "physical",
     ipAddress: "192.168.1.102",
@@ -380,7 +395,8 @@ export const testBeds: TestBed[] = [
   {
     id: "TM-RIG-002",
     name: "TM-RIG-002",
-    description: "Cranky prototype rig from the '70s. Loud, inconsistent, powered by spite and spare parts.",
+    description:
+      "Cranky prototype rig from the '70s. Loud, inconsistent, powered by spite and spare parts.",
     status: "maintenance",
     type: "physical",
     ipAddress: "192.168.1.103",
@@ -394,7 +410,8 @@ export const testBeds: TestBed[] = [
   {
     id: "TM-PORTAL-001",
     name: "TM-PORTAL-001",
-    description: "Standalone temporal gateway with programmable destination matrix and hazy ethics.",
+    description:
+      "Standalone temporal gateway with programmable destination matrix and hazy ethics.",
     status: "active",
     type: "physical",
     ipAddress: "192.168.1.104",
@@ -408,7 +425,8 @@ export const testBeds: TestBed[] = [
   {
     id: "TM-SUIT-001",
     name: "TM-SUIT-001",
-    description: "Wearable time displacement suit—sleek, stylish, highly unstable in 88% humidity.",
+    description:
+      "Wearable time displacement suit—sleek, stylish, highly unstable in 88% humidity.",
     status: "active",
     type: "physical",
     ipAddress: "192.168.1.105",
@@ -422,7 +440,8 @@ export const testBeds: TestBed[] = [
   {
     id: "TM-VEHICLE-001",
     name: "TM-VEHICLE-001",
-    description: "Modified DeLorean-style temporal vehicle with flux capacitor and neon trim.",
+    description:
+      "Modified DeLorean-style temporal vehicle with flux capacitor and neon trim.",
     status: "active",
     type: "physical",
     ipAddress: "192.168.1.106",
@@ -436,7 +455,8 @@ export const testBeds: TestBed[] = [
   {
     id: "TM-VEHICLE-002",
     name: "TM-VEHICLE-002",
-    description: "Steam-powered Victorian time carriage with manual dials and tea holders.",
+    description:
+      "Steam-powered Victorian time carriage with manual dials and tea holders.",
     status: "maintenance",
     type: "physical",
     ipAddress: "192.168.1.107",
@@ -450,7 +470,8 @@ export const testBeds: TestBed[] = [
   {
     id: "TM-NANO-001",
     name: "TM-NANO-001",
-    description: "Nanobot swarm collective capable of micro-scale temporal observation and retrieval.",
+    description:
+      "Nanobot swarm collective capable of micro-scale temporal observation and retrieval.",
     status: "active",
     type: "virtual",
     ipAddress: "192.168.1.108",
@@ -464,7 +485,8 @@ export const testBeds: TestBed[] = [
   {
     id: "TM-STATION-001",
     name: "TM-STATION-001",
-    description: "Secure research facility for multi-device deployment, logs time drift, chronal echoes, and snacks.",
+    description:
+      "Secure research facility for multi-device deployment, logs time drift, chronal echoes, and snacks.",
     status: "active",
     type: "physical",
     ipAddress: "192.168.1.109",
