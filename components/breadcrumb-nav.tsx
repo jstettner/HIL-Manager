@@ -14,10 +14,9 @@ const routeMap: Record<string, { title: string; parent?: string }> = {
   "/": { title: "Overview" },
   "/dashboard": { title: "Dashboard", parent: "Overview" },
   "/testcases": { title: "Library", parent: "Testcases" },
+  "/lab": { title: "Lab", parent: "Testcases" },
   "/testbeds": { title: "Armory", parent: "Testbeds" },
-  "/mcp": { title: "MCP", parent: "Overview" },
-  "/support": { title: "Support", parent: "Overview" },
-  "/settings": { title: "Settings", parent: "Overview" },
+  "/builder": { title: "Builder", parent: "Testbeds" },
 };
 
 export function BreadcrumbNav() {

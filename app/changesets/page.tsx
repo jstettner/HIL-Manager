@@ -26,10 +26,15 @@ export default function ChangesetsPage() {
     <div className="p-6">
       <div className="flex items-center gap-2 mb-6 page-header">
         <FlaskConical className="w-6 h-6" />
-        <h1 className="text-2xl">Past Runs</h1>
+        <div className="flex flex-row items-baseline gap-2">
+          <h1 className="text-2xl">Changesets</h1>
+          <h3 className="text-xl text-muted-foreground">
+            In-Progress and Finished Testsets
+          </h3>
+        </div>
       </div>
       <Table className="rounded-md border">
-        <TableCaption className="sr-only">Past Runs</TableCaption>
+        <TableCaption className="sr-only">Changesets</TableCaption>
         <TableHeader>
           <TableRow>
             <TableHead className="p-3 text-left">Status</TableHead>

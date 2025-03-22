@@ -57,7 +57,7 @@ const data = {
         },
         {
           title: "Lab",
-          url: "/testcases",
+          url: "/lab",
         },
       ],
     },
@@ -73,7 +73,7 @@ const data = {
         },
         {
           title: "Builder",
-          url: "/testbeds",
+          url: "/builder",
         },
       ],
     },
