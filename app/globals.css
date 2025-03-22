@@ -109,6 +109,11 @@
   font-weight: 200;
 }
 
+.page-header h1 {
+  font-family: var(--font-dotgothic16);
+  font-weight: 200;
+}
+
 .dark {
   --background: oklch(0.141 0.005 285.823);
   --foreground: oklch(0.985 0 0);

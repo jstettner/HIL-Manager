@@ -11,9 +11,9 @@ import { testBeds } from "@/data/sample-data";
 export default function TestbedsPage() {
   return (
     <div className="p-6">
-      <div className="flex items-center gap-2 mb-6">
+      <div className="flex items-center gap-2 mb-6 page-header">
         <BedDouble className="w-6 h-6" />
-        <h1 className="text-2xl font-semibold">Testbeds</h1>
+        <h1 className="text-2xl">Testbeds</h1>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {testBeds.map((testbed) => (

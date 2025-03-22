@@ -54,11 +54,11 @@ export default async function TestcasesPage({
 
   return (
     <div className="p-6">
-      <div className="flex flex-row items-center gap-2 mb-6">
+      <div className="flex flex-row items-center gap-2 mb-6 page-header">
         <FlaskConical className="w-6 h-6" />
         <div className="flex flex-row items-baseline gap-2">
-          <h1 className="text-2xl font-dotgothic">Test Library</h1>
-          <h3 className="text-xl font-muted-foreground">Your Go-To Tests</h3>
+          <h1 className="text-2xl">Test Library</h1>
+          <h3 className="text-xl text-muted-foreground">Your Go-To Tests</h3>
         </div>
       </div>
       <Table className="rounded-md">
