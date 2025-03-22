@@ -1,6 +1,27 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+@keyframes dialogGlow {
+  0% {
+    box-shadow: 0 0 40px -10px var(--shiny-1);
+  }
+  20% {
+    box-shadow: 0 0 40px -8px var(--shiny-2);
+  }
+  40% {
+    box-shadow: 0 0 40px -6px var(--shiny-3);
+  }
+  60% {
+    box-shadow: 0 0 40px -8px var(--shiny-4);
+  }
+  80% {
+    box-shadow: 0 0 40px -10px var(--shiny-5);
+  }
+  100% {
+    box-shadow: 0 0 40px -10px var(--shiny-1);
+  }
+}
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {

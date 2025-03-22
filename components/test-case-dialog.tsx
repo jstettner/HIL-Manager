@@ -74,7 +74,8 @@ export function TestCaseDialog({ testCase }: TestCaseDialogRowProps) {
             <div
               className="absolute inset-0"
               style={{
-                backgroundImage: "linear-gradient(to bottom right, rgba(0,0,0,0.7), rgba(0,0,0,0.1)), url(/images/banner-med-grad.png)",
+                backgroundImage:
+                  "linear-gradient(to bottom right, rgba(0,0,0,0.7), rgba(0,0,0,0.1)), url(/images/banner-med-grad.png)",
                 backgroundSize: "cover",
                 backgroundPosition: "center",
               }}
