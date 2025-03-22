@@ -49,7 +49,7 @@ export function TestCaseDialog({ testCase }: TestCaseDialogRowProps) {
       <TestCaseDialogRow testCase={testCase} />
       <DialogContent className="">
         <DialogHeader>
-          <DialogTitle>{testCase.name}</DialogTitle>
+          <DialogTitle className="text-white">{testCase.name}</DialogTitle>
           <DialogDescription className="text-sm font-medium">
             {testCase.description}
           </DialogDescription>
@@ -70,16 +70,16 @@ export function TestCaseDialog({ testCase }: TestCaseDialogRowProps) {
               </p>
             </div>
           </div>
-          <div className="rounded-lg p-4 relative bg-gray-100/50 overflow-hidden">
+          <div className="rounded-lg p-4 relative bg-transparent overflow-hidden">
             <div
               className="absolute inset-0"
               style={{
-                backgroundImage: "url(/images/banner-med-grad.png)",
+                backgroundImage: "linear-gradient(to bottom right, rgba(0,0,0,0.7), rgba(0,0,0,0.1)), url(/images/banner-med-grad.png)",
                 backgroundSize: "cover",
                 backgroundPosition: "center",
               }}
             />
-            <h4 className="text-md font-medium mb-3 text-black relative z-10">
+            <h4 className="text-md font-medium mb-3 text-white relative z-10">
               Compatible Testbeds
             </h4>
             <div className="flex flex-wrap gap-2 relative z-10">
