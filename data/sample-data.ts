@@ -337,7 +337,8 @@ export const testCases: TestCase[] = [
 export const testBeds: TestBed[] = [
   {
     id: "TM-POD-001",
-    name: "Personal Time Pod",
+    name: "TM-POD-001",
+    description: "Personal Time Pod – compact, single-user time travel capsule with biometric access and fusion core.",
     status: "active",
     type: "physical",
     ipAddress: "192.168.1.100",
@@ -350,7 +351,8 @@ export const testBeds: TestBed[] = [
   },
   {
     id: "TM-POD-002",
-    name: "Budget Time Pod",
+    name: "TM-POD-002",
+    description: "Budget time pod with basic controls, no touchscreen, powered by plutonium (sometimes).",
     status: "active",
     type: "physical",
     ipAddress: "192.168.1.101",
@@ -363,7 +365,8 @@ export const testBeds: TestBed[] = [
   },
   {
     id: "TM-RIG-001",
-    name: "Stationary Time Rig",
+    name: "TM-RIG-001",
+    description: "Stationary room-sized time rig with full cockpit, dual-core chrono processors, and wormhole stabilizers.",
     status: "active",
     type: "physical",
     ipAddress: "192.168.1.102",
@@ -376,7 +379,8 @@ export const testBeds: TestBed[] = [
   },
   {
     id: "TM-RIG-002",
-    name: "Prototype Time Rig",
+    name: "TM-RIG-002",
+    description: "Cranky prototype rig from the '70s. Loud, inconsistent, powered by spite and spare parts.",
     status: "maintenance",
     type: "physical",
     ipAddress: "192.168.1.103",
@@ -389,7 +393,8 @@ export const testBeds: TestBed[] = [
   },
   {
     id: "TM-PORTAL-001",
-    name: "Temporal Gateway",
+    name: "TM-PORTAL-001",
+    description: "Standalone temporal gateway with programmable destination matrix and hazy ethics.",
     status: "active",
     type: "physical",
     ipAddress: "192.168.1.104",
@@ -402,7 +407,8 @@ export const testBeds: TestBed[] = [
   },
   {
     id: "TM-SUIT-001",
-    name: "Wearable Time Suit",
+    name: "TM-SUIT-001",
+    description: "Wearable time displacement suit—sleek, stylish, highly unstable in 88% humidity.",
     status: "active",
     type: "physical",
     ipAddress: "192.168.1.105",
@@ -415,7 +421,8 @@ export const testBeds: TestBed[] = [
   },
   {
     id: "TM-VEHICLE-001",
-    name: "DeLorean Temporal Vehicle",
+    name: "TM-VEHICLE-001",
+    description: "Modified DeLorean-style temporal vehicle with flux capacitor and neon trim.",
     status: "active",
     type: "physical",
     ipAddress: "192.168.1.106",
@@ -428,7 +435,8 @@ export const testBeds: TestBed[] = [
   },
   {
     id: "TM-VEHICLE-002",
-    name: "Victorian Time Carriage",
+    name: "TM-VEHICLE-002",
+    description: "Steam-powered Victorian time carriage with manual dials and tea holders.",
     status: "maintenance",
     type: "physical",
     ipAddress: "192.168.1.107",
@@ -441,7 +449,8 @@ export const testBeds: TestBed[] = [
   },
   {
     id: "TM-NANO-001",
-    name: "Nanobot Swarm",
+    name: "TM-NANO-001",
+    description: "Nanobot swarm collective capable of micro-scale temporal observation and retrieval.",
     status: "active",
     type: "virtual",
     ipAddress: "192.168.1.108",
@@ -454,7 +463,8 @@ export const testBeds: TestBed[] = [
   },
   {
     id: "TM-STATION-001",
-    name: "Secure Research Facility",
+    name: "TM-STATION-001",
+    description: "Secure research facility for multi-device deployment, logs time drift, chronal echoes, and snacks.",
     status: "active",
     type: "physical",
     ipAddress: "192.168.1.109",

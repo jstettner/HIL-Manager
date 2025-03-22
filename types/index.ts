@@ -12,6 +12,7 @@ export interface TestCase {
 export interface TestBed {
   id: string;
   name: string;
+  description: string;
   status: "active" | "inactive" | "maintenance";
   type: "physical" | "virtual";
   ipAddress: string;
