@@ -49,7 +49,12 @@ export function TestCaseDialog({ testCase }: TestCaseDialogRowProps) {
       <TestCaseDialogRow testCase={testCase} />
       <DialogContent className="">
         <DialogHeader>
-          <DialogTitle className="text-white">{testCase.name}</DialogTitle>
+          <DialogTitle className="text-white">
+            <span className="font-dotgothic pr-1.5 text-muted-foreground">
+              {testCase.id}.
+            </span>
+            {testCase.name}
+          </DialogTitle>
           <DialogDescription className="text-sm font-medium">
             {testCase.description}
           </DialogDescription>
