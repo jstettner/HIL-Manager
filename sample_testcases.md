@@ -1,52 +1,51 @@
-# Test Case Name Description
-
-1 Power Button Responsiveness Test Will it turn on… or is it just emotionally unavailable?
-2 Overheating Stress Test Run processes until the device feels like it could fry an egg.
-3 Sleep/Wake Functionality Does it nap efficiently or fake sleep like a toddler?
-4 Battery Life Under Load Can it survive a Marvel movie marathon or die at the intro?
-5 Port Abuse Test Plug and unplug like a stressed-out tech support agent.
-6 Fan Noise Level Test Measure in decibels: whisper or helicopter?
-7 Display Brightness Test Bright enough to see or still stuck in the Dark Ages?
-8 Color Accuracy Test Is white actually white, or emotionally beige?
-9 Keyboard Smash Resistance Simulate rage typing. Does it tap out or stand strong?
-10 USB Detection Speed Time how fast it makes the hopeful 'bing'.
-11 Wi-Fi Connectivity Test Does it find Wi-Fi faster than your uncle at a buffet?
-12 Bluetooth Pairing Test Will it connect, or ghost you like a bad date?
-13 Shutdown Speed Test Faster than a dramatic movie death scene?
-14 Durability Drop Test Desk-height drop: survival or obituary?
-15 Lid Open/Close Test Hinge check + sigh detection.
-16 Peripheral Compatibility Test Accepts that 2009 mouse, or scoffs in binary?
-17 Touchscreen Accuracy Tap one spot. Does it listen or go rogue?
-18 Overnight Idle Stability Leave overnight: wake refreshed or crashed?
-19 Thermal Throttling Observation Under stress, does it stay cool or slow like Monday morning?
-20 Speaker Quality Test Symphony or soup can concert?
-21 BIOS Access Speed Can you beat the window of BIOS acceptance?
-22 RAM Stress Test Overload it until it cries or conquers.
-23 External Display Support Plug into a monitor—does it freak out or say hello?
-24 Trackpad Sensitivity Smooth operator or jumpy jitterbug?
-25 Charging Port Connection Test Plug in—does it charge or just tease you with the light?
-26 Battery Swell Check Check if the battery’s doing a slow balloon impression.
-27 Audio Jack Functionality Plug in headphones. Bliss or static storm?
-28 Webcam Clarity Test Is that you… or a pixelated ghost?
-29 Microphone Input Test Talk into it. Does it hear your secrets or just wind?
-30 GPS Accuracy (if applicable) Does it know where you are or think you’re in Narnia?
-31 Vibration Test (for devices that vibrate) Notification buzz or confused lawn mower?
-32 Fingerprint Scanner Reliability Recognizes you, or locks you out like a club bouncer?
-33 Face Recognition Test Do you need to put on makeup to be recognized?
-34 Storage Read/Write Speed Snappy file transfers or elderly snail pace?
-35 SD Card Detection Insert and pray—will it show up or vanish like socks in a dryer?
-36 Power Adapter Heat Test Warm, or ready to double as a space heater?
-37 Fan Start/Stop Test Do they spin when needed, or just vibe occasionally?
-38 BIOS Settings Persistence Save settings. Restart. Do they ghost you?
-39 Dust Resistance (Visual) Does it attract dust like a lint magnet?
-40 Case Flex Test Gentle twist. Sturdy or squeaky plastic horror?
-41 Rubber Feet Adhesion Still gripping the desk, or off on a solo journey?
-42 Power Cable Wiggle Test Wiggle the cord—charging steady or disco light show?
-43 Fan Grill Finger Safety Will a toddler lose a finger? Please test with a stick.
-44 Heat Distribution Check Are all the warm spots cozy or suspiciously volcanic?
-45 LED Indicator Test Blinking like it means something, or decorative only?
-46 Multi-Monitor Support Test Plug in 3 monitors—party or panic?
-47 BIOS Time Sync Time stays accurate or goes full time traveler?
-48 Device Weight Check Featherlight or personal gym equipment?
-49 Screen Glare Resistance Can you see the screen outdoors or just your regrets?
-50 Static Electricity Resistance Touch the chassis—zap? Now you’re awake.
+#	Test Case Name	Description	Compatible Testbeds
+1	Temporal Activation Button Test	Does the start button initiate time travel, or just existential dread?	TM-POD-001, TM-RIG-001, TM-VEHICLE-001
+2	Core Overheat During Chrono Jump	Does it fry an egg mid-jump or hold steady at subatomic temps?	TM-POD-002, TM-RIG-002, TM-STATION-001
+3	Sleep Mode in Temporal Suspension	Can it safely idle in the 1600s without drawing attention?	TM-POD-001, TM-SUIT-001, TM-VEHICLE-002
+4	Power Cell Endurance Through Ages	Does the battery survive 1,000 years or wimp out in 20 minutes?	TM-POD-001, TM-SUIT-001
+5	Port Stability in Multi-Epoch Use	Do the connectors hold after 300 plug cycles across different centuries?	TM-RIG-002, TM-STATION-001
+6	Reactor Noise During Jump	Does it hum with power or scream like an angry banshee?	TM-RIG-001, TM-VEHICLE-001
+7	Display Legibility in Medieval Light	Can you read the UI by candlelight in a 14th-century tavern?	TM-POD-001, TM-VEHICLE-002
+8	Visual Calibration for Dino-Eras	Are colors rendered correctly even when surrounded by angry T-Rexes?	TM-POD-001, TM-SUIT-001
+9	Control Panel Rage Resistance	Can it survive a frustrated chrononaut punching the buttons repeatedly?	TM-RIG-002, TM-VEHICLE-002
+10	USB Temporal Drift Tolerance	Do USB devices retain functionality after jumping 500 years?	TM-RIG-001, TM-STATION-001
+11	Chrono-Field Signal Acquisition	Does it sync to spacetime GPS or ask for directions like your dad?	TM-POD-001, TM-VEHICLE-001, TM-SUIT-001
+12	Bluetooth Pairing Across Timelines	Can it stay paired through time ripples or ghost like a bad ex?	TM-POD-001, TM-NANO-001
+13	Shutdown Speed in Emergency Recall	Does it retreat from a collapsing timeline in under 10 seconds?	TM-SUIT-001, TM-POD-002
+14	Drop Test Into a Chaotic Time Loop	If dropped in a paradox, does it still boot up?	TM-SUIT-001, TM-POD-001
+15	Hatch Open/Close Test	Does the door seal hold against both vacuum and Victorian fog?	TM-POD-001, TM-VEHICLE-001
+16	Temporal Interface Compatibility Check	Does it accept relic peripherals like steam keyboards and bone dice?	TM-RIG-002, TM-VEHICLE-002
+17	Touchscreen Response in Roman Times	Does it work with togas and oil-covered fingers?	TM-POD-001, TM-SUIT-001
+18	Overnight Stability in the Ice Age	Can it idle safely next to a saber-toothed tiger?	TM-SUIT-001, TM-STATION-001
+19	Chrono-Flux Performance Benchmark	Does time slow down due to hardware lag, or just philosophy?	TM-RIG-001, TM-POD-002
+20	Audio Alerts in the Future	Do the warning sounds still mean something in 3089?	TM-POD-001, TM-NANO-001
+21	BIOS Entry Speed During Startup	Can you hit F2 before being flung to 1812?	TM-RIG-001, TM-VEHICLE-001
+22	Memory Retention Through Wormholes	Do settings survive 12-dimensional wormholes, or just give up?	TM-STATION-001, TM-POD-001
+23	External Chrono-Monitor Integration	Supports temporal monitors or just throws sparks?	TM-RIG-001, TM-STATION-001
+24	Touchpad Smoothness on Cobblestones	Is it still usable during a bumpy ride through 1422?	TM-POD-001, TM-VEHICLE-002
+25	Charging Connector Stability	Does it charge properly even when haunted by past versions of itself?	TM-POD-001, TM-RIG-002
+26	Reactor Swell Check	Is the core expanding ominously, or just breathing?	TM-POD-002, TM-VEHICLE-001
+27	Analog Audio Interface (Gramophone Sync)	Will it pair with a phonograph in 1911?	TM-VEHICLE-002, TM-RIG-002
+28	HoloCam Clarity in Dimensional Fog	Clear selfie or cosmic static?	TM-POD-001, TM-NANO-001
+29	Mic Sensitivity in Paradox Zones	Can it hear your screams through time?	TM-POD-001, TM-SUIT-001
+30	Time-Locked Location Accuracy	Can it drop you exactly outside Caesar’s tent?	TM-SUIT-001, TM-PORTAL-001
+31	Vibration Response Test	Subtle hum or Harlem Shake at launch?	TM-VEHICLE-001, TM-POD-001
+32	Biometric Recognition Post-Time-Jump	Does it still recognize you after aging backward?	TM-POD-001, TM-SUIT-001
+33	Face Recognition Through Millennia	Does it get confused by 1700s makeup?	TM-POD-001, TM-SUIT-001
+34	Chrono-Cache Read/Write Speed	Does it store and retrieve timelines faster than drama spreads?	TM-RIG-001, TM-NANO-001
+35	SD Card Recovery from the Cretaceous	Can the card still mount after surviving a meteor?	TM-STATION-001, TM-RIG-001
+36	Core Heat Distribution After Launch	Evenly hot or localized mini volcano?	TM-POD-001, TM-RIG-002
+37	Time Vector Fan Spin Check	Are cooling fans aligned with quantum vectors?	TM-RIG-001, TM-VEHICLE-001
+38	BIOS Setting Stability in 2099	Do settings stick or go full Blade Runner?	TM-VEHICLE-001, TM-RIG-001
+39	Dust Accumulation Through Time	Does it attract medieval plague dust or future nanodust?	TM-POD-002, TM-RIG-002
+40	Shell Flex Resistance in War Zones	Can it withstand the tension of 1944?	TM-VEHICLE-001, TM-SUIT-001
+41	Foot Pad Adhesion in Zero Gravity	Are the pads still sticky in space?	TM-SUIT-001, TM-POD-001
+42	Plug Wobble Under Temporal Stress	Does it wiggle loose in temporal turbulence?	TM-POD-001, TM-RIG-001
+43	Ventilation Safety (for Hands & Rats)	Is it toddler-safe or rodent-vacuuming dangerous?	TM-RIG-002, TM-VEHICLE-002
+44	Thermal Balance During Time Drift	Does one side heat up before the rest arrives?	TM-POD-002, TM-RIG-001
+45	LED Panel Messaging Clarity	Are warning lights intuitive, or coded in sarcasm?	TM-POD-001, TM-SUIT-001
+46	Multi-Era Display Support	Can it output to CRTs and brainwave HUDs?	TM-STATION-001, TM-RIG-001
+47	BIOS Clock Sync in All Timezones	Can it keep accurate time everywhere?	TM-PORTAL-001, TM-POD-001
+48	Apparatus Weight in Different Gravities	Does the device go full pancake on Jupiter?	TM-SUIT-001, TM-VEHICLE-001
+49	Display Glare in Binary Star Systems	Is the screen still readable under twin suns?	TM-VEHICLE-001, TM-POD-001
+50	Temporal Feedback Resistance	Can it survive meeting its past self without imploding?	TM-POD-001, TM-NANO-001, TM-SUIT-001

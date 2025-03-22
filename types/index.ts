@@ -6,6 +6,7 @@ export interface TestCase {
   lastRun: string;
   duration: number; // in seconds
   priority: "low" | "medium" | "high";
+  compatibleTestbeds?: string[];
 }
 
 export interface TestBed {
