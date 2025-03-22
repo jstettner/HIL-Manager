@@ -50,6 +50,10 @@ export default function TestbedsPage() {
                 </span>
               </div>
 
+              <div className="pt-3 border-t">
+                <p className="text-sm text-muted-foreground pb-3">{testbed.description}</p>
+              </div>
+
               <div className="pt-3 border-t space-y-2">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">

@@ -44,7 +44,7 @@ export function TestCaseDialog({ testCase }: TestCaseDialogRowProps) {
   return (
     <Dialog>
       <TestCaseDialogRow testCase={testCase} />
-      <DialogContent>
+      <DialogContent className="">
         <DialogHeader>
           <DialogTitle>{testCase.name}</DialogTitle>
         </DialogHeader>
