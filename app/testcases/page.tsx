@@ -14,11 +14,12 @@ import {
   Table,
   TableBody,
   TableCaption,
-  TableCell,
   TableHead,
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+
+import { TestCaseDialog } from "@/components/test-case-dialog";
 
 export default async function TestcasesPage({
   searchParams,
@@ -73,18 +74,7 @@ export default async function TestcasesPage({
         </TableHeader>
         <TableBody>
           {currentTestCases.map((testCase) => (
-            <TableRow key={testCase.id} className="border-b">
-              <TableCell className="p-3">{testCase.name}</TableCell>
-              <TableCell className="p-3 text-muted-foreground">
-                {testCase.description}
-              </TableCell>
-              <TableCell className="p-3 text-muted-foreground">
-                {new Date(testCase.lastRun).toLocaleString()}
-              </TableCell>
-              <TableCell className="p-3 text-muted-foreground">
-                {testCase.duration}s
-              </TableCell>
-            </TableRow>
+            <TestCaseDialog key={testCase.id} testCase={testCase} />
           ))}
         </TableBody>
       </Table>
