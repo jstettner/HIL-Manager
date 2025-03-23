@@ -1,8 +1,9 @@
 import { SquareDashedMousePointer } from "lucide-react";
+import { TestbedCanvas } from "@/components/testbed-canvas";
 
 export default function TestbedBuilderPage() {
   return (
-    <div className="p-6">
+    <div className="flex flex-col h-[calc(100vh-4rem)] p-6">
       <div className="flex items-center gap-2 mb-6 page-header">
         <SquareDashedMousePointer className="w-6 h-6" />
         <div className="flex flex-row items-baseline gap-2">
@@ -16,7 +17,9 @@ export default function TestbedBuilderPage() {
           </h3>
         </div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+      <div className="flex-1 min-h-0">
+        <TestbedCanvas />
+      </div>
     </div>
   );
 }
