@@ -97,29 +97,10 @@ export function TestCaseDialog({ testCase }: TestCaseDialogRowProps) {
                   <span className="relative block truncate mix-blend-difference">
                     {testbed}
                   </span>
-                  <div
-                    className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity"
-                    style={{
-                      background:
-                        "linear-gradient(45deg, transparent 45%, rgba(255,255,255,0.2) 50%, transparent 55%)",
-                      backgroundSize: "200% 200%",
-                      animation: "shine 1s ease-in-out infinite",
-                    }}
-                  />
                 </button>
               ))}
             </div>
           </div>
-          <style jsx>{`
-            @keyframes shine {
-              0% {
-                background-position: -100% -100%;
-              }
-              100% {
-                background-position: 100% 100%;
-              }
-            }
-          `}</style>
         </div>
       </DialogContent>
     </Dialog>
