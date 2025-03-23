@@ -1,5 +1,5 @@
 import { SquareDashedMousePointer } from "lucide-react";
-import { TestbedCanvas } from "@/components/testbed-canvas";
+import { FlowDataLoader } from "@/components/flow-data-loader";
 
 export default function TestbedBuilderPage() {
   return (
@@ -19,7 +19,7 @@ export default function TestbedBuilderPage() {
         </div>
       </div>
       <div className="flex-1 min-h-0">
-        <TestbedCanvas />
+        <FlowDataLoader />
       </div>
     </div>
   );
