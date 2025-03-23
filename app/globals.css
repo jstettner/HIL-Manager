@@ -202,30 +202,28 @@
 }
 
 /* ReactFlow Custom Styling */
-.react-flow.flow-canvas {
-  @apply bg-muted/50;
-  @apply rounded-lg;
+.react-flow {
+  @apply !rounded-lg;
 }
 
-.react-flow.flow-canvas .react-flow__node {
-  @apply bg-card text-card-foreground shadow-sm border border-border rounded-md;
+.react-flow__node {
+  @apply !bg-card !text-card-foreground !shadow-sm !border !border-border !rounded-md;
 }
 
-.react-flow.flow-canvas .react-flow__edge {
-  @apply stroke-muted-foreground;
+.react-flow__edge {
+  @apply !stroke-muted-foreground;
 }
 
-.react-flow.flow-canvas .react-flow__handle {
-  @apply bg-primary border-background;
-}
-
-.react-flow.flow-canvas .react-flow__attribution {
-  @apply bg-transparent text-muted-foreground;
-  animation: gradient-shift 15s ease infinite;
+.react-flow__handle {
+  @apply !bg-primary !border-background;
 }
 
 .react-flow__attribution {
-  @apply hidden;
+  @apply !hidden;
+}
+
+.react-flow__controls {
+  @apply !rounded-md !overflow-hidden;
 }
 
 @keyframes gradient-shift {

@@ -4,6 +4,7 @@ import React, { useCallback } from "react";
 import {
   ReactFlow,
   MiniMap,
+  Controls,
   Background,
   BackgroundVariant,
   useNodesState,
@@ -59,9 +60,10 @@ export function TestbedCanvas() {
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
         className="flow-canvas"
+        colorMode="dark"
         fitView
       >
-        {/* <Controls /> */}
+        <Controls />
         <MiniMap />
         <Background variant={BackgroundVariant.Cross} gap={48} size={2} />
       </ReactFlow>
