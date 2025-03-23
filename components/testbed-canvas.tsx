@@ -12,7 +12,7 @@ import {
   Node,
 } from "@xyflow/react";
 import { Button } from "@/components/ui/button";
-import { LucideCommand, PlusCircle, ScanEye } from "lucide-react";
+import { LucideCommand, PlusCircle, ScanEye, Save } from "lucide-react";
 
 type NodeData = { label: string | ReactNode };
 import {
@@ -132,8 +132,8 @@ export function TestbedCanvas() {
   };
 
   return (
-    <div className="flex flex-col gap-4 h-full">
-      <div className="flex justify-end">
+    <div className="flex flex-col gap-4 h-full bg-gray">
+      <div className="flex flex-row justify-between items-baseline">
         <Button variant="outline" size="sm" onClick={() => setOpen(true)}>
           <div className="flex flex-row items-center">
             <PlusCircle className="mr-2 h-4 w-4" />
@@ -143,21 +143,32 @@ export function TestbedCanvas() {
             </span>
           </div>
         </Button>
-        <Button
-          className="ml-2 group relative min-w-[120px] text-xs font-medium text-white rounded-md transition-all overflow-hidden hover:scale-105 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-white/20 bg-black/80 mix-blend-screen"
-          variant="outline"
-          size="sm"
-          style={{
-            backgroundImage: `url('/images/button-alt.png')`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-        >
-          <div className="flex flex-row items-center">
-            <ScanEye className="mr-2 h-4 w-4" />
-            <span>Assess and Register</span>
-          </div>
-        </Button>
+        <h1 className="text-lg">
+          Untitled <span className="text-muted-foreground">(unsaved)</span>
+        </h1>
+        <div className="flex flex-row items-baseline gap-2">
+          <Button variant="default" size="sm">
+            <div className="flex flex-row items-center">
+              <Save className="mr-2 h-4 w-4" />
+              Save Draft
+            </div>
+          </Button>
+          <Button
+            className="ml-2 group relative text-xs font-medium text-white rounded-md transition-all overflow-hidden hover:scale-105 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-white/20 bg-black/80 mix-blend-screen"
+            variant="outline"
+            size="sm"
+            style={{
+              backgroundImage: `url('/images/button-alt.png')`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          >
+            <div className="flex flex-row items-center">
+              <ScanEye className="mr-2 h-4 w-4" />
+              <span>Register</span>
+            </div>
+          </Button>
+        </div>
       </div>
       <CommandDialog open={open} onOpenChange={setOpen}>
         <Command className="rounded-lg border shadow-md">
