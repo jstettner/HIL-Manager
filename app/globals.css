@@ -5,18 +5,23 @@
   0% {
     box-shadow: 0 0 40px -10px var(--shiny-1);
   }
+
   20% {
     box-shadow: 0 0 40px -8px var(--shiny-2);
   }
+
   40% {
     box-shadow: 0 0 40px -6px var(--shiny-3);
   }
+
   60% {
     box-shadow: 0 0 40px -8px var(--shiny-4);
   }
+
   80% {
     box-shadow: 0 0 40px -10px var(--shiny-5);
   }
+
   100% {
     box-shadow: 0 0 40px -10px var(--shiny-1);
   }
@@ -174,6 +179,7 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
@@ -193,16 +199,44 @@
     var(--shiny-9) 90%
   );
   background-size: 300% 140%;
+}
+
+/* ReactFlow Custom Styling */
+.react-flow.flow-canvas {
+  @apply bg-muted/50;
+  @apply rounded-lg;
+}
+
+.react-flow.flow-canvas .react-flow__node {
+  @apply bg-card text-card-foreground shadow-sm border border-border rounded-md;
+}
+
+.react-flow.flow-canvas .react-flow__edge {
+  @apply stroke-muted-foreground;
+}
+
+.react-flow.flow-canvas .react-flow__handle {
+  @apply bg-primary border-background;
+}
+
+.react-flow.flow-canvas .react-flow__attribution {
+  @apply bg-transparent text-muted-foreground;
   animation: gradient-shift 15s ease infinite;
+}
+
+.react-flow__attribution {
+  @apply hidden;
 }
 
 @keyframes gradient-shift {
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }
