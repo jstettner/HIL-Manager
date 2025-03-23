@@ -1,8 +1,18 @@
 "use client";
 
-import { useState } from "react";
-import { FlowNode, FlowEdge } from "./canvas";
-import { Canvas } from "./canvas";
+import { useCallback, useEffect } from "react";
+import { Canvas } from "@/components/canvas-ui/canvas";
+import type { ReactNode } from "react";
+import {
+  useNodesState,
+  useEdgesState,
+  addEdge,
+  Connection,
+  Edge,
+  Node,
+} from "@xyflow/react";
+
+type NodeData = { label: string | ReactNode };
 import {
   Command,
   CommandInput,
@@ -21,11 +31,11 @@ const sampleNodes = [
 ];
 
 interface FlowData {
-  nodes: FlowNode[];
-  edges: FlowEdge[];
+  nodes: Node<NodeData>[];
+  edges: Edge[];
 }
 
-async function fetchFlowData(): Promise<FlowData> {
+async function fetchTestbedConfigurationFlows(): Promise<FlowData> {
   // In a real implementation, this would fetch from an API or database
   // For demonstration, we're returning mock data
   return {
@@ -79,11 +89,25 @@ async function fetchFlowData(): Promise<FlowData> {
 }
 
 export function TestbedCanvas() {
-  const [nodes, setNodes] = useState<FlowNode[]>([]);
-  const [edges, setEdges] = useState<FlowEdge[]>([]);
+  const [nodes, setNodes, onNodesChange] = useNodesState<Node<NodeData>>([]);
+  const [edges, setEdges, onEdgesChange] = useEdgesState<Edge>([]);
+
+  useEffect(() => {
+    const loadInitialData = async () => {
+      const flowData = await fetchTestbedConfigurationFlows();
+      setNodes(flowData.nodes);
+      setEdges(flowData.edges);
+    };
+    loadInitialData();
+  }, []);
+
+  const onConnect = useCallback(
+    (params: Connection | Edge) => setEdges((eds) => addEdge(params, eds)),
+    [setEdges],
+  );
 
   const addNode = (type: string, label: string) => {
-    const newNode: FlowNode = {
+    const newNode: Node<NodeData> = {
       id: `${nodes.length + 1}`,
       type,
       data: { label },
@@ -112,8 +136,17 @@ export function TestbedCanvas() {
           </CommandList>
         </Command>
       </div>
-      <div className="flex-1 min-h-0 border rounded-lg bg-background" style={{ height: 'calc(100vh - 400px)' }}>
-        <Canvas initialNodes={nodes} initialEdges={edges} />
+      <div
+        className="flex-1 min-h-0 border rounded-lg bg-background"
+        style={{ height: "calc(100vh - 400px)" }}
+      >
+        <Canvas
+          nodes={nodes}
+          edges={edges}
+          onNodesChange={onNodesChange}
+          onEdgesChange={onEdgesChange}
+          onConnect={onConnect}
+        />
       </div>
     </div>
   );
