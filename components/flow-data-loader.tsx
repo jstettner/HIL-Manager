@@ -1,6 +1,24 @@
-// This is a server component
+"use client";
+
+import { useState } from "react";
 import { FlowNode, FlowEdge } from "./canvas";
 import { Canvas } from "./canvas";
+import {
+  Command,
+  CommandInput,
+  CommandList,
+  CommandEmpty,
+  CommandGroup,
+  CommandItem,
+} from "@/components/ui/command";
+
+const sampleNodes = [
+  { type: "input", label: "IEPE Input" },
+  { type: "input", label: "LED Strip" },
+  { type: "default", label: "MCU" },
+  { type: "default", label: "LDR" },
+  { type: "output", label: "Halidom" },
+];
 
 interface FlowData {
   nodes: FlowNode[];
@@ -60,10 +78,43 @@ async function fetchFlowData(): Promise<FlowData> {
   };
 }
 
-export async function FlowDataLoader() {
-  // Fetch the flow data
-  const flowData = await fetchFlowData();
+export function TestbedCanvas() {
+  const [nodes, setNodes] = useState<FlowNode[]>([]);
+  const [edges, setEdges] = useState<FlowEdge[]>([]);
 
-  // Pass the data to the client component
-  return <Canvas initialNodes={flowData.nodes} initialEdges={flowData.edges} />;
+  const addNode = (type: string, label: string) => {
+    const newNode: FlowNode = {
+      id: `${nodes.length + 1}`,
+      type,
+      data: { label },
+      position: { x: 100 + Math.random() * 200, y: 100 + Math.random() * 100 },
+    };
+    setNodes([...nodes, newNode]);
+  };
+
+  return (
+    <div className="flex flex-col gap-4 h-full">
+      <div className="h-[200px]">
+        <Command className="rounded-lg border shadow-md">
+          <CommandInput placeholder="Search nodes..." />
+          <CommandList>
+            <CommandEmpty>No results found.</CommandEmpty>
+            <CommandGroup heading="Available Nodes">
+              {sampleNodes.map((node) => (
+                <CommandItem
+                  key={`${node.type}-${node.label}`}
+                  onSelect={() => addNode(node.type, node.label)}
+                >
+                  {node.label}
+                </CommandItem>
+              ))}
+            </CommandGroup>
+          </CommandList>
+        </Command>
+      </div>
+      <div className="flex-1 min-h-0 border rounded-lg bg-background" style={{ height: 'calc(100vh - 400px)' }}>
+        <Canvas initialNodes={nodes} initialEdges={edges} />
+      </div>
+    </div>
+  );
 }
