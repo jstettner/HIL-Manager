@@ -8,7 +8,14 @@ type OutputNodeProps = {
 
 export const OutputNode = memo(({ data }: OutputNodeProps) => {
   return (
-    <div className="px-4 py-2 rounded-md border-2 border-red-500 bg-red-100 dark:bg-red-900 dark:border-red-700">
+    <div
+      className="px-4 py-2 rounded-md"
+      style={{
+        backgroundImage: "url(/images/banner-med-grad.png)",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
       <Handle type="target" position={Position.Top} />
       <div className="font-medium text-sm">{data.label}</div>
     </div>

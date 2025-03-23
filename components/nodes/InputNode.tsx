@@ -8,7 +8,7 @@ type InputNodeProps = {
 
 export const InputNode = memo(({ data }: InputNodeProps) => {
   return (
-    <div className="px-4 py-2 rounded-md border-2 border-green-500 bg-green-100 dark:bg-green-900 dark:border-green-700">
+    <div className="px-4 py-2 rounded-md border-2 border-[#47BAFE] bg-[#47BAFE]/10 dark:bg-[#47BAFE]/20 dark:border-[#47BAFE]">
       <Handle type="source" position={Position.Bottom} />
       <div className="font-medium text-sm">{data.label}</div>
     </div>

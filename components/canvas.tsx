@@ -17,6 +17,8 @@ import {
 
 import "@xyflow/react/dist/style.css";
 
+import { Command } from "@/components/ui/command";
+
 // Import custom node components
 import { InputNode } from "./nodes/InputNode";
 import { DefaultNode } from "./nodes/DefaultNode";
