@@ -15,11 +15,11 @@ import {
 import "@xyflow/react/dist/style.css";
 
 // Import custom node components
-import { InputNode } from "./InputNode";
-import { DefaultNode } from "./DefaultNode";
-import { OutputNode } from "./OutputNode";
+import { InputNode } from "./testbed-nodes/InputNode";
+import { DefaultNode } from "./testbed-nodes/DefaultNode";
+import { OutputNode } from "./testbed-nodes/OutputNode";
 
-const nodeTypes = {
+const defaultNodeTypes = {
   input: InputNode,
   default: DefaultNode,
   output: OutputNode,
@@ -34,6 +34,7 @@ interface CanvasProps {
   onNodesChange: (changes: any) => void;
   onEdgesChange: (changes: any) => void;
   onConnect: (params: Connection | Edge) => void;
+  nodeTypes?: { [key: string]: React.ComponentType<any> };
 }
 
 export function Canvas({
@@ -42,6 +43,7 @@ export function Canvas({
   onNodesChange,
   onEdgesChange,
   onConnect,
+  nodeTypes,
 }: CanvasProps) {
   return (
     <div className="w-full h-full">
@@ -51,7 +53,7 @@ export function Canvas({
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
-        nodeTypes={nodeTypes}
+        nodeTypes={nodeTypes || defaultNodeTypes}
         className="flow-canvas"
         colorMode="dark"
         fitView

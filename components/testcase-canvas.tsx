@@ -13,8 +13,16 @@ import {
 } from "@xyflow/react";
 import { Button } from "@/components/ui/button";
 import { LucideCommand, PlusCircle, ScanEye, Save } from "lucide-react";
+import { StartNode } from "@/components/canvas-ui/testcase-nodes/StartNode";
+import { StepNode } from "@/components/canvas-ui/testcase-nodes/StepNode";
+import { EndNode } from "@/components/canvas-ui/testcase-nodes/EndNode";
+import { ConditionalNode } from "@/components/canvas-ui/testcase-nodes/ConditionalNode";
 
-type NodeData = { label: string | ReactNode };
+type NodeData = {
+  label: string | ReactNode;
+  description?: string;
+  condition?: string;
+};
 import {
   Command,
   CommandDialog,
@@ -26,11 +34,24 @@ import {
 } from "@/components/ui/command";
 
 const sampleNodes = [
-  { type: "input", label: "IEPE Input" },
-  { type: "input", label: "LED Strip" },
-  { type: "default", label: "MCU" },
-  { type: "default", label: "LDR" },
-  { type: "output", label: "Halidom" },
+  { type: "start", label: "Begin Test" },
+  {
+    type: "step",
+    label: "Initialize System",
+    description: "Set up test environment",
+  },
+  { type: "step", label: "Run Calibration", description: "Calibrate sensors" },
+  {
+    type: "conditional",
+    label: "Check Status",
+    condition: "All sensors ready?",
+  },
+  {
+    type: "step",
+    label: "Execute Test Sequence",
+    description: "Run main test procedure",
+  },
+  { type: "end", label: "Complete Test" },
 ];
 
 interface FlowData {
@@ -38,60 +59,58 @@ interface FlowData {
   edges: Edge[];
 }
 
-async function fetchTestbedConfigurationFlows(): Promise<FlowData> {
+async function fetchTestcaseFlows(): Promise<FlowData> {
   // In a real implementation, this would fetch from an API or database
   // For demonstration, we're returning mock data
   return {
     nodes: [
       {
         id: "1",
-        type: "input",
-        data: { label: "IEPE Input" },
-        position: { x: 175, y: 25 },
+        type: "start",
+        data: { label: "Begin Test" },
+        position: { x: 250, y: 25 },
       },
       {
         id: "2",
-        type: "default",
-        data: { label: "MCU 1" },
-        position: { x: 75, y: 125 },
+        type: "step",
+        data: {
+          label: "Initialize System",
+          description: "Set up test environment",
+        },
+        position: { x: 250, y: 125 },
       },
       {
         id: "3",
-        type: "default",
-        data: { label: "MCU 2" },
-        position: { x: 275, y: 125 },
+        type: "conditional",
+        data: { label: "Check Status", condition: "All sensors ready?" },
+        position: { x: 250, y: 225 },
       },
       {
         id: "4",
-        type: "default",
-        data: { label: "LDR" },
-        position: { x: 475, y: 125 },
+        type: "step",
+        data: {
+          label: "Execute Test Sequence",
+          description: "Run main test procedure",
+        },
+        position: { x: 250, y: 325 },
       },
       {
         id: "5",
-        type: "output",
-        data: { label: "Halidom" },
-        position: { x: 175, y: 250 },
-      },
-      {
-        id: "6",
-        type: "input",
-        data: { label: "LED Strip" },
-        position: { x: 375, y: 25 },
+        type: "end",
+        data: { label: "Complete Test" },
+        position: { x: 250, y: 425 },
       },
     ],
     edges: [
       { id: "e1-2", source: "1", target: "2" },
-      { id: "e1-3", source: "1", target: "3" },
-      { id: "e2-4", source: "2", target: "5", animated: true },
-      { id: "e3-4", source: "3", target: "5", animated: true },
-      { id: "e6-4", source: "6", target: "4" },
-      { id: "e4-3", source: "4", target: "3" },
+      { id: "e2-3", source: "2", target: "3" },
+      { id: "e3-4", source: "3", target: "4" },
+      { id: "e4-5", source: "4", target: "5", animated: true },
     ],
   };
 }
 
-export function TestbedCanvas() {
+export function TestcaseCanvas() {
   const [nodes, setNodes, onNodesChange] = useNodesState<Node<NodeData>>([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState<Edge>([]);
   const [open, setOpen] = useState(false);
@@ -109,7 +128,7 @@ export function TestbedCanvas() {
 
   useEffect(() => {
     const loadInitialData = async () => {
-      const flowData = await fetchTestbedConfigurationFlows();
+      const flowData = await fetchTestcaseFlows();
       setNodes(flowData.nodes);
       setEdges(flowData.edges);
     };
@@ -163,12 +182,12 @@ export function TestbedCanvas() {
               backgroundPosition: "center",
             }}
             onClick={() => {
-              // TODO: Implement register testbed
+              // TODO: Implement register testcase
             }}
           >
             <div className="flex flex-row items-center text-black">
               <ScanEye className="mr-2 h-4 w-4" />
-              <span>Register Testbed</span>
+              <span>Register Testcase</span>
             </div>
           </Button>
         </div>
@@ -202,6 +221,12 @@ export function TestbedCanvas() {
           nodes={nodes}
           edges={edges}
           onNodesChange={onNodesChange}
+          nodeTypes={{
+            start: StartNode,
+            step: StepNode,
+            conditional: ConditionalNode,
+            end: EndNode,
+          }}
           onEdgesChange={onEdgesChange}
           onConnect={onConnect}
         />

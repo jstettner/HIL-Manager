@@ -1,16 +1,23 @@
 import { FlaskConical } from "lucide-react";
+import { TestcaseCanvas } from "@/components/testcase-canvas";
 
 export default function TestcaseLabPage() {
   return (
-    <div className="p-6">
+    <div className="flex flex-col h-[calc(100vh-5rem)] p-6">
       <div className="flex items-center gap-2 mb-6 page-header">
         <FlaskConical className="w-6 h-6" />
         <div className="flex flex-row items-baseline gap-2">
-          <h1 className="text-2xl">Test Lab</h1>
-          <h3 className="text-xl text-muted-foreground">Design a Test</h3>
+          <div className="flex flex-row items-baseline">
+            <h1 className="text-2xl">Test Lab</h1>
+          </div>
+          <h3 className="text-xl text-muted-foreground">
+            Design a Test Procedure
+          </h3>
         </div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+      <div className="flex-1 min-h-0">
+        <TestcaseCanvas />
+      </div>
     </div>
   );
 }

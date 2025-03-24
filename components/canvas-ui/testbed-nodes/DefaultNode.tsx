@@ -1,6 +1,6 @@
 import React, { memo } from "react";
 import { Handle, Position } from "@xyflow/react";
-import type { CustomNode } from "./types";
+import type { CustomNode } from "../types";
 
 type DefaultNodeProps = {
   data: CustomNode["data"];
