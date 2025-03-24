@@ -210,14 +210,6 @@
   @apply !bg-card !text-card-foreground !shadow-sm !border !border-border !rounded-md;
 }
 
-.react-flow__edge {
-  @apply !stroke-muted-foreground;
-}
-
-.react-flow__handle {
-  @apply !bg-primary !border-background;
-}
-
 .react-flow__attribution {
   @apply !hidden;
 }

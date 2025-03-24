@@ -147,7 +147,7 @@ export function TestbedCanvas() {
           Untitled <span className="text-muted-foreground">(unsaved)</span>
         </h1>
         <div className="flex flex-row items-baseline gap-2">
-          <Button variant="default" size="sm">
+          <Button variant="outline" size="sm">
             <div className="flex flex-row items-center">
               <Save className="mr-2 h-4 w-4" />
               Save Draft
@@ -163,7 +163,7 @@ export function TestbedCanvas() {
               backgroundPosition: "center",
             }}
           >
-            <div className="flex flex-row items-center">
+            <div className="flex flex-row items-center text-black">
               <ScanEye className="mr-2 h-4 w-4" />
               <span>Register</span>
             </div>
