@@ -1,7 +1,14 @@
 "use client";
 
 import { useCallback, useState, useEffect } from "react";
-import { useNodesState, useEdgesState, addEdge, Connection, Edge, Node } from "@xyflow/react";
+import {
+  useNodesState,
+  useEdgesState,
+  addEdge,
+  Connection,
+  Edge,
+  Node,
+} from "@xyflow/react";
 import { BaseNodeData, FlowData } from "@/types/canvas-types";
 
 interface UseCanvasOptions<T extends BaseNodeData> {
@@ -9,11 +16,23 @@ interface UseCanvasOptions<T extends BaseNodeData> {
   onDataChange?: (data: FlowData<T>) => void;
 }
 
-export function useCanvas<T extends BaseNodeData>({ initialData, onDataChange }: UseCanvasOptions<T> = {}) {
-  const [nodes, setNodes, onNodesChange] = useNodesState<Node<T>>(initialData?.nodes || []);
-  const [edges, setEdges, onEdgesChange] = useEdgesState<Edge>(initialData?.edges || []);
+export function useCanvas<T extends BaseNodeData>({
+  initialData,
+  onDataChange,
+}: UseCanvasOptions<T> = {}) {
+  const [nodes, setNodes, onNodesChange] = useNodesState<Node<T>>([]);
+  const [edges, setEdges, onEdgesChange] = useEdgesState<Edge>([]);
   const [canvasKey, setCanvasKey] = useState(Date.now());
   const [commandOpen, setCommandOpen] = useState(false);
+  const [isInitialized, setIsInitialized] = useState(false);
+
+  useEffect(() => {
+    if (initialData && !isInitialized) {
+      setNodes(initialData.nodes);
+      setEdges(initialData.edges);
+      setIsInitialized(true);
+    }
+  }, [initialData, isInitialized, setNodes, setEdges]);
 
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
@@ -31,16 +50,22 @@ export function useCanvas<T extends BaseNodeData>({ initialData, onDataChange }:
     [setEdges],
   );
 
-  const addNode = useCallback((type: string, data: Partial<T>) => {
-    const newNode: Node<T> = {
-      id: `${nodes.length + 1}`,
-      type,
-      data: data as T,
-      position: { x: 100 + Math.random() * 200, y: 100 + Math.random() * 100 },
-    };
-    setNodes([...nodes, newNode]);
-    setCanvasKey(Date.now());
-  }, [nodes, setNodes]);
+  const addNode = useCallback(
+    (type: string, data: Partial<T>) => {
+      const newNode: Node<T> = {
+        id: `${nodes.length + 1}`,
+        type,
+        data: data as T,
+        position: {
+          x: 100 + Math.random() * 200,
+          y: 100 + Math.random() * 100,
+        },
+      };
+      setNodes([...nodes, newNode]);
+      setCanvasKey(Date.now());
+    },
+    [nodes, setNodes],
+  );
 
   useEffect(() => {
     onDataChange?.({ nodes, edges });

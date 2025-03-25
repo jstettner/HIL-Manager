@@ -1,6 +1,12 @@
 "use client";
 
-import { ReactFlow, Controls, MiniMap, Background, BackgroundVariant } from "@xyflow/react";
+import {
+  ReactFlow,
+  Controls,
+  MiniMap,
+  Background,
+  BackgroundVariant,
+} from "@xyflow/react";
 import { CanvasProps, BaseNodeData } from "@/types/canvas-types";
 import "@xyflow/react/dist/style.css";
 

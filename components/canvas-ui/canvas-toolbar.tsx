@@ -10,7 +10,11 @@ interface CanvasToolbarProps {
   actions?: ReactNode;
 }
 
-export function CanvasToolbar({ title, onAddNode, actions }: CanvasToolbarProps) {
+export function CanvasToolbar({
+  title,
+  onAddNode,
+  actions,
+}: CanvasToolbarProps) {
   return (
     <div className="flex flex-row justify-between items-baseline">
       <div className="flex flex-row items-baseline gap-2">
@@ -27,9 +31,7 @@ export function CanvasToolbar({ title, onAddNode, actions }: CanvasToolbarProps)
           {title} <span className="text-muted-foreground">(saved)</span>
         </h1>
       </div>
-      <div className="flex flex-row items-baseline gap-2">
-        {actions}
-      </div>
+      <div className="flex flex-row items-baseline gap-2">{actions}</div>
     </div>
   );
 }

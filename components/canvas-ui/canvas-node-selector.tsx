@@ -33,21 +33,23 @@ export function CanvasNodeSelector({
         <CommandList>
           <CommandEmpty>No results found.</CommandEmpty>
           {isGrouped ? (
-            Object.entries(nodes as NodeGroups).map(([groupName, groupNodes]) => (
-              <CommandGroup key={groupName} heading={groupName}>
-                {groupNodes.map((node) => (
-                  <CommandItem
-                    key={`${node.type}-${node.label}`}
-                    onSelect={() => {
-                      onSelectNode(node.type, node.label);
-                      onOpenChange(false);
-                    }}
-                  >
-                    {node.label}
-                  </CommandItem>
-                ))}
-              </CommandGroup>
-            ))
+            Object.entries(nodes as NodeGroups).map(
+              ([groupName, groupNodes]) => (
+                <CommandGroup key={groupName} heading={groupName}>
+                  {groupNodes.map((node) => (
+                    <CommandItem
+                      key={`${node.type}-${node.label}`}
+                      onSelect={() => {
+                        onSelectNode(node.type, node.label);
+                        onOpenChange(false);
+                      }}
+                    >
+                      {node.label}
+                    </CommandItem>
+                  ))}
+                </CommandGroup>
+              ),
+            )
           ) : (
             <CommandGroup heading="Available Nodes">
               {(nodes as NodeType[]).map((node) => (
