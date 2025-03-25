@@ -12,7 +12,7 @@ import {
   Node,
 } from "@xyflow/react";
 import { Button } from "@/components/ui/button";
-import { LucideCommand, PlusCircle, ScanEye, Save } from "lucide-react";
+import { LucideCommand, PlusCircle, ServerCog, Save } from "lucide-react";
 import { StartNode } from "@/components/canvas-ui/testcase-nodes/StartNode";
 import { StepNode } from "@/components/canvas-ui/testcase-nodes/StepNode";
 import { EndNode } from "@/components/canvas-ui/testcase-nodes/EndNode";
@@ -153,18 +153,20 @@ export function TestcaseCanvas() {
   return (
     <div className="flex flex-col gap-4 h-full bg-gray">
       <div className="flex flex-row justify-between items-baseline">
-        <Button variant="outline" size="sm" onClick={() => setOpen(true)}>
-          <div className="flex flex-row items-center">
-            <PlusCircle className="mr-2 h-4 w-4" />
-            <span>Add Node</span>
-            <span className="text-muted-foreground flex flex-row items-center ml-2">
-              (<LucideCommand className="h-2 w-2 mr-[0.2rem]" />+ k)
-            </span>
-          </div>
-        </Button>
-        <h1 className="text-lg">
-          Untitled <span className="text-muted-foreground">(unsaved)</span>
-        </h1>
+        <div className="flex flex-row items-baseline gap-2">
+          <Button variant="outline" size="sm" onClick={() => setOpen(true)}>
+            <div className="flex flex-row items-center">
+              <PlusCircle className="mr-2 h-4 w-4" />
+              <span>Add Node</span>
+              <span className="text-muted-foreground flex flex-row items-center ml-2">
+                (<LucideCommand className="h-2 w-2 mr-[0.2rem]" />+ k)
+              </span>
+            </div>
+          </Button>
+          <h1 className="text-lg">
+            Untitled <span className="text-muted-foreground">(unsaved)</span>
+          </h1>
+        </div>
         <div className="flex flex-row items-baseline gap-2">
           <Button variant="outline" size="sm">
             <div className="flex flex-row items-center">
@@ -186,7 +188,7 @@ export function TestcaseCanvas() {
             }}
           >
             <div className="flex flex-row items-center text-black">
-              <ScanEye className="mr-2 h-4 w-4" />
+              <ServerCog className="mr-2 h-4 w-4" />
               <span>Register Testcase</span>
             </div>
           </Button>

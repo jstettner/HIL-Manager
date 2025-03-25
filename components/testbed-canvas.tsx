@@ -12,7 +12,7 @@ import {
   Node,
 } from "@xyflow/react";
 import { Button } from "@/components/ui/button";
-import { LucideCommand, PlusCircle, ScanEye, Save } from "lucide-react";
+import { LucideCommand, PlusCircle, ScanEye, Save, Unplug } from "lucide-react";
 
 type NodeData = { label: string | ReactNode };
 import {
@@ -70,7 +70,13 @@ async function fetchTestbedConfigurationFlows(): Promise<FlowData> {
       {
         id: "5",
         type: "output",
-        data: { label: "Halidom" },
+        data: {
+          label: (
+            <span>
+              Hal<span className="ml-[-0.17em]">i</span>dom
+            </span>
+          ),
+        },
         position: { x: 175, y: 250 },
       },
       {
@@ -134,23 +140,31 @@ export function TestbedCanvas() {
   return (
     <div className="flex flex-col gap-4 h-full bg-gray">
       <div className="flex flex-row justify-between items-baseline">
-        <Button variant="outline" size="sm" onClick={() => setOpen(true)}>
-          <div className="flex flex-row items-center">
-            <PlusCircle className="mr-2 h-4 w-4" />
-            <span>Add Node</span>
-            <span className="text-muted-foreground flex flex-row items-center ml-2">
-              (<LucideCommand className="h-2 w-2 mr-[0.2rem]" />+ k)
-            </span>
-          </div>
-        </Button>
-        <h1 className="text-lg">
-          Untitled <span className="text-muted-foreground">(unsaved)</span>
-        </h1>
+        <div className="flex flex-row items-baseline gap-2">
+          <Button variant="outline" size="sm" onClick={() => setOpen(true)}>
+            <div className="flex flex-row items-center">
+              <PlusCircle className="mr-2 h-4 w-4" />
+              <span>Add Node</span>
+              <span className="text-muted-foreground flex flex-row items-center ml-2">
+                (<LucideCommand className="h-2 w-2 mr-[0.2rem]" />+ k)
+              </span>
+            </div>
+          </Button>
+          <h1 className="text-lg">
+            Untitled <span className="text-muted-foreground">(unsaved)</span>
+          </h1>
+        </div>
         <div className="flex flex-row items-baseline gap-2">
           <Button variant="outline" size="sm">
             <div className="flex flex-row items-center">
               <Save className="mr-2 h-4 w-4" />
               Save Draft
+            </div>
+          </Button>
+          <Button variant="outline" size="sm">
+            <div className="flex flex-row items-center">
+              <Unplug className="mr-2 h-4 w-4" />
+              Register Component
             </div>
           </Button>
           <Button

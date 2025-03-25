@@ -17,7 +17,9 @@ export const OutputNode = memo(({ data }: OutputNodeProps) => {
       }}
     >
       <Handle type="target" position={Position.Top} />
-      <div className="font-medium text-sm text-gray-800">{data.label}</div>
+      <div className="font-medium text-sm text-gray-800 font-dotgothic">
+        {data.label}
+      </div>
     </div>
   );
 });
