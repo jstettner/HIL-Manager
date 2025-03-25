@@ -18,11 +18,12 @@ import { StepNode } from "@/components/canvas-ui/testcase-nodes/StepNode";
 import { EndNode } from "@/components/canvas-ui/testcase-nodes/EndNode";
 import { ConditionalNode } from "@/components/canvas-ui/testcase-nodes/ConditionalNode";
 
-type NodeData = {
-  label: string | ReactNode;
-  description?: string;
-  condition?: string;
-};
+import {
+  NodeData,
+  FlowData,
+  SAMPLE_NODES,
+  SAMPLE_FLOW_DATA,
+} from "@/constants/testcase-nodes";
 import {
   Command,
   CommandDialog,
@@ -33,81 +34,10 @@ import {
   CommandItem,
 } from "@/components/ui/command";
 
-const sampleNodes = [
-  { type: "start", label: "Begin Test" },
-  {
-    type: "step",
-    label: "Initialize System",
-    description: "Set up test environment",
-  },
-  { type: "step", label: "Run Calibration", description: "Calibrate sensors" },
-  {
-    type: "conditional",
-    label: "Check Status",
-    condition: "All sensors ready?",
-  },
-  {
-    type: "step",
-    label: "Execute Test Sequence",
-    description: "Run main test procedure",
-  },
-  { type: "end", label: "Complete Test" },
-];
-
-interface FlowData {
-  nodes: Node<NodeData>[];
-  edges: Edge[];
-}
-
 async function fetchTestcaseFlows(): Promise<FlowData> {
   // In a real implementation, this would fetch from an API or database
   // For demonstration, we're returning mock data
-  return {
-    nodes: [
-      {
-        id: "1",
-        type: "start",
-        data: { label: "Begin Test" },
-        position: { x: 250, y: 25 },
-      },
-      {
-        id: "2",
-        type: "step",
-        data: {
-          label: "Initialize System",
-          description: "Set up test environment",
-        },
-        position: { x: 250, y: 125 },
-      },
-      {
-        id: "3",
-        type: "conditional",
-        data: { label: "Check Status", condition: "All sensors ready?" },
-        position: { x: 250, y: 225 },
-      },
-      {
-        id: "4",
-        type: "step",
-        data: {
-          label: "Execute Test Sequence",
-          description: "Run main test procedure",
-        },
-        position: { x: 250, y: 325 },
-      },
-      {
-        id: "5",
-        type: "end",
-        data: { label: "Complete Test" },
-        position: { x: 250, y: 425 },
-      },
-    ],
-    edges: [
-      { id: "e1-2", source: "1", target: "2" },
-      { id: "e2-3", source: "2", target: "3" },
-      { id: "e3-4", source: "3", target: "4" },
-      { id: "e4-5", source: "4", target: "5", animated: true },
-    ],
-  };
+  return SAMPLE_FLOW_DATA;
 }
 
 export function TestcaseCanvas() {
@@ -166,7 +96,8 @@ export function TestcaseCanvas() {
             </div>
           </Button>
           <h1 className="text-lg">
-            Untitled <span className="text-muted-foreground">(unsaved)</span>
+            Test Monitor Core{" "}
+            <span className="text-muted-foreground">(saved)</span>
           </h1>
         </div>
         <div className="flex flex-row items-baseline gap-2">
@@ -187,6 +118,8 @@ export function TestcaseCanvas() {
             }}
             onClick={() => {
               // TODO: Implement register testcase
+              console.log(nodes);
+              console.log(edges);
             }}
           >
             <div className="flex flex-row items-center text-black">
@@ -202,7 +135,7 @@ export function TestcaseCanvas() {
           <CommandList>
             <CommandEmpty>No results found.</CommandEmpty>
             <CommandGroup heading="Available Nodes">
-              {sampleNodes.map((node) => (
+              {SAMPLE_NODES.map((node: { type: string; label: string }) => (
                 <CommandItem
                   key={`${node.type}-${node.label}`}
                   onSelect={() => {

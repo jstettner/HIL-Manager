@@ -19,7 +19,7 @@ import {
   SAMPLE_FLOW_DATA,
   FlowData,
   testbedNodeTypes,
-} from "@/constants/nodes";
+} from "@/constants/testbed-nodes";
 import {
   Command,
   CommandDialog,
