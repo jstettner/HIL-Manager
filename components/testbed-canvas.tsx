@@ -14,7 +14,12 @@ import {
 import { Button } from "@/components/ui/button";
 import { LucideCommand, PlusCircle, ScanEye, Save, Unplug } from "lucide-react";
 
-import { NodeData, SAMPLE_NODE_TYPES, SAMPLE_FLOW_DATA, FlowData } from "@/constants/nodes";
+import {
+  NodeData,
+  SAMPLE_NODE_TYPES,
+  SAMPLE_FLOW_DATA,
+  FlowData,
+} from "@/constants/nodes";
 import {
   Command,
   CommandDialog,
