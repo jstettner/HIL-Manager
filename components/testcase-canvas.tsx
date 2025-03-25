@@ -17,6 +17,7 @@ import { StartNode } from "@/components/canvas-ui/testcase-nodes/StartNode";
 import { StepNode } from "@/components/canvas-ui/testcase-nodes/StepNode";
 import { EndNode } from "@/components/canvas-ui/testcase-nodes/EndNode";
 import { ConditionalNode } from "@/components/canvas-ui/testcase-nodes/ConditionalNode";
+import { InputNode } from "@/components/canvas-ui/testcase-nodes/InputNode";
 
 import {
   NodeData,
@@ -163,6 +164,7 @@ export function TestcaseCanvas() {
             step: StepNode,
             conditional: ConditionalNode,
             end: EndNode,
+            input: InputNode,
           }}
           onEdgesChange={onEdgesChange}
           onConnect={onConnect}

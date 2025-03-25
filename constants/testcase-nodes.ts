@@ -14,6 +14,7 @@ export interface FlowData {
 
 export const SAMPLE_NODES = [
   { type: "start", label: "Begin Test" },
+  { type: "input", label: "Time Input" },
   {
     type: "step",
     label: "Initialize System",
@@ -24,6 +25,10 @@ export const SAMPLE_NODES = [
     type: "conditional",
     label: "Check Status",
     condition: "All sensors ready?",
+  },
+  {
+    type: "input",
+    label: "Gesture Input",
   },
   {
     type: "step",
@@ -38,8 +43,17 @@ export const SAMPLE_FLOW_DATA: FlowData = {
     {
       id: "1",
       type: "start",
-      data: { label: "Start" },
-      position: { x: 250, y: 25 },
+      data: {
+        label: "Start",
+      },
+      position: {
+        x: 250,
+        y: 25,
+      },
+      measured: {
+        width: 150,
+        height: 62,
+      },
     },
     {
       id: "2",
@@ -48,7 +62,14 @@ export const SAMPLE_FLOW_DATA: FlowData = {
         label: "Power Up",
         description: "Initialize system power sequence",
       },
-      position: { x: 250, y: 125 },
+      position: {
+        x: 250,
+        y: 125,
+      },
+      measured: {
+        width: 150,
+        height: 62,
+      },
     },
     {
       id: "3",
@@ -57,7 +78,14 @@ export const SAMPLE_FLOW_DATA: FlowData = {
         label: "Perform Gesture Input",
         description: "Destination: July 4, 1776 – Philadelphia",
       },
-      position: { x: 250, y: 225 },
+      position: {
+        x: 250,
+        y: 225,
+      },
+      measured: {
+        width: 150,
+        height: 82,
+      },
     },
     {
       id: "4",
@@ -66,7 +94,14 @@ export const SAMPLE_FLOW_DATA: FlowData = {
         label: "Validate Input Propagation",
         description: "Verify gesture input signals",
       },
-      position: { x: 250, y: 325 },
+      position: {
+        x: 250,
+        y: 325,
+      },
+      measured: {
+        width: 150,
+        height: 82,
+      },
     },
     {
       id: "5",
@@ -75,7 +110,14 @@ export const SAMPLE_FLOW_DATA: FlowData = {
         label: "Monitor Core Activation",
         description: "Track core power levels and stability",
       },
-      position: { x: 250, y: 425 },
+      position: {
+        x: 250,
+        y: 425,
+      },
+      measured: {
+        width: 150,
+        height: 82,
+      },
     },
     {
       id: "6",
@@ -84,21 +126,84 @@ export const SAMPLE_FLOW_DATA: FlowData = {
         label: "GPIO Controller Signal Confirmation",
         description: "Verify all GPIO signals are within expected ranges",
       },
-      position: { x: 250, y: 525 },
+      position: {
+        x: 250,
+        y: 525,
+      },
+      measured: {
+        width: 150,
+        height: 122,
+      },
     },
     {
       id: "7",
       type: "end",
-      data: { label: "End" },
-      position: { x: 250, y: 665 },
+      data: {
+        label: "End",
+      },
+      position: {
+        x: 250,
+        y: 665,
+      },
+      measured: {
+        width: 150,
+        height: 58,
+      },
+    },
+    {
+      id: "8",
+      type: "input",
+      data: {
+        label: '"Destination: July 4, 1776 – Philadelphia"',
+      },
+      position: {
+        x: 437,
+        y: 70,
+      },
+      measured: {
+        width: 150,
+        height: 62,
+      },
+      selected: true,
+      dragging: false,
     },
   ],
   edges: [
-    { id: "e1-2", source: "1", target: "2" },
-    { id: "e2-3", source: "2", target: "3" },
-    { id: "e3-4", source: "3", target: "4" },
-    { id: "e4-5", source: "4", target: "5" },
-    { id: "e5-6", source: "5", target: "6" },
-    { id: "e6-7", source: "6", target: "7", animated: true },
+    {
+      id: "e1-2",
+      source: "1",
+      target: "2",
+    },
+    {
+      id: "e2-3",
+      source: "2",
+      target: "3",
+    },
+    {
+      id: "e3-4",
+      source: "3",
+      target: "4",
+    },
+    {
+      id: "e4-5",
+      source: "4",
+      target: "5",
+    },
+    {
+      id: "e5-6",
+      source: "5",
+      target: "6",
+    },
+    {
+      id: "e6-7",
+      source: "6",
+      target: "7",
+      animated: true,
+    },
+    {
+      source: "8",
+      target: "3",
+      id: "xy-edge__8-3",
+    },
   ],
 };
