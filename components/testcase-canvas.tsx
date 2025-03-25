@@ -114,6 +114,7 @@ export function TestcaseCanvas() {
   const [nodes, setNodes, onNodesChange] = useNodesState<Node<NodeData>>([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState<Edge>([]);
   const [open, setOpen] = useState(false);
+  const [canvasKey, setCanvasKey] = useState(Date.now());
 
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
@@ -148,6 +149,7 @@ export function TestcaseCanvas() {
       position: { x: 100 + Math.random() * 200, y: 100 + Math.random() * 100 },
     };
     setNodes([...nodes, newNode]);
+    setCanvasKey(Date.now());
   };
 
   return (
@@ -231,6 +233,7 @@ export function TestcaseCanvas() {
           }}
           onEdgesChange={onEdgesChange}
           onConnect={onConnect}
+          canvasKey={canvasKey}
         />
       </div>
     </div>
