@@ -34,6 +34,7 @@ interface CanvasProps {
   onNodesChange: (changes: any) => void;
   onEdgesChange: (changes: any) => void;
   onConnect: (params: Connection | Edge) => void;
+  canvasKey: number;
   nodeTypes?: { [key: string]: React.ComponentType<any> };
 }
 
@@ -43,6 +44,7 @@ export function Canvas({
   onNodesChange,
   onEdgesChange,
   onConnect,
+  canvasKey,
   nodeTypes,
 }: CanvasProps) {
   return (
@@ -56,6 +58,7 @@ export function Canvas({
         nodeTypes={nodeTypes || defaultNodeTypes}
         className="flow-canvas"
         colorMode="dark"
+        key={canvasKey}
         fitView
       >
         <Controls />
