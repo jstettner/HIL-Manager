@@ -2,7 +2,6 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { Canvas } from "@/components/canvas-ui/canvas";
-import type { ReactNode } from "react";
 import {
   useNodesState,
   useEdgesState,
@@ -19,6 +18,7 @@ import {
   SAMPLE_NODE_TYPES,
   SAMPLE_FLOW_DATA,
   FlowData,
+  testbedNodeTypes,
 } from "@/constants/nodes";
 import {
   Command,
@@ -92,7 +92,7 @@ export function TestbedCanvas() {
             </div>
           </Button>
           <h1 className="text-lg">
-            Untitled <span className="text-muted-foreground">(unsaved)</span>
+            TM-RIG-001 <span className="text-muted-foreground">(saved)</span>
           </h1>
         </div>
         <div className="flex flex-row items-baseline gap-2">
@@ -164,6 +164,7 @@ export function TestbedCanvas() {
           onEdgesChange={onEdgesChange}
           onConnect={onConnect}
           canvasKey={canvasKey}
+          nodeTypes={testbedNodeTypes}
         />
       </div>
     </div>
