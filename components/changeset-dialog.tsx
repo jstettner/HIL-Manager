@@ -207,7 +207,7 @@ export function ChangesetDialog({ changeset }: { changeset: Changeset }) {
           </div>
 
           <div>
-            <h3 className="font-medium mb-2">Associated Tests</h3>
+            <h3 className="font-medium mb-2">Existing Tests</h3>
             <div className="space-y-2">
               {associatedTests.map((test) => (
                 <div

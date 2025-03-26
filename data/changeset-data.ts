@@ -39,288 +39,244 @@ export interface Changeset {
 
 export const changesets: Changeset[] = [
   {
-    id: "PR-001",
-    title: "Add new authentication flow",
-    description:
-      "Implements OAuth2 authentication with Google and GitHub providers",
-    author: "Sarah Chen",
-    status: "open",
-    createdAt: "2025-03-24T10:00:00Z",
-    updatedAt: "2025-03-25T15:30:00Z",
-    testCases: [testCases[0].id, testCases[1].id],
-    bespoke_tests: [
-      {
-        name: "OAuth Token Refresh",
-        description: "Verify token refresh flow works correctly",
-        status: "passed",
-      },
-      {
-        name: "Provider Switch",
-        description: "Test switching between auth providers",
-        status: "pending",
-      },
-    ],
-    impactedSubsystems: [
-      {
-        name: "Authentication Service",
-        riskLevel: "high",
-        description: "Complete overhaul of auth system",
-      },
-      {
-        name: "User Sessions",
-        riskLevel: "medium",
-        description: "Changes to session management",
-      },
-    ],
-    verificationObjectives: [
-      {
-        objective: "Secure token storage",
-        status: "verified",
-        notes: "Using HttpOnly cookies",
-      },
-      {
-        objective: "CSRF protection",
-        status: "pending",
-      },
-    ],
-    plausibleFallout: [
-      {
-        scenario: "Auth provider downtime",
-        severity: "critical",
-        mitigation: "Implement fallback authentication",
-      },
-      {
-        scenario: "Token leakage",
-        severity: "major",
-        mitigation: "Implement token rotation",
-      },
-    ],
-    changedFiles: [
-      {
-        path: "src/auth/oauth.ts",
-        changeType: "added",
-        linesAdded: 156,
-        linesRemoved: 0,
-      },
-      {
-        path: "src/components/LoginButton.tsx",
-        changeType: "modified",
-        linesAdded: 45,
-        linesRemoved: 12,
-      },
-    ],
-  },
-  {
-    id: "PR-002",
-    title: "Optimize database queries",
-    description: "Add indexes and improve query performance for user dashboard",
-    author: "Mike Johnson",
+    id: "PR-TM001",
+    title: "Implement Quantum Temporal Core",
+    description: "Core implementation of the quantum temporal engine for precise time displacement",
+    author: "Dr. Maya Patel",
     status: "merged",
-    createdAt: "2025-03-23T09:15:00Z",
-    updatedAt: "2025-03-24T14:20:00Z",
-    testCases: [testCases[2].id, testCases[3].id],
+    createdAt: "2025-03-20T08:00:00Z",
+    updatedAt: "2025-03-22T16:45:00Z",
+    testCases: [testCases[2].id],
     bespoke_tests: [
       {
-        name: "Query Performance",
-        description: "Verify query execution time improvements",
-        status: "passed",
+        name: "Quantum Stability Test",
+        description: "Verify temporal field stability at various power levels",
+        status: "passed"
       },
+      {
+        name: "Temporal Paradox Detection",
+        description: "Test the paradox detection and prevention systems",
+        status: "passed"
+      }
     ],
     impactedSubsystems: [
       {
-        name: "Database Layer",
-        riskLevel: "medium",
-        description: "Changes to query optimization",
+        name: "Temporal Core",
+        riskLevel: "high",
+        description: "Foundation of the time displacement system"
       },
       {
-        name: "User Dashboard",
-        riskLevel: "low",
-        description: "Performance improvements",
-      },
+        name: "Power Management",
+        riskLevel: "high",
+        description: "Integration with quantum power source"
+      }
     ],
     verificationObjectives: [
       {
-        objective: "Query response time < 100ms",
+        objective: "Quantum field stability",
         status: "verified",
-        notes: "Avg response time: 45ms",
+        notes: "Maintained within 0.001% variance"
       },
+      {
+        objective: "Temporal shielding integrity",
+        status: "verified"
+      }
     ],
     plausibleFallout: [
       {
-        scenario: "Index rebuild during peak hours",
-        severity: "minor",
-        mitigation: "Schedule maintenance window",
-      },
+        scenario: "Temporal feedback loop",
+        severity: "critical",
+        mitigation: "Automated emergency shutdown protocol"
+      }
     ],
     changedFiles: [
       {
-        path: "src/db/schema.ts",
-        changeType: "modified",
-        linesAdded: 23,
-        linesRemoved: 5,
-      },
-    ],
+        path: "src/core/quantum-temporal-engine.ts",
+        changeType: "added",
+        linesAdded: 1250,
+        linesRemoved: 0
+      }
+    ]
   },
   {
-    id: "PR-003",
-    title: "Update UI components",
-    description: "Refresh design system and implement dark mode",
-    author: "Emma Wilson",
+    id: "PR-TM002",
+    title: "Implement Temporal Navigation UI",
+    description: "Modern interface for temporal coordinate selection and journey planning",
+    author: "Alex Rivera",
     status: "open",
-    createdAt: "2025-03-25T08:45:00Z",
-    updatedAt: "2025-03-25T16:10:00Z",
+    createdAt: "2025-03-23T09:15:00Z",
+    updatedAt: "2025-03-25T14:30:00Z",
+    testCases: [testCases[3].id],
+    bespoke_tests: [
+      {
+        name: "Timeline Visualization",
+        description: "Test accuracy of temporal waypoint rendering",
+        status: "passed"
+      }
+    ],
+    impactedSubsystems: [
+      {
+        name: "User Interface",
+        riskLevel: "medium",
+        description: "New temporal navigation controls"
+      }
+    ],
+    verificationObjectives: [
+      {
+        objective: "Intuitive temporal selection",
+        status: "verified",
+        notes: "User testing completed successfully"
+      }
+    ],
+    plausibleFallout: [
+      {
+        scenario: "Invalid temporal coordinates",
+        severity: "minor",
+        mitigation: "Input validation and safety bounds"
+      }
+    ],
+    changedFiles: [
+      {
+        path: "src/components/temporal-navigator.tsx",
+        changeType: "added",
+        linesAdded: 458,
+        linesRemoved: 0
+      }
+    ]
+  },
+  {
+    id: "PR-TM003",
+    title: "Refactor Temporal Calibration System",
+    description: "Improve accuracy of temporal targeting system using quantum entanglement",
+    author: "Dr. James Chen",
+    status: "merged",
+    createdAt: "2025-03-24T11:20:00Z",
+    updatedAt: "2025-03-25T09:45:00Z",
     testCases: [testCases[4].id],
     bespoke_tests: [
       {
-        name: "Theme Switching",
-        description: "Test smooth transition between light and dark modes",
-        status: "passed",
-      },
-      {
-        name: "Color Contrast",
-        description: "Verify WCAG compliance for all color combinations",
-        status: "failed",
-      },
+        name: "Quantum Calibration Precision",
+        description: "Verify temporal targeting accuracy",
+        status: "passed"
+      }
     ],
     impactedSubsystems: [
       {
-        name: "Theme Engine",
-        riskLevel: "medium",
-        description: "New theming system implementation",
-      },
-      {
-        name: "Component Library",
+        name: "Calibration System",
         riskLevel: "high",
-        description: "Major updates to core components",
-      },
+        description: "Enhanced temporal targeting precision"
+      }
     ],
     verificationObjectives: [
       {
-        objective: "WCAG 2.1 AA compliance",
-        status: "failed",
-        notes: "Color contrast issues found",
-      },
-      {
-        objective: "Theme persistence",
-        status: "verified",
-      },
+        objective: "Sub-microsecond accuracy",
+        status: "verified"
+      }
     ],
     plausibleFallout: [
       {
-        scenario: "CSS conflicts",
+        scenario: "Quantum decoherence",
         severity: "major",
-        mitigation: "Implement CSS modules",
-      },
-      {
-        scenario: "Browser compatibility",
-        severity: "minor",
-        mitigation: "Add fallback styles",
-      },
+        mitigation: "Redundant calibration systems"
+      }
     ],
     changedFiles: [
       {
-        path: "src/styles/theme.css",
+        path: "src/core/temporal-calibration.ts",
         changeType: "modified",
-        linesAdded: 89,
-        linesRemoved: 67,
-      },
-      {
-        path: "src/components/Button.tsx",
-        changeType: "modified",
-        linesAdded: 34,
-        linesRemoved: 28,
-      },
-    ],
+        linesAdded: 325,
+        linesRemoved: 180
+      }
+    ]
   },
   {
-    id: "PR-004",
-    title: "Implement real-time collaboration",
-    description: "Add WebSocket-based real-time updates for collaborative features",
-    author: "Alex Rivera",
+    id: "PR-TM004",
+    title: "Implement Temporal Shielding 2.0",
+    description: "Next-generation temporal shielding to prevent paradox cascade effects",
+    author: "Dr. Sarah Wong",
     status: "open",
-    createdAt: "2025-03-25T14:20:00Z",
-    updatedAt: "2025-03-25T19:45:00Z",
-    testCases: [testCases[1].id, testCases[3].id],
+    createdAt: "2025-03-25T13:00:00Z",
+    updatedAt: "2025-03-25T19:30:00Z",
+    testCases: [testCases[5].id],
     bespoke_tests: [
       {
-        name: "Connection Recovery",
-        description: "Test automatic reconnection after network issues",
-        status: "pending",
-      },
-      {
-        name: "Conflict Resolution",
-        description: "Verify concurrent edit handling",
-        status: "passed",
-      },
+        name: "Paradox Resistance",
+        description: "Test shield effectiveness against temporal anomalies",
+        status: "pending"
+      }
     ],
     impactedSubsystems: [
       {
-        name: "WebSocket Server",
+        name: "Temporal Shielding",
         riskLevel: "high",
-        description: "New real-time communication layer",
-      },
-      {
-        name: "State Management",
-        riskLevel: "high",
-        description: "Changes to handle real-time updates",
-      },
-      {
-        name: "UI Components",
-        riskLevel: "medium",
-        description: "Add real-time indicators",
-      },
+        description: "Complete overhaul of protection systems"
+      }
     ],
     verificationObjectives: [
       {
-        objective: "Message delivery < 100ms",
-        status: "verified",
-        notes: "Avg latency: 45ms",
-      },
-      {
-        objective: "Conflict-free updates",
-        status: "pending",
-      },
-      {
-        objective: "Graceful degradation",
-        status: "verified",
-      },
+        objective: "99.999% paradox prevention",
+        status: "pending"
+      }
     ],
     plausibleFallout: [
       {
-        scenario: "WebSocket server overload",
+        scenario: "Shield failure",
         severity: "critical",
-        mitigation: "Implement connection pooling and load balancing",
-      },
-      {
-        scenario: "Data inconsistency",
-        severity: "major",
-        mitigation: "Add periodic state reconciliation",
-      },
-      {
-        scenario: "Browser compatibility",
-        severity: "minor",
-        mitigation: "Implement fallback to polling",
-      },
+        mitigation: "Emergency temporal lockdown"
+      }
     ],
     changedFiles: [
       {
-        path: "src/websocket/server.ts",
-        changeType: "added",
-        linesAdded: 245,
-        linesRemoved: 0,
-      },
+        path: "src/systems/temporal-shielding.ts",
+        changeType: "modified",
+        linesAdded: 890,
+        linesRemoved: 450
+      }
+    ]
+  },
+  {
+    id: "PR-TM005",
+    title: "Add Temporal Waypoint System",
+    description: "Implement safe temporal waypoints for emergency returns",
+    author: "Marcus Johnson",
+    status: "open",
+    createdAt: "2025-03-25T16:45:00Z",
+    updatedAt: "2025-03-25T20:30:00Z",
+    testCases: [testCases[6].id],
+    bespoke_tests: [
       {
-        path: "src/hooks/useRealtime.ts",
-        changeType: "added",
-        linesAdded: 178,
-        linesRemoved: 0,
-      },
-      {
-        path: "src/components/CollaborationIndicator.tsx",
-        changeType: "added",
-        linesAdded: 89,
-        linesRemoved: 0,
-      },
+        name: "Waypoint Persistence",
+        description: "Verify stability of temporal markers",
+        status: "pending"
+      }
     ],
+    impactedSubsystems: [
+      {
+        name: "Safety Systems",
+        riskLevel: "medium",
+        description: "Emergency return capabilities"
+      }
+    ],
+    verificationObjectives: [
+      {
+        objective: "Reliable waypoint creation",
+        status: "pending"
+      }
+    ],
+    plausibleFallout: [
+      {
+        scenario: "Waypoint decay",
+        severity: "major",
+        mitigation: "Redundant marker system"
+      }
+    ],
+    changedFiles: [
+      {
+        path: "src/systems/temporal-waypoints.ts",
+        changeType: "added",
+        linesAdded: 645,
+        linesRemoved: 0
+      }
+    ]
   },
 ];
