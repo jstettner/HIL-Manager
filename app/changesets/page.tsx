@@ -60,7 +60,7 @@ export default async function ChangesetsPage({
         <div className="flex flex-row items-baseline gap-2">
           <h1 className="text-2xl">Changesets</h1>
           <h3 className="text-xl text-muted-foreground">
-            Pull Requests and Their Tests
+            Verification Reports
           </h3>
         </div>
       </div>

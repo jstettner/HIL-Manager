@@ -19,12 +19,16 @@ import {
 
 export function ChangesetDialog({ changeset }: { changeset: Changeset }) {
   const getTestStatus = () => {
-    const hasFailedTests = changeset.bespoke_tests.some(test => test.status === 'failed');
-    const hasRunningTests = changeset.bespoke_tests.some(test => test.status === 'pending');
-    
-    if (hasFailedTests) return 'failed';
-    if (hasRunningTests) return 'running';
-    return changeset.bespoke_tests.length > 0 ? 'passed' : 'running';
+    const hasFailedTests = changeset.bespoke_tests.some(
+      (test) => test.status === "failed",
+    );
+    const hasRunningTests = changeset.bespoke_tests.some(
+      (test) => test.status === "pending",
+    );
+
+    if (hasFailedTests) return "failed";
+    if (hasRunningTests) return "running";
+    return changeset.bespoke_tests.length > 0 ? "passed" : "running";
   };
 
   const testStatus = getTestStatus();
@@ -54,11 +58,11 @@ export function ChangesetDialog({ changeset }: { changeset: Changeset }) {
             <div className="flex items-center gap-2">
               <Circle
                 className={`w-3 h-3 ${
-                  testStatus === 'passed'
-                    ? 'fill-blue-500 text-blue-500'
-                    : testStatus === 'running'
-                      ? 'fill-blue-300 text-blue-300'
-                      : 'fill-red-500 text-red-500'
+                  testStatus === "passed"
+                    ? "fill-blue-500 text-blue-500"
+                    : testStatus === "running"
+                      ? "fill-blue-300 text-blue-300"
+                      : "fill-red-500 text-red-500"
                 }`}
               />
               <span className="capitalize">{testStatus}</span>
