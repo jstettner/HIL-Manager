@@ -18,6 +18,16 @@ import {
 } from "lucide-react";
 
 export function ChangesetDialog({ changeset }: { changeset: Changeset }) {
+  const getTestStatus = () => {
+    const hasFailedTests = changeset.bespoke_tests.some(test => test.status === 'failed');
+    const hasRunningTests = changeset.bespoke_tests.some(test => test.status === 'pending');
+    
+    if (hasFailedTests) return 'failed';
+    if (hasRunningTests) return 'running';
+    return changeset.bespoke_tests.length > 0 ? 'passed' : 'running';
+  };
+
+  const testStatus = getTestStatus();
   const associatedTests = testCases.filter((test) =>
     changeset.testCases.includes(test.id),
   );
@@ -34,10 +44,24 @@ export function ChangesetDialog({ changeset }: { changeset: Changeset }) {
                     ? "fill-green-500 text-green-500"
                     : changeset.status === "closed"
                       ? "fill-red-500 text-red-500"
-                      : "fill-yellow-500 text-yellow-500"
+                      : "fill-blue-400 text-blue-400"
                 }`}
               />
               <span className="capitalize">{changeset.status}</span>
+            </div>
+          </TableCell>
+          <TableCell className="p-3">
+            <div className="flex items-center gap-2">
+              <Circle
+                className={`w-3 h-3 ${
+                  testStatus === 'passed'
+                    ? 'fill-blue-500 text-blue-500'
+                    : testStatus === 'running'
+                      ? 'fill-blue-300 text-blue-300'
+                      : 'fill-red-500 text-red-500'
+                }`}
+              />
+              <span className="capitalize">{testStatus}</span>
             </div>
           </TableCell>
           <TableCell className="p-3 font-medium">{changeset.title}</TableCell>

@@ -69,6 +69,7 @@ export default async function ChangesetsPage({
         <TableHeader>
           <TableRow>
             <TableHead className="p-3 text-left">Status</TableHead>
+            <TableHead className="p-3 text-left">Tests</TableHead>
             <TableHead className="p-3 text-left">Title</TableHead>
             <TableHead className="p-3 text-left">Author</TableHead>
             <TableHead className="p-3 text-left">Last Updated</TableHead>

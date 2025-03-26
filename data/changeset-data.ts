@@ -43,7 +43,7 @@ export const changesets: Changeset[] = [
     title: "Implement Quantum Temporal Core",
     description:
       "Core implementation of the quantum temporal engine for precise time displacement",
-    author: "Dr. Maya Patel",
+    author: "Maya Patel",
     status: "merged",
     createdAt: "2025-03-20T08:00:00Z",
     updatedAt: "2025-03-22T16:45:00Z",
@@ -151,7 +151,7 @@ export const changesets: Changeset[] = [
     title: "Refactor Temporal Calibration System",
     description:
       "Improve accuracy of temporal targeting system using quantum entanglement",
-    author: "Dr. James Chen",
+    author: "James Chen",
     status: "merged",
     createdAt: "2025-03-24T11:20:00Z",
     updatedAt: "2025-03-25T09:45:00Z",
@@ -197,7 +197,7 @@ export const changesets: Changeset[] = [
     title: "Implement Temporal Shielding 2.0",
     description:
       "Next-generation temporal shielding to prevent paradox cascade effects",
-    author: "Dr. Sarah Wong",
+    author: "Sarah Wong",
     status: "open",
     createdAt: "2025-03-25T13:00:00Z",
     updatedAt: "2025-03-25T19:30:00Z",
@@ -251,7 +251,7 @@ export const changesets: Changeset[] = [
       {
         name: "Waypoint Persistence",
         description: "Verify stability of temporal markers",
-        status: "pending",
+        status: "failed",
       },
     ],
     impactedSubsystems: [
@@ -288,7 +288,7 @@ export const changesets: Changeset[] = [
     title: "Implement Temporal Ethics Validator",
     description:
       "AI-powered system to prevent historically destructive temporal modifications",
-    author: "Dr. Elena Martinez",
+    author: "Elena Martinez",
     status: "open",
     createdAt: "2025-03-25T19:15:00Z",
     updatedAt: "2025-03-25T20:45:00Z",
@@ -391,7 +391,7 @@ export const changesets: Changeset[] = [
     title: "Implement Temporal Communication Protocol",
     description:
       "Secure communication system for coordinating across different temporal points",
-    author: "Dr. Robert Chang",
+    author: "Robert Chang",
     status: "open",
     createdAt: "2025-03-25T20:30:00Z",
     updatedAt: "2025-03-25T20:55:00Z",
@@ -437,8 +437,8 @@ export const changesets: Changeset[] = [
     title: "Implement Temporal Power Management",
     description:
       "Advanced power distribution and containment system for temporal operations",
-    author: "Dr. Michael Tesla",
-    status: "open",
+    author: "Michael Tesla",
+    status: "closed",
     createdAt: "2025-03-25T20:40:00Z",
     updatedAt: "2025-03-25T20:56:00Z",
     testCases: [testCases[10].id],
@@ -451,7 +451,7 @@ export const changesets: Changeset[] = [
       {
         name: "Emergency Shutdown",
         description: "Verify graceful power down sequences",
-        status: "passed",
+        status: "failed",
       },
     ],
     impactedSubsystems: [
@@ -494,7 +494,7 @@ export const changesets: Changeset[] = [
     title: "Add Temporal Anomaly Detection",
     description:
       "AI-driven system for detecting and classifying temporal anomalies",
-    author: "Dr. Lisa Chen",
+    author: "Lisa Chen",
     status: "open",
     createdAt: "2025-03-25T20:45:00Z",
     updatedAt: "2025-03-25T20:56:30Z",
@@ -540,7 +540,7 @@ export const changesets: Changeset[] = [
     title: "Implement Temporal Maintenance System",
     description:
       "Automated maintenance and self-repair capabilities for temporal systems",
-    author: "Dr. James Wright",
+    author: "James Wright",
     status: "open",
     createdAt: "2025-03-25T20:50:00Z",
     updatedAt: "2025-03-25T20:56:45Z",
@@ -586,7 +586,7 @@ export const changesets: Changeset[] = [
     title: "Implement Temporal Weather System",
     description:
       "Advanced system for managing atmospheric conditions during temporal transitions",
-    author: "Dr. Sarah Storm",
+    author: "Sarah Storm",
     status: "open",
     createdAt: "2025-03-25T20:57:00Z",
     updatedAt: "2025-03-25T20:58:30Z",
@@ -638,7 +638,7 @@ export const changesets: Changeset[] = [
     title: "Add Temporal Biometric Scanner",
     description:
       "Advanced system for monitoring traveler health during temporal transitions",
-    author: "Dr. Maria Santos",
+    author: "Maria Santos",
     status: "open",
     createdAt: "2025-03-25T20:57:30Z",
     updatedAt: "2025-03-25T20:58:35Z",
@@ -684,7 +684,7 @@ export const changesets: Changeset[] = [
     title: "Implement Temporal Archive System",
     description:
       "Secure storage system for preserving historical artifacts during temporal operations",
-    author: "Dr. Alex Thompson",
+    author: "Alex Thompson",
     status: "open",
     createdAt: "2025-03-25T20:58:00Z",
     updatedAt: "2025-03-25T20:58:40Z",
