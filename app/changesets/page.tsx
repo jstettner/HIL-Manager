@@ -1,5 +1,6 @@
-import { FlaskConical, Circle } from "lucide-react";
-import { testCases } from "@/data/sample-data";
+import { GitPullRequest } from "lucide-react";
+import { changesets } from "@/data/changeset-data";
+import { ChangesetDialog } from "@/components/changeset-dialog";
 
 import {
   Pagination,
@@ -21,15 +22,45 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-export default function ChangesetsPage() {
+export default async function ChangesetsPage({
+  searchParams,
+}: {
+  searchParams?: { [key: string]: string | string[] | undefined } | undefined;
+}) {
+  const searchParamsObj = await searchParams;
+  const page =
+    typeof searchParamsObj?.page === "string"
+      ? parseInt(searchParamsObj.page)
+      : 1;
+  const itemsPerPage = 10;
+  const totalItems = changesets.length;
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+  const startIndex = (page - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentChangesets = changesets.slice(startIndex, endIndex);
+
+  const generatePaginationItems = () => {
+    const items = [];
+    for (let i = 1; i <= totalPages; i++) {
+      items.push(
+        <PaginationItem key={i}>
+          <PaginationLink href={`/changesets?page=${i}`} isActive={page === i}>
+            {i}
+          </PaginationLink>
+        </PaginationItem>,
+      );
+    }
+    return items;
+  };
   return (
     <div className="p-6">
       <div className="flex items-center gap-2 mb-6 page-header">
-        <FlaskConical className="w-6 h-6" />
+        <GitPullRequest className="w-6 h-6" />
         <div className="flex flex-row items-baseline gap-2">
           <h1 className="text-2xl">Changesets</h1>
           <h3 className="text-xl text-muted-foreground">
-            In-Progress and Finished Testsets
+            Pull Requests and Their Tests
           </h3>
         </div>
       </div>
@@ -38,74 +69,37 @@ export default function ChangesetsPage() {
         <TableHeader>
           <TableRow>
             <TableHead className="p-3 text-left">Status</TableHead>
-            <TableHead className="p-3 text-left">Name</TableHead>
+            <TableHead className="p-3 text-left">Title</TableHead>
             <TableHead className="p-3 text-left">Description</TableHead>
-            <TableHead className="p-3 text-left">Priority</TableHead>
-            <TableHead className="p-3 text-left">Last Run</TableHead>
-            <TableHead className="p-3 text-left">Duration</TableHead>
+            <TableHead className="p-3 text-left">Author</TableHead>
+            <TableHead className="p-3 text-left">Last Updated</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
-          {testCases.map((testCase) => (
-            <TableRow key={testCase.id} className="border-b">
-              <TableCell className="p-3">
-                <div className="flex items-center gap-2">
-                  <Circle
-                    className={`w-3 h-3 ${
-                      testCase.status === "passed"
-                        ? "fill-green-500 text-green-500"
-                        : testCase.status === "failed"
-                          ? "fill-red-500 text-red-500"
-                          : "fill-yellow-500 text-yellow-500"
-                    }`}
-                  />
-                  <span className="capitalize">{testCase.status}</span>
-                </div>
-              </TableCell>
-              <TableCell className="p-3 font-medium">{testCase.name}</TableCell>
-              <TableCell className="p-3 text-muted-foreground">
-                {testCase.description}
-              </TableCell>
-              <TableCell className="p-3">
-                <span
-                  className={`inline-block px-2 py-1 rounded-full text-xs font-medium
-                  ${
-                    testCase.priority === "high"
-                      ? "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300"
-                      : testCase.priority === "medium"
-                        ? "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300"
-                        : "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300"
-                  }`}
-                >
-                  {testCase.priority}
-                </span>
-              </TableCell>
-              <TableCell className="p-3 text-muted-foreground">
-                {new Date(testCase.lastRun).toLocaleString()}
-              </TableCell>
-              <TableCell className="p-3 text-muted-foreground">
-                {testCase.duration}s
-              </TableCell>
-            </TableRow>
+          {currentChangesets.map((changeset) => (
+            <ChangesetDialog key={changeset.id} changeset={changeset} />
           ))}
         </TableBody>
       </Table>
-      <Pagination className="mt-6">
-        <PaginationContent>
-          <PaginationItem>
-            <PaginationPrevious href="#" />
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationLink href="#">1</PaginationLink>
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationEllipsis />
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationNext href="#" />
-          </PaginationItem>
-        </PaginationContent>
-      </Pagination>
+      <div className="mt-4">
+        <Pagination>
+          <PaginationContent>
+            <PaginationItem>
+              <PaginationPrevious
+                href={page > 1 ? `/changesets?page=${page - 1}` : "#"}
+              />
+            </PaginationItem>
+
+            {generatePaginationItems()}
+
+            <PaginationItem>
+              <PaginationNext
+                href={page < totalPages ? `/changesets?page=${page + 1}` : "#"}
+              />
+            </PaginationItem>
+          </PaginationContent>
+        </Pagination>
+      </div>
     </div>
   );
 }
