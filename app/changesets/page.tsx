@@ -70,7 +70,6 @@ export default async function ChangesetsPage({
           <TableRow>
             <TableHead className="p-3 text-left">Status</TableHead>
             <TableHead className="p-3 text-left">Title</TableHead>
-            <TableHead className="p-3 text-left">Description</TableHead>
             <TableHead className="p-3 text-left">Author</TableHead>
             <TableHead className="p-3 text-left">Last Updated</TableHead>
           </TableRow>

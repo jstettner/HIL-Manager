@@ -41,9 +41,7 @@ export function ChangesetDialog({ changeset }: { changeset: Changeset }) {
             </div>
           </TableCell>
           <TableCell className="p-3 font-medium">{changeset.title}</TableCell>
-          <TableCell className="p-3 text-muted-foreground max-w-md">
-            <div className="truncate">{changeset.description}</div>
-          </TableCell>
+
           <TableCell className="p-3 text-muted-foreground">
             {changeset.author}
           </TableCell>
@@ -59,6 +57,22 @@ export function ChangesetDialog({ changeset }: { changeset: Changeset }) {
             <GitPullRequest className="w-5 h-5" />
             {changeset.title}
           </DialogTitle>
+          <div className="flex items-center gap-4 mt-2 text-sm text-muted-foreground">
+            <div className="flex items-center gap-2">
+              <Circle
+                className={`w-3 h-3 ${
+                  changeset.status === "merged"
+                    ? "fill-green-500 text-green-500"
+                    : changeset.status === "closed"
+                      ? "fill-red-500 text-red-500"
+                      : "fill-yellow-500 text-yellow-500"
+                }`}
+              />
+              <span className="capitalize">{changeset.status}</span>
+            </div>
+            <div>by {changeset.author}</div>
+            <div>Updated {new Date(changeset.updatedAt).toLocaleString()}</div>
+          </div>
         </DialogHeader>
 
         <div className="grid gap-4 py-4">
