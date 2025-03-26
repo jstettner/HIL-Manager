@@ -8,7 +8,14 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { TableCell, TableRow } from "@/components/ui/table";
-import { AlertTriangle, Circle, FileCode, GitPullRequest, Target, Zap } from "lucide-react";
+import {
+  AlertTriangle,
+  Circle,
+  FileCode,
+  GitPullRequest,
+  Target,
+  Zap,
+} from "lucide-react";
 
 export function ChangesetDialog({ changeset }: { changeset: Changeset }) {
   const associatedTests = testCases.filter((test) =>
@@ -34,8 +41,8 @@ export function ChangesetDialog({ changeset }: { changeset: Changeset }) {
             </div>
           </TableCell>
           <TableCell className="p-3 font-medium">{changeset.title}</TableCell>
-          <TableCell className="p-3 text-muted-foreground">
-            {changeset.description}
+          <TableCell className="p-3 text-muted-foreground max-w-md">
+            <div className="truncate">{changeset.description}</div>
           </TableCell>
           <TableCell className="p-3 text-muted-foreground">
             {changeset.author}
@@ -76,14 +83,16 @@ export function ChangesetDialog({ changeset }: { changeset: Changeset }) {
                       system.riskLevel === "high"
                         ? "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300"
                         : system.riskLevel === "medium"
-                        ? "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300"
-                        : "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300"
+                          ? "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300"
+                          : "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300"
                     }`}
                   >
                     {system.riskLevel}
                   </span>
                   <span className="font-medium">{system.name}</span>
-                  <span className="flex-1 text-muted-foreground">{system.description}</span>
+                  <span className="flex-1 text-muted-foreground">
+                    {system.description}
+                  </span>
                 </div>
               ))}
             </div>
@@ -105,13 +114,15 @@ export function ChangesetDialog({ changeset }: { changeset: Changeset }) {
                       objective.status === "verified"
                         ? "fill-green-500 text-green-500"
                         : objective.status === "failed"
-                        ? "fill-red-500 text-red-500"
-                        : "fill-yellow-500 text-yellow-500"
+                          ? "fill-red-500 text-red-500"
+                          : "fill-yellow-500 text-yellow-500"
                     }`}
                   />
                   <span className="flex-1">{objective.objective}</span>
                   {objective.notes && (
-                    <span className="text-muted-foreground">{objective.notes}</span>
+                    <span className="text-muted-foreground">
+                      {objective.notes}
+                    </span>
                   )}
                 </div>
               ))}
@@ -135,8 +146,8 @@ export function ChangesetDialog({ changeset }: { changeset: Changeset }) {
                         fallout.severity === "critical"
                           ? "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300"
                           : fallout.severity === "major"
-                          ? "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300"
-                          : "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300"
+                            ? "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300"
+                            : "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300"
                       }`}
                     >
                       {fallout.severity}
@@ -166,8 +177,8 @@ export function ChangesetDialog({ changeset }: { changeset: Changeset }) {
                       file.changeType === "added"
                         ? "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300"
                         : file.changeType === "deleted"
-                        ? "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300"
-                        : "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300"
+                          ? "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300"
+                          : "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300"
                     }`}
                   >
                     {file.changeType}
@@ -193,13 +204,15 @@ export function ChangesetDialog({ changeset }: { changeset: Changeset }) {
                       test.status === "passed"
                         ? "fill-green-500 text-green-500"
                         : test.status === "failed"
-                        ? "fill-red-500 text-red-500"
-                        : "fill-yellow-500 text-yellow-500"
+                          ? "fill-red-500 text-red-500"
+                          : "fill-yellow-500 text-yellow-500"
                     }`}
                   />
                   <div className="flex-1">
                     <div className="font-medium">{test.name}</div>
-                    <div className="text-muted-foreground text-xs">{test.description}</div>
+                    <div className="text-muted-foreground text-xs">
+                      {test.description}
+                    </div>
                   </div>
                 </div>
               ))}
@@ -219,8 +232,8 @@ export function ChangesetDialog({ changeset }: { changeset: Changeset }) {
                       test.status === "passed"
                         ? "fill-green-500 text-green-500"
                         : test.status === "failed"
-                        ? "fill-red-500 text-red-500"
-                        : "fill-yellow-500 text-yellow-500"
+                          ? "fill-red-500 text-red-500"
+                          : "fill-yellow-500 text-yellow-500"
                     }`}
                   />
                   <span className="flex-1">{test.name}</span>
