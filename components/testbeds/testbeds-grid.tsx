@@ -2,14 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
-import {
-  GalleryVerticalEnd,
-  Cpu,
-  MemoryStick,
-  HardDrive,
-  Activity,
-  Globe,
-} from "lucide-react";
+import { Cpu, MemoryStick, HardDrive, Activity, Globe } from "lucide-react";
 import { testBeds as sampleTestBeds } from "@/data/sample-data";
 
 // Mock API fetch function
