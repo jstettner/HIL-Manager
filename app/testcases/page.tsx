@@ -17,7 +17,8 @@ export default async function TestcasesPage({
 }: {
   searchParams?: { [key: string]: string | string[] | undefined };
 }) {
-  const page = typeof searchParams?.page === "string" ? parseInt(searchParams.page) : 1;
+  const page =
+    typeof searchParams?.page === "string" ? parseInt(searchParams.page) : 1;
   const itemsPerPage = 10;
   const totalItems = testCases.length;
   const totalPages = Math.ceil(totalItems / itemsPerPage);

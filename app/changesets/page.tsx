@@ -28,12 +28,11 @@ export default async function ChangesetsPage({
 }: {
   searchParams?: { [key: string]: string | string[] | undefined } | undefined;
 }) {
-  const page = typeof searchParams?.page === "string" ? parseInt(searchParams.page) : 1;
+  const page =
+    typeof searchParams?.page === "string" ? parseInt(searchParams.page) : 1;
   const itemsPerPage = 10;
   const totalItems = changesets.length;
   const totalPages = Math.ceil(totalItems / itemsPerPage);
-
-
 
   const generatePaginationItems = () => {
     const items = [];

@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { Skeleton } from '@/components/ui/skeleton';
-import { ChangesetDialog } from '@/components/changeset-dialog';
+import { useState, useEffect } from "react";
+import { Skeleton } from "@/components/ui/skeleton";
+import { ChangesetDialog } from "@/components/changeset-dialog";
 import {
   Table,
   TableBody,
@@ -11,8 +11,8 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/table';
-import { changesets as sampleChangesets } from '@/data/changeset-data';
+} from "@/components/ui/table";
+import { changesets as sampleChangesets } from "@/data/changeset-data";
 
 // Mock API fetch function
 const fetchChangesets = async () => {
@@ -56,21 +56,29 @@ export function ChangesetsTable({ page, itemsPerPage }: ChangesetsTableProps) {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {loading ? (
-          Array.from({ length: itemsPerPage }).map((_, index) => (
-            <TableRow key={index}>
-              <TableCell className="p-3"><Skeleton className="h-4 w-[80px]" /></TableCell>
-              <TableCell className="p-3"><Skeleton className="h-4 w-[60px]" /></TableCell>
-              <TableCell className="p-3"><Skeleton className="h-4 w-[300px]" /></TableCell>
-              <TableCell className="p-3"><Skeleton className="h-4 w-[150px]" /></TableCell>
-              <TableCell className="p-3"><Skeleton className="h-4 w-[120px]" /></TableCell>
-            </TableRow>
-          ))
-        ) : (
-          currentChangesets.map((changeset) => (
-            <ChangesetDialog key={changeset.id} changeset={changeset} />
-          ))
-        )}
+        {loading
+          ? Array.from({ length: itemsPerPage }).map((_, index) => (
+              <TableRow key={index}>
+                <TableCell className="p-3">
+                  <Skeleton className="h-4 w-[80px]" />
+                </TableCell>
+                <TableCell className="p-3">
+                  <Skeleton className="h-4 w-[60px]" />
+                </TableCell>
+                <TableCell className="p-3">
+                  <Skeleton className="h-4 w-[300px]" />
+                </TableCell>
+                <TableCell className="p-3">
+                  <Skeleton className="h-4 w-[150px]" />
+                </TableCell>
+                <TableCell className="p-3">
+                  <Skeleton className="h-4 w-[120px]" />
+                </TableCell>
+              </TableRow>
+            ))
+          : currentChangesets.map((changeset) => (
+              <ChangesetDialog key={changeset.id} changeset={changeset} />
+            ))}
       </TableBody>
     </Table>
   );

@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { Skeleton } from '@/components/ui/skeleton';
-import { TestCaseDialog } from '@/components/test-case-dialog';
+import { useState, useEffect } from "react";
+import { Skeleton } from "@/components/ui/skeleton";
+import { TestCaseDialog } from "@/components/test-case-dialog";
 import {
   Table,
   TableBody,
@@ -10,8 +10,8 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/table';
-import { testCases as sampleTestCases } from '@/data/sample-data';
+} from "@/components/ui/table";
+import { testCases as sampleTestCases } from "@/data/sample-data";
 
 // Mock API fetch function
 const fetchTestCases = async () => {
@@ -54,20 +54,26 @@ export function TestcasesTable({ page, itemsPerPage }: TestcasesTableProps) {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {loading ? (
-          Array.from({ length: itemsPerPage }).map((_, index) => (
-            <TableRow key={index}>
-              <td className="p-3"><Skeleton className="h-4 w-[250px]" /></td>
-              <td className="p-3"><Skeleton className="h-4 w-[300px]" /></td>
-              <td className="p-3"><Skeleton className="h-4 w-[150px]" /></td>
-              <td className="p-3"><Skeleton className="h-4 w-[100px]" /></td>
-            </TableRow>
-          ))
-        ) : (
-          currentTestCases.map((testCase) => (
-            <TestCaseDialog key={testCase.id} testCase={testCase} />
-          ))
-        )}
+        {loading
+          ? Array.from({ length: itemsPerPage }).map((_, index) => (
+              <TableRow key={index}>
+                <td className="p-3">
+                  <Skeleton className="h-4 w-[250px]" />
+                </td>
+                <td className="p-3">
+                  <Skeleton className="h-4 w-[300px]" />
+                </td>
+                <td className="p-3">
+                  <Skeleton className="h-4 w-[150px]" />
+                </td>
+                <td className="p-3">
+                  <Skeleton className="h-4 w-[100px]" />
+                </td>
+              </TableRow>
+            ))
+          : currentTestCases.map((testCase) => (
+              <TestCaseDialog key={testCase.id} testCase={testCase} />
+            ))}
       </TableBody>
     </Table>
   );
