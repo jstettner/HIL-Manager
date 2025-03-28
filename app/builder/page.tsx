@@ -10,11 +10,11 @@ export default function TestbedBuilderPage() {
           <div className="flex flex-row items-baseline">
             {/* Hack to fix the kerning between the words. */}
             <h1 className="text-2xl pr-3">
-              Testbed Bui<span className="ml-[-0.17em]">l</span>der
+              Environment Bui<span className="ml-[-0.17em]">l</span>der
             </h1>
           </div>
           <h3 className="text-xl text-muted-foreground">
-            Add a Test Environment to the Armory
+            Create or Modify a Test Environment
           </h3>
         </div>
       </div>

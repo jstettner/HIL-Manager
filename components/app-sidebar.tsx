@@ -7,7 +7,7 @@ import {
   Send,
   LayoutDashboard,
   FlaskConical,
-  BedDouble,
+  GalleryVerticalEnd,
 } from "lucide-react";
 
 import { NavMain } from "@/components/nav-main";
@@ -62,9 +62,9 @@ const data = {
       ],
     },
     {
-      title: "Testbeds",
+      title: "Environments",
       url: "#",
-      icon: BedDouble,
+      icon: GalleryVerticalEnd,
       isActive: true,
       items: [
         {

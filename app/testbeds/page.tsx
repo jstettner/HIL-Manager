@@ -1,5 +1,5 @@
 import {
-  BedDouble,
+  GalleryVerticalEnd,
   Cpu,
   MemoryStick,
   HardDrive,
@@ -12,11 +12,11 @@ export default function TestbedsPage() {
   return (
     <div className="p-6">
       <div className="flex items-center gap-2 mb-6 page-header">
-        <BedDouble className="w-6 h-6" />
+        <GalleryVerticalEnd className="w-6 h-6" />
         <div className="flex flex-row items-baseline gap-2">
-          <h1 className="text-2xl">Testbeds</h1>
+          <h1 className="text-2xl">Armory</h1>
           <h3 className="text-xl text-muted-foreground">
-            Your Fleet of Test Assets
+            Your Collection of Test Environments
           </h3>
         </div>
       </div>

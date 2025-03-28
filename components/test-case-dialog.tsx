@@ -86,7 +86,7 @@ export function TestCaseDialog({ testCase }: TestCaseDialogRowProps) {
               }}
             />
             <h4 className="text-md font-medium mb-3 text-white relative z-10">
-              Compatible Testbeds
+              Compatible Environments
             </h4>
             <div className="flex flex-wrap gap-2 relative z-10">
               {testCase.compatibleTestbeds?.map((testbed) => (
