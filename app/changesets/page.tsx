@@ -1,7 +1,7 @@
 import { GitPullRequest } from "lucide-react";
 import { TipsFooter } from "@/components/ui/tips-footer";
 import { changesets } from "@/data/changeset-data";
-import { ChangesetDialog } from "@/components/changeset-dialog";
+import { ChangesetsTable } from "@/components/changesets/changesets-table";
 
 import {
   Pagination,
@@ -28,18 +28,12 @@ export default async function ChangesetsPage({
 }: {
   searchParams?: { [key: string]: string | string[] | undefined } | undefined;
 }) {
-  const searchParamsObj = await searchParams;
-  const page =
-    typeof searchParamsObj?.page === "string"
-      ? parseInt(searchParamsObj.page)
-      : 1;
+  const page = typeof searchParams?.page === "string" ? parseInt(searchParams.page) : 1;
   const itemsPerPage = 10;
   const totalItems = changesets.length;
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
-  const startIndex = (page - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const currentChangesets = changesets.slice(startIndex, endIndex);
+
 
   const generatePaginationItems = () => {
     const items = [];
@@ -65,23 +59,7 @@ export default async function ChangesetsPage({
           </h3>
         </div>
       </div>
-      <Table className="rounded-md border">
-        <TableCaption className="sr-only">Changesets</TableCaption>
-        <TableHeader>
-          <TableRow>
-            <TableHead className="p-3 text-left">Status</TableHead>
-            <TableHead className="p-3 text-left">Tests</TableHead>
-            <TableHead className="p-3 text-left">Title</TableHead>
-            <TableHead className="p-3 text-left">Author</TableHead>
-            <TableHead className="p-3 text-left">Last Updated</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {currentChangesets.map((changeset) => (
-            <ChangesetDialog key={changeset.id} changeset={changeset} />
-          ))}
-        </TableBody>
-      </Table>
+      <ChangesetsTable page={page} itemsPerPage={itemsPerPage} />
       <div className="mt-4">
         <Pagination>
           <PaginationContent>
