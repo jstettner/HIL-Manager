@@ -52,7 +52,7 @@ export const SAMPLE_FLOW_DATA: FlowData = {
       },
       measured: {
         width: 150,
-        height: 62,
+        height: 52,
       },
     },
     {
@@ -63,12 +63,12 @@ export const SAMPLE_FLOW_DATA: FlowData = {
         description: "Initialize system power sequence",
       },
       position: {
-        x: 250,
+        x: 150,
         y: 125,
       },
       measured: {
         width: 150,
-        height: 62,
+        height: 52,
       },
     },
     {
@@ -79,12 +79,12 @@ export const SAMPLE_FLOW_DATA: FlowData = {
         description: "Destination: July 4, 1776 – Philadelphia",
       },
       position: {
-        x: 250,
+        x: 350,
         y: 225,
       },
       measured: {
         width: 150,
-        height: 82,
+        height: 72,
       },
     },
     {
@@ -95,12 +95,12 @@ export const SAMPLE_FLOW_DATA: FlowData = {
         description: "Verify gesture input signals",
       },
       position: {
-        x: 250,
+        x: 150,
         y: 325,
       },
       measured: {
         width: 150,
-        height: 82,
+        height: 72,
       },
     },
     {
@@ -111,13 +111,15 @@ export const SAMPLE_FLOW_DATA: FlowData = {
         description: "Track core power levels and stability",
       },
       position: {
-        x: 250,
-        y: 425,
+        x: 344.847091625336,
+        y: 426.9556101366049,
       },
       measured: {
         width: 150,
-        height: 82,
+        height: 72,
       },
+      selected: false,
+      dragging: false,
     },
     {
       id: "6",
@@ -127,13 +129,15 @@ export const SAMPLE_FLOW_DATA: FlowData = {
         description: "Verify all GPIO signals are within expected ranges",
       },
       position: {
-        x: 250,
-        y: 525,
+        x: 170.79778946750292,
+        y: 515.2219493169757,
       },
       measured: {
         width: 150,
-        height: 122,
+        height: 112,
       },
+      selected: true,
+      dragging: false,
     },
     {
       id: "7",
@@ -147,7 +151,7 @@ export const SAMPLE_FLOW_DATA: FlowData = {
       },
       measured: {
         width: 150,
-        height: 58,
+        height: 48,
       },
     },
     {
@@ -162,9 +166,9 @@ export const SAMPLE_FLOW_DATA: FlowData = {
       },
       measured: {
         width: 150,
-        height: 62,
+        height: 92,
       },
-      selected: true,
+      selected: false,
       dragging: false,
     },
   ],
