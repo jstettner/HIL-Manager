@@ -1,4 +1,5 @@
 import { GitPullRequest } from "lucide-react";
+import { TipsFooter } from "@/components/ui/tips-footer";
 import { changesets } from "@/data/changeset-data";
 import { ChangesetDialog } from "@/components/changeset-dialog";
 
@@ -100,6 +101,7 @@ export default async function ChangesetsPage({
           </PaginationContent>
         </Pagination>
       </div>
+      <TipsFooter />
     </div>
   );
 }

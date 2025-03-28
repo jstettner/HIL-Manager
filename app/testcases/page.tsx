@@ -1,5 +1,7 @@
 import { Library } from "lucide-react";
+import { TipsFooter } from "@/components/ui/tips-footer";
 import { testCases } from "@/data/sample-data";
+import { TestcasesTable } from "@/components/testcases/testcases-table";
 
 import {
   Pagination,
@@ -10,34 +12,15 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-
-import { TestCaseDialog } from "@/components/test-case-dialog";
-
 export default async function TestcasesPage({
   searchParams,
 }: {
   searchParams?: { [key: string]: string | string[] | undefined };
 }) {
-  const searchParamsObj = await searchParams;
-  const page =
-    typeof searchParamsObj?.page === "string"
-      ? parseInt(searchParamsObj.page)
-      : 1;
+  const page = typeof searchParams?.page === "string" ? parseInt(searchParams.page) : 1;
   const itemsPerPage = 10;
   const totalItems = testCases.length;
   const totalPages = Math.ceil(totalItems / itemsPerPage);
-
-  const startIndex = (page - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const currentTestCases = testCases.slice(startIndex, endIndex);
 
   const generatePaginationItems = () => {
     const items = [];
@@ -62,22 +45,7 @@ export default async function TestcasesPage({
           <h3 className="text-xl text-muted-foreground">Your Go-To Tests</h3>
         </div>
       </div>
-      <Table className="rounded-md">
-        <TableCaption className="sr-only">Testcases</TableCaption>
-        <TableHeader>
-          <TableRow>
-            <TableHead className="p-3 text-left">Name</TableHead>
-            <TableHead className="p-3 text-left">Description</TableHead>
-            <TableHead className="p-3 text-left">Last Run</TableHead>
-            <TableHead className="p-3 text-left">Average Duration</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {currentTestCases.map((testCase) => (
-            <TestCaseDialog key={testCase.id} testCase={testCase} />
-          ))}
-        </TableBody>
-      </Table>
+      <TestcasesTable page={page} itemsPerPage={itemsPerPage} />
 
       <div className="mt-4">
         <Pagination>
@@ -98,6 +66,7 @@ export default async function TestcasesPage({
           </PaginationContent>
         </Pagination>
       </div>
+      <TipsFooter />
     </div>
   );
 }
