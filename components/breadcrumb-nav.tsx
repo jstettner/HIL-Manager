@@ -13,10 +13,11 @@ import {
 const routeMap: Record<string, { title: string; parent?: string }> = {
   "/": { title: "Overview" },
   "/dashboard": { title: "Dashboard", parent: "Overview" },
+  "/changesets": { title: "Changesets", parent: "Overview" },
   "/testcases": { title: "Library", parent: "Testcases" },
   "/lab": { title: "Lab", parent: "Testcases" },
-  "/testbeds": { title: "Armory", parent: "Testbeds" },
-  "/builder": { title: "Builder", parent: "Testbeds" },
+  "/testbeds": { title: "Armory", parent: "Environments " },
+  "/builder": { title: "Builder", parent: "Environments" },
 };
 
 export function BreadcrumbNav() {

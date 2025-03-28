@@ -144,7 +144,7 @@
 .dark {
   --background: oklch(0.141 0.005 285.823);
   --foreground: oklch(0.985 0 0);
-  --card: oklch(0.21 0.006 285.885);
+  --card: oklch(0.141 0.005 285.823);
   --card-foreground: oklch(0.985 0 0);
   --popover: oklch(0.21 0.006 285.885);
   --popover-foreground: oklch(0.985 0 0);
@@ -206,9 +206,13 @@
   @apply !rounded-lg;
 }
 
+.react-flow__background {
+  @apply !bg-sidebar;
+}
+
 .react-flow__node {
-  @apply !bg-card !text-card-foreground !shadow-sm !border !border-border !rounded-md;
-  padding: 10px;
+  @apply !text-card-foreground !shadow-sm !border !border-border !rounded-md;
+  padding: 5px !important;
   border-radius: var(
     --xy-node-border-radius,
     var(--xy-node-border-radius-default)

@@ -23,13 +23,13 @@ export default function DashboardPage() {
       </div>
       <div className="flex flex-1 flex-col gap-5 px-4 pt-7 pb-10">
         <div className="grid auto-rows-min gap-7 md:grid-cols-3 h-min-content">
-          <div className="rounded-xl bg-muted/50 h-full">
+          <div className="rounded-xl h-full">
             <TestcaseCountChart />
           </div>
-          <div className="rounded-xl bg-muted/50 h-full">
+          <div className="rounded-xl h-full">
             <TestcasePassFailChart />
           </div>
-          <div className="rounded-xl bg-muted/50 h-full">
+          <div className="rounded-xl h-full">
             <TestcaseFailureOriginChart />
           </div>
         </div>
