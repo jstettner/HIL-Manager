@@ -53,9 +53,16 @@ export function ChangesetDialog({
   };
 
   const testStatus = getTestStatus();
-  const associatedTests = testCases.filter((test) =>
-    changeset.testCases.includes(test.id),
-  );
+  const associatedTests = testCases
+    .filter((test) =>
+      changeset.testCases.some((testResult) => testResult.id === test.id),
+    )
+    .map((test) => ({
+      ...test,
+      status:
+        changeset.testCases.find((testResult) => testResult.id === test.id)
+          ?.status || "pending",
+    }));
 
   return (
     <Dialog open={isOpen} onOpenChange={handleOpenChange}>

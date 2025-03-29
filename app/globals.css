@@ -160,10 +160,10 @@
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
   --ring: oklch(0.552 0.016 285.938);
-  --chart-1: #4494fd;
+  --chart-1: #006eff;
   --chart-2: #47bafe;
   --chart-3: #4dd8f9;
-  --chart-4: #c93325;
+  --chart-4: #898989;
   --chart-5: #fbc1fa;
   --sidebar: oklch(0.15 0.006 285.885);
   --sidebar-foreground: oklch(0.985 0 0);

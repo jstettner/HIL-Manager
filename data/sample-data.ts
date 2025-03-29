@@ -6,8 +6,7 @@ export const testCases: TestCase[] = [
     name: "Temporal Activation Button Test",
     description:
       "Does the start button initiate time travel, or just existential dread?",
-    status: "passed",
-    lastRun: "2025-03-22T09:30:00Z",
+
     duration: 30,
     priority: "high",
     compatibleTestbeds: ["TM-POD-001", "TM-RIG-001", "TM-VEHICLE-001"],
@@ -17,8 +16,7 @@ export const testCases: TestCase[] = [
     name: "Core Overheat During Chrono Jump",
     description:
       "Does it fry an egg mid-jump or hold steady at subatomic temps?",
-    status: "pending",
-    lastRun: "2025-03-22T08:15:00Z",
+
     duration: 120,
     priority: "high",
     compatibleTestbeds: ["TM-POD-002", "TM-RIG-002", "TM-STATION-001"],
@@ -27,8 +25,7 @@ export const testCases: TestCase[] = [
     id: "tc-003",
     name: "Sleep Mode in Temporal Suspension",
     description: "Can it safely idle in the 1600s without drawing attention?",
-    status: "passed",
-    lastRun: "2025-03-22T07:45:00Z",
+
     duration: 45,
     priority: "medium",
     compatibleTestbeds: ["TM-POD-001", "TM-SUIT-001", "TM-VEHICLE-002"],
@@ -38,8 +35,7 @@ export const testCases: TestCase[] = [
     name: "Power Cell Endurance Through Ages",
     description:
       "Does the battery survive 1,000 years or wimp out in 20 minutes?",
-    status: "failed",
-    lastRun: "2025-03-21T14:30:00Z",
+
     duration: 240,
     priority: "high",
     compatibleTestbeds: ["TM-POD-001", "TM-SUIT-001"],
@@ -59,8 +55,7 @@ export const testCases: TestCase[] = [
     id: "tc-006",
     name: "Reactor Noise During Jump",
     description: "Does it hum with power or scream like an angry banshee?",
-    status: "pending",
-    lastRun: "2025-03-21T12:00:00Z",
+
     duration: 30,
     priority: "low",
     compatibleTestbeds: ["TM-RIG-001", "TM-VEHICLE-001"],
@@ -80,8 +75,7 @@ export const testCases: TestCase[] = [
     name: "Visual Calibration for Dino-Eras",
     description:
       "Are colors rendered correctly even when surrounded by angry T-Rexes?",
-    status: "failed",
-    lastRun: "2025-03-21T10:45:00Z",
+
     duration: 90,
     priority: "high",
     compatibleTestbeds: ["TM-POD-001", "TM-SUIT-001"],

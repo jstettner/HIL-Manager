@@ -8,7 +8,11 @@ export interface Changeset {
   status: "open" | "merged" | "closed";
   createdAt: string;
   updatedAt: string;
-  testCases: string[]; // IDs of associated test cases
+  testCases: {
+    id: string;
+    status: "passed" | "failed" | "pending";
+    lastRun: string;
+  }[]; // Results of associated test cases
   bespoke_tests: {
     name: string;
     description: string;
@@ -48,13 +52,41 @@ export const changesets: Changeset[] = [
     createdAt: "2025-03-20T08:00:00Z",
     updatedAt: "2025-03-22T16:45:00Z",
     testCases: [
-      testCases[0].id,
-      testCases[1].id,
-      testCases[2].id,
-      testCases[3].id,
-      testCases[4].id,
-      testCases[5].id,
-      testCases[6].id,
+      {
+        id: "tc-001",
+        status: "passed",
+        lastRun: "2025-03-22T09:30:00Z",
+      },
+      {
+        id: "tc-002",
+        status: "passed",
+        lastRun: "2025-03-22T08:15:00Z",
+      },
+      {
+        id: testCases[2].id,
+        status: "passed",
+        lastRun: "2025-03-22T07:45:00Z",
+      },
+      {
+        id: "tc-004",
+        status: "passed",
+        lastRun: "2025-03-21T14:30:00Z",
+      },
+      {
+        id: testCases[4].id,
+        status: "passed",
+        lastRun: "2025-03-21T13:15:00Z",
+      },
+      {
+        id: "tc-006",
+        status: "passed",
+        lastRun: "2025-03-21T12:00:00Z",
+      },
+      {
+        id: testCases[6].id,
+        status: "passed",
+        lastRun: "2025-03-21T11:30:00Z",
+      },
     ],
     bespoke_tests: [
       {
@@ -117,15 +149,51 @@ export const changesets: Changeset[] = [
     createdAt: "2025-03-23T09:15:00Z",
     updatedAt: "2025-03-25T14:30:00Z",
     testCases: [
-      testCases[6].id,
-      testCases[7].id,
-      testCases[8].id,
-      testCases[9].id,
-      testCases[10].id,
-      testCases[11].id,
-      testCases[12].id,
-      testCases[13].id,
-      testCases[14].id,
+      {
+        id: testCases[6].id,
+        status: "passed",
+        lastRun: "2025-03-21T11:30:00Z",
+      },
+      {
+        id: testCases[7].id,
+        status: "failed",
+        lastRun: "2025-03-21T10:45:00Z",
+      },
+      {
+        id: testCases[8].id,
+        status: "passed",
+        lastRun: "2025-03-21T09:30:00Z",
+      },
+      {
+        id: testCases[9].id,
+        status: "pending",
+        lastRun: "2025-03-21T08:15:00Z",
+      },
+      {
+        id: testCases[10].id,
+        status: "passed",
+        lastRun: "2025-03-20T16:30:00Z",
+      },
+      {
+        id: testCases[11].id,
+        status: "failed",
+        lastRun: "2025-03-20T15:15:00Z",
+      },
+      {
+        id: testCases[12].id,
+        status: "passed",
+        lastRun: "2025-03-20T14:30:00Z",
+      },
+      {
+        id: testCases[13].id,
+        status: "pending",
+        lastRun: "2025-03-20T13:45:00Z",
+      },
+      {
+        id: testCases[14].id,
+        status: "passed",
+        lastRun: "2025-03-20T13:00:00Z",
+      },
     ],
     bespoke_tests: [
       {
@@ -174,14 +242,46 @@ export const changesets: Changeset[] = [
     createdAt: "2025-03-24T11:20:00Z",
     updatedAt: "2025-03-25T09:45:00Z",
     testCases: [
-      testCases[2].id,
-      testCases[4].id,
-      testCases[6].id,
-      testCases[8].id,
-      testCases[10].id,
-      testCases[12].id,
-      testCases[14].id,
-      testCases[16].id,
+      {
+        id: testCases[2].id,
+        status: "passed",
+        lastRun: "2025-03-22T07:45:00Z",
+      },
+      {
+        id: testCases[4].id,
+        status: "passed",
+        lastRun: "2025-03-21T13:15:00Z",
+      },
+      {
+        id: testCases[6].id,
+        status: "passed",
+        lastRun: "2025-03-21T11:30:00Z",
+      },
+      {
+        id: testCases[8].id,
+        status: "passed",
+        lastRun: "2025-03-21T09:30:00Z",
+      },
+      {
+        id: testCases[10].id,
+        status: "passed",
+        lastRun: "2025-03-20T16:30:00Z",
+      },
+      {
+        id: testCases[12].id,
+        status: "passed",
+        lastRun: "2025-03-20T14:30:00Z",
+      },
+      {
+        id: testCases[14].id,
+        status: "passed",
+        lastRun: "2025-03-20T13:00:00Z",
+      },
+      {
+        id: testCases[16].id,
+        status: "passed",
+        lastRun: "2025-03-20T11:30:00Z",
+      },
     ],
     bespoke_tests: [
       {
@@ -229,16 +329,16 @@ export const changesets: Changeset[] = [
     createdAt: "2025-03-25T13:00:00Z",
     updatedAt: "2025-03-25T19:30:00Z",
     testCases: [
-      testCases[1].id,
-      testCases[3].id,
-      testCases[5].id,
-      testCases[7].id,
-      testCases[9].id,
-      testCases[11].id,
-      testCases[13].id,
-      testCases[15].id,
-      testCases[17].id,
-      testCases[19].id,
+      { id: "tc-002", status: "passed", lastRun: "2025-03-25T19:00:00Z" },
+      { id: "tc-004", status: "failed", lastRun: "2025-03-25T18:45:00Z" },
+      { id: "tc-006", status: "pending", lastRun: "2025-03-25T18:30:00Z" },
+      { id: "tc-008", status: "passed", lastRun: "2025-03-25T18:15:00Z" },
+      { id: "tc-010", status: "failed", lastRun: "2025-03-25T18:00:00Z" },
+      { id: "tc-012", status: "pending", lastRun: "2025-03-25T17:45:00Z" },
+      { id: "tc-014", status: "passed", lastRun: "2025-03-25T17:30:00Z" },
+      { id: "tc-016", status: "failed", lastRun: "2025-03-25T17:15:00Z" },
+      { id: "tc-018", status: "pending", lastRun: "2025-03-25T17:00:00Z" },
+      { id: "tc-020", status: "passed", lastRun: "2025-03-25T16:45:00Z" },
     ],
     bespoke_tests: [
       {
@@ -285,17 +385,17 @@ export const changesets: Changeset[] = [
     createdAt: "2025-03-25T16:45:00Z",
     updatedAt: "2025-03-25T20:30:00Z",
     testCases: [
-      testCases[0].id,
-      testCases[2].id,
-      testCases[4].id,
-      testCases[6].id,
-      testCases[8].id,
-      testCases[10].id,
-      testCases[12].id,
-      testCases[14].id,
-      testCases[16].id,
-      testCases[18].id,
-      testCases[20].id,
+      { id: "tc-001", status: "passed", lastRun: "2025-03-25T20:00:00Z" },
+      { id: "tc-003", status: "failed", lastRun: "2025-03-25T19:45:00Z" },
+      { id: "tc-005", status: "pending", lastRun: "2025-03-25T19:30:00Z" },
+      { id: "tc-007", status: "passed", lastRun: "2025-03-25T19:15:00Z" },
+      { id: "tc-009", status: "failed", lastRun: "2025-03-25T19:00:00Z" },
+      { id: "tc-011", status: "pending", lastRun: "2025-03-25T18:45:00Z" },
+      { id: "tc-013", status: "passed", lastRun: "2025-03-25T18:30:00Z" },
+      { id: "tc-015", status: "failed", lastRun: "2025-03-25T18:15:00Z" },
+      { id: "tc-017", status: "pending", lastRun: "2025-03-25T18:00:00Z" },
+      { id: "tc-019", status: "passed", lastRun: "2025-03-25T17:45:00Z" },
+      { id: "tc-021", status: "failed", lastRun: "2025-03-25T17:30:00Z" },
     ],
     bespoke_tests: [
       {
@@ -343,17 +443,17 @@ export const changesets: Changeset[] = [
     createdAt: "2025-03-25T19:15:00Z",
     updatedAt: "2025-03-25T20:45:00Z",
     testCases: [
-      testCases[1].id,
-      testCases[4].id,
-      testCases[7].id,
-      testCases[10].id,
-      testCases[13].id,
-      testCases[16].id,
-      testCases[19].id,
-      testCases[22].id,
-      testCases[25].id,
-      testCases[28].id,
-      testCases[31].id,
+      { id: "tc-002", status: "passed", lastRun: "2025-03-25T19:00:00Z" },
+      { id: "tc-005", status: "passed", lastRun: "2025-03-25T18:45:00Z" },
+      { id: "tc-008", status: "passed", lastRun: "2025-03-25T18:30:00Z" },
+      { id: "tc-011", status: "passed", lastRun: "2025-03-25T18:15:00Z" },
+      { id: "tc-014", status: "passed", lastRun: "2025-03-25T18:00:00Z" },
+      { id: "tc-017", status: "passed", lastRun: "2025-03-25T17:45:00Z" },
+      { id: "tc-020", status: "passed", lastRun: "2025-03-25T17:30:00Z" },
+      { id: "tc-023", status: "passed", lastRun: "2025-03-25T17:15:00Z" },
+      { id: "tc-026", status: "passed", lastRun: "2025-03-25T17:00:00Z" },
+      { id: "tc-029", status: "passed", lastRun: "2025-03-25T16:45:00Z" },
+      { id: "tc-032", status: "passed", lastRun: "2025-03-25T16:30:00Z" },
     ],
     bespoke_tests: [
       {
@@ -411,7 +511,9 @@ export const changesets: Changeset[] = [
     status: "merged",
     createdAt: "2025-03-25T20:00:00Z",
     updatedAt: "2025-03-25T20:50:00Z",
-    testCases: [testCases[8].id],
+    testCases: [
+      { id: "tc-009", status: "passed", lastRun: "2025-03-24T09:30:00Z" },
+    ],
     bespoke_tests: [
       {
         name: "Timeline Rendering",
@@ -457,7 +559,9 @@ export const changesets: Changeset[] = [
     status: "merged",
     createdAt: "2025-03-25T20:30:00Z",
     updatedAt: "2025-03-25T20:55:00Z",
-    testCases: [testCases[9].id],
+    testCases: [
+      { id: "tc-010", status: "passed", lastRun: "2025-03-24T09:00:00Z" },
+    ],
     bespoke_tests: [
       {
         name: "Temporal Encryption",
@@ -503,7 +607,9 @@ export const changesets: Changeset[] = [
     status: "closed",
     createdAt: "2025-03-25T20:40:00Z",
     updatedAt: "2025-03-25T20:56:00Z",
-    testCases: [testCases[10].id],
+    testCases: [
+      { id: "tc-011", status: "pending", lastRun: "2025-03-24T08:30:00Z" },
+    ],
     bespoke_tests: [
       {
         name: "Power Surge Protection",
@@ -560,7 +666,9 @@ export const changesets: Changeset[] = [
     status: "open",
     createdAt: "2025-03-25T20:45:00Z",
     updatedAt: "2025-03-25T20:56:30Z",
-    testCases: [testCases[11].id],
+    testCases: [
+      { id: "tc-012", status: "passed", lastRun: "2025-03-24T08:00:00Z" },
+    ],
     bespoke_tests: [
       {
         name: "Anomaly Classification",
@@ -606,7 +714,9 @@ export const changesets: Changeset[] = [
     status: "merged",
     createdAt: "2025-03-25T20:50:00Z",
     updatedAt: "2025-03-25T20:56:45Z",
-    testCases: [testCases[12].id],
+    testCases: [
+      { id: "tc-013", status: "failed", lastRun: "2025-03-24T07:30:00Z" },
+    ],
     bespoke_tests: [
       {
         name: "Self-Repair Protocols",
@@ -652,7 +762,9 @@ export const changesets: Changeset[] = [
     status: "merged",
     createdAt: "2025-03-25T20:57:00Z",
     updatedAt: "2025-03-25T20:58:30Z",
-    testCases: [testCases[13].id],
+    testCases: [
+      { id: "tc-014", status: "pending", lastRun: "2025-03-24T07:00:00Z" },
+    ],
     bespoke_tests: [
       {
         name: "Atmospheric Stabilization",
@@ -704,7 +816,9 @@ export const changesets: Changeset[] = [
     status: "merged",
     createdAt: "2025-03-25T20:57:30Z",
     updatedAt: "2025-03-25T20:58:35Z",
-    testCases: [testCases[14].id],
+    testCases: [
+      { id: "tc-015", status: "passed", lastRun: "2025-03-24T06:30:00Z" },
+    ],
     bespoke_tests: [
       {
         name: "Biometric Tracking",
@@ -750,7 +864,9 @@ export const changesets: Changeset[] = [
     status: "merged",
     createdAt: "2025-03-25T20:58:00Z",
     updatedAt: "2025-03-25T20:58:40Z",
-    testCases: [testCases[15].id],
+    testCases: [
+      { id: "tc-016", status: "failed", lastRun: "2025-03-24T06:00:00Z" },
+    ],
     bespoke_tests: [
       {
         name: "Artifact Preservation",

@@ -2,8 +2,6 @@ export interface TestCase {
   id: string;
   name: string;
   description: string;
-  status: "passed" | "failed" | "pending";
-  lastRun: string;
   duration: number; // in seconds
   priority: "low" | "medium" | "high";
   compatibleTestbeds?: string[];
