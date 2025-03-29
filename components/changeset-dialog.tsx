@@ -20,16 +20,22 @@ import {
   Zap,
 } from "lucide-react";
 
-export function ChangesetDialog({ changeset, isOpen = false }: { changeset: Changeset; isOpen?: boolean }) {
+export function ChangesetDialog({
+  changeset,
+  isOpen = false,
+}: {
+  changeset: Changeset;
+  isOpen?: boolean;
+}) {
   const router = useRouter();
   const searchParams = useSearchParams();
 
   const handleOpenChange = (open: boolean) => {
     const params = new URLSearchParams(searchParams.toString());
     if (!open) {
-      params.delete('changeset');
+      params.delete("changeset");
     } else {
-      params.set('changeset', changeset.id);
+      params.set("changeset", changeset.id);
     }
     router.push(`/changesets?${params.toString()}`);
   };
@@ -54,17 +60,22 @@ export function ChangesetDialog({ changeset, isOpen = false }: { changeset: Chan
   return (
     <Dialog open={isOpen} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>
-        <TableRow 
+        <TableRow
           className="cursor-pointer hover:bg-muted/50"
           onClick={() => {
             if (!isOpen) {
               const params = new URLSearchParams(searchParams.toString());
-              const page = Math.ceil((changesets.findIndex((c: Changeset) => c.id === changeset.id) + 1) / 10);
-              params.set('page', page.toString());
-              params.set('changeset', changeset.id);
+              const page = Math.ceil(
+                (changesets.findIndex((c: Changeset) => c.id === changeset.id) +
+                  1) /
+                  10,
+              );
+              params.set("page", page.toString());
+              params.set("changeset", changeset.id);
               router.push(`/changesets?${params.toString()}`);
             }
-          }}>
+          }}
+        >
           <TableCell className="p-3">
             <div className="flex items-center gap-2">
               <span
@@ -106,7 +117,7 @@ export function ChangesetDialog({ changeset, isOpen = false }: { changeset: Chan
         </TableRow>
       </DialogTrigger>
 
-      <DialogContent className="max-w-3xl">
+      <DialogContent>
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <GitPullRequest className="w-5 h-5" />

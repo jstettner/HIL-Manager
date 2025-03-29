@@ -26,7 +26,11 @@ interface ChangesetsTableProps {
   selectedChangeset?: string;
 }
 
-export function ChangesetsTable({ page, itemsPerPage, selectedChangeset }: ChangesetsTableProps) {
+export function ChangesetsTable({
+  page,
+  itemsPerPage,
+  selectedChangeset,
+}: ChangesetsTableProps) {
   const [loading, setLoading] = useState(true);
   const [changesets, setChangesets] = useState<typeof sampleChangesets>([]);
 
@@ -78,8 +82,8 @@ export function ChangesetsTable({ page, itemsPerPage, selectedChangeset }: Chang
               </TableRow>
             ))
           : currentChangesets.map((changeset) => (
-              <ChangesetDialog 
-                key={changeset.id} 
+              <ChangesetDialog
+                key={changeset.id}
                 changeset={changeset}
                 isOpen={selectedChangeset === changeset.id}
               />

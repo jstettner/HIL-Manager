@@ -47,7 +47,15 @@ export const changesets: Changeset[] = [
     status: "merged",
     createdAt: "2025-03-20T08:00:00Z",
     updatedAt: "2025-03-22T16:45:00Z",
-    testCases: [testCases[2].id],
+    testCases: [
+      testCases[0].id,
+      testCases[1].id,
+      testCases[2].id,
+      testCases[3].id,
+      testCases[4].id,
+      testCases[5].id,
+      testCases[6].id,
+    ],
     bespoke_tests: [
       {
         name: "Quantum Stability Test",
@@ -108,7 +116,17 @@ export const changesets: Changeset[] = [
     status: "open",
     createdAt: "2025-03-23T09:15:00Z",
     updatedAt: "2025-03-25T14:30:00Z",
-    testCases: [testCases[3].id],
+    testCases: [
+      testCases[6].id,
+      testCases[7].id,
+      testCases[8].id,
+      testCases[9].id,
+      testCases[10].id,
+      testCases[11].id,
+      testCases[12].id,
+      testCases[13].id,
+      testCases[14].id,
+    ],
     bespoke_tests: [
       {
         name: "Timeline Visualization",
@@ -155,7 +173,16 @@ export const changesets: Changeset[] = [
     status: "merged",
     createdAt: "2025-03-24T11:20:00Z",
     updatedAt: "2025-03-25T09:45:00Z",
-    testCases: [testCases[4].id],
+    testCases: [
+      testCases[2].id,
+      testCases[4].id,
+      testCases[6].id,
+      testCases[8].id,
+      testCases[10].id,
+      testCases[12].id,
+      testCases[14].id,
+      testCases[16].id,
+    ],
     bespoke_tests: [
       {
         name: "Quantum Calibration Precision",
@@ -201,7 +228,18 @@ export const changesets: Changeset[] = [
     status: "open",
     createdAt: "2025-03-25T13:00:00Z",
     updatedAt: "2025-03-25T19:30:00Z",
-    testCases: [testCases[5].id],
+    testCases: [
+      testCases[1].id,
+      testCases[3].id,
+      testCases[5].id,
+      testCases[7].id,
+      testCases[9].id,
+      testCases[11].id,
+      testCases[13].id,
+      testCases[15].id,
+      testCases[17].id,
+      testCases[19].id,
+    ],
     bespoke_tests: [
       {
         name: "Paradox Resistance",
@@ -246,7 +284,19 @@ export const changesets: Changeset[] = [
     status: "open",
     createdAt: "2025-03-25T16:45:00Z",
     updatedAt: "2025-03-25T20:30:00Z",
-    testCases: [testCases[6].id],
+    testCases: [
+      testCases[0].id,
+      testCases[2].id,
+      testCases[4].id,
+      testCases[6].id,
+      testCases[8].id,
+      testCases[10].id,
+      testCases[12].id,
+      testCases[14].id,
+      testCases[16].id,
+      testCases[18].id,
+      testCases[20].id,
+    ],
     bespoke_tests: [
       {
         name: "Waypoint Persistence",
@@ -292,7 +342,19 @@ export const changesets: Changeset[] = [
     status: "merged",
     createdAt: "2025-03-25T19:15:00Z",
     updatedAt: "2025-03-25T20:45:00Z",
-    testCases: [testCases[7].id],
+    testCases: [
+      testCases[1].id,
+      testCases[4].id,
+      testCases[7].id,
+      testCases[10].id,
+      testCases[13].id,
+      testCases[16].id,
+      testCases[19].id,
+      testCases[22].id,
+      testCases[25].id,
+      testCases[28].id,
+      testCases[31].id,
+    ],
     bespoke_tests: [
       {
         name: "Historical Impact Analysis",

@@ -12,7 +12,7 @@ export default function TestcasesPage() {
           <h3 className="text-xl text-muted-foreground">Your Go-To Tests</h3>
         </div>
       </div>
-      
+
       <TestcasesTable />
 
       <TipsFooter />
