@@ -49,7 +49,7 @@ export function BaseCanvas<T extends BaseNodeData>({
           <h2 className="text-3xl font-bold text-white mb-4 font-dotgothic">
             Coming Soon to Halidom
           </h2>
-          <p className="text-xl text-muted-foreground mb-4 max-w-xl text-center">
+          <p className="text-xl text-muted-foreground mb-4 max-w-xl text-center font-mono">
             {comingSoonText}
           </p>
           <Button

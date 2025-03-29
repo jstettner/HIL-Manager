@@ -1,6 +1,7 @@
 "use client";
 
 import { ChevronRight, type LucideIcon } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 import {
   Collapsible,
@@ -33,6 +34,7 @@ export function NavMain({
     }[];
   }[];
 }) {
+  const pathname = usePathname();
   return (
     <SidebarGroup>
       <SidebarGroupLabel>Veriframe</SidebarGroupLabel>
@@ -58,7 +60,10 @@ export function NavMain({
                     <SidebarMenuSub>
                       {item.items?.map((subItem) => (
                         <SidebarMenuSubItem key={subItem.title}>
-                          <SidebarMenuSubButton asChild>
+                          <SidebarMenuSubButton 
+                            asChild 
+                            className={pathname === subItem.url ? 'bg-primary/10 text-primary font-medium rounded-lg' : undefined}
+                          >
                             <a href={subItem.url}>
                               <span>{subItem.title}</span>
                             </a>

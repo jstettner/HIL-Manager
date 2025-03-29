@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import { Skeleton } from "@/components/ui/skeleton";
 import { TestCaseDialog } from "@/components/test-case-dialog";
 import {
@@ -11,6 +12,14 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
 import { testCases as sampleTestCases } from "@/data/sample-data";
 
 // Mock API fetch function
@@ -19,12 +28,10 @@ const fetchTestCases = async () => {
   return sampleTestCases;
 };
 
-interface TestcasesTableProps {
-  page: number;
-  itemsPerPage: number;
-}
-
-export function TestcasesTable({ page, itemsPerPage }: TestcasesTableProps) {
+export function TestcasesTable() {
+  const searchParams = useSearchParams();
+  const page = parseInt(searchParams.get("page") ?? "1");
+  const itemsPerPage = 10;
   const [loading, setLoading] = useState(true);
   const [testCases, setTestCases] = useState<typeof sampleTestCases>([]);
 
@@ -42,39 +49,76 @@ export function TestcasesTable({ page, itemsPerPage }: TestcasesTableProps) {
   const endIndex = startIndex + itemsPerPage;
   const currentTestCases = testCases.slice(startIndex, endIndex);
 
+  const totalItems = testCases.length;
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+  const generatePaginationItems = () => {
+    const items = [];
+    for (let i = 1; i <= totalPages; i++) {
+      items.push(
+        <PaginationItem key={i}>
+          <PaginationLink href={`/testcases?page=${i}`} isActive={page === i}>
+            {i}
+          </PaginationLink>
+        </PaginationItem>,
+      );
+    }
+    return items;
+  };
+
   return (
-    <Table className="rounded-md">
-      <TableCaption className="sr-only">Testcases</TableCaption>
-      <TableHeader>
-        <TableRow>
-          <TableHead className="p-3 text-left">Name</TableHead>
-          <TableHead className="p-3 text-left">Description</TableHead>
-          <TableHead className="p-3 text-left">Last Run</TableHead>
-          <TableHead className="p-3 text-left">Average Duration</TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {loading
-          ? Array.from({ length: itemsPerPage }).map((_, index) => (
-              <TableRow key={index}>
-                <td className="p-3">
-                  <Skeleton className="h-4 w-[250px]" />
-                </td>
-                <td className="p-3">
-                  <Skeleton className="h-4 w-[300px]" />
-                </td>
-                <td className="p-3">
-                  <Skeleton className="h-4 w-[150px]" />
-                </td>
-                <td className="p-3">
-                  <Skeleton className="h-4 w-[100px]" />
-                </td>
-              </TableRow>
-            ))
-          : currentTestCases.map((testCase) => (
-              <TestCaseDialog key={testCase.id} testCase={testCase} />
-            ))}
-      </TableBody>
-    </Table>
+    <div className="space-y-4">
+      <Table className="rounded-md">
+        <TableCaption className="sr-only">Testcases</TableCaption>
+        <TableHeader>
+          <TableRow>
+            <TableHead className="p-3 text-left">Name</TableHead>
+            <TableHead className="p-3 text-left">Description</TableHead>
+            <TableHead className="p-3 text-left">Last Run</TableHead>
+            <TableHead className="p-3 text-left">Average Duration</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {loading
+            ? Array.from({ length: itemsPerPage }).map((_, index) => (
+                <TableRow key={index}>
+                  <td className="p-3">
+                    <Skeleton className="h-4 w-[250px]" />
+                  </td>
+                  <td className="p-3">
+                    <Skeleton className="h-4 w-[300px]" />
+                  </td>
+                  <td className="p-3">
+                    <Skeleton className="h-4 w-[150px]" />
+                  </td>
+                  <td className="p-3">
+                    <Skeleton className="h-4 w-[100px]" />
+                  </td>
+                </TableRow>
+              ))
+            : currentTestCases.map((testCase) => (
+                <TestCaseDialog key={testCase.id} testCase={testCase} />
+              ))}
+        </TableBody>
+      </Table>
+
+      <Pagination>
+        <PaginationContent>
+          <PaginationItem>
+            <PaginationPrevious
+              href={page > 1 ? `/testcases?page=${page - 1}` : "#"}
+            />
+          </PaginationItem>
+
+          {generatePaginationItems()}
+
+          <PaginationItem>
+            <PaginationNext
+              href={page < totalPages ? `/testcases?page=${page + 1}` : "#"}
+            />
+          </PaginationItem>
+        </PaginationContent>
+      </Pagination>
+    </div>
   );
 }
