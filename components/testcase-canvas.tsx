@@ -95,6 +95,21 @@ export function TestcaseCanvas() {
           onConnect={onConnect}
           canvasKey={canvasKey}
           nodeTypes={testcaseNodeTypes}
+          comingSoonText={
+            <span>
+              The Testcase Lab is currently in development. The recommended way
+              to build testcases is to use the
+              <a
+                href="https://github.com/halidom/halidom"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="whitespace-nowrap text-blue-400 hover:underline pl-1.5"
+              >
+                Halidom Python framework
+              </a>
+              .
+            </span>
+          }
         />
       </div>
     </div>

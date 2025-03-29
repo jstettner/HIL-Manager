@@ -31,4 +31,5 @@ export interface CanvasProps<T extends Record<string, unknown> = BaseNodeData> {
   onConnect: (connection: any) => void;
   canvasKey?: number;
   nodeTypes: Record<string, React.ComponentType<any>>;
+  comingSoonText: ReactNode;
 }

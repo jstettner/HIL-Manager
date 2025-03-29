@@ -20,6 +20,7 @@ export function BaseCanvas<T extends BaseNodeData>({
   onConnect,
   canvasKey,
   nodeTypes,
+  comingSoonText,
 }: CanvasProps<T>) {
   const [isPreview, setIsPreview] = useState(false);
 
@@ -48,6 +49,9 @@ export function BaseCanvas<T extends BaseNodeData>({
           <h2 className="text-3xl font-bold text-white mb-4 font-dotgothic">
             Coming Soon to Halidom
           </h2>
+          <p className="text-xl text-muted-foreground mb-4 max-w-xl text-center">
+            {comingSoonText}
+          </p>
           <Button
             onClick={() => setIsPreview(true)}
             className="px-6 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-colors"

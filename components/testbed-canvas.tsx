@@ -92,6 +92,21 @@ export function TestbedCanvas() {
           onConnect={onConnect}
           canvasKey={canvasKey}
           nodeTypes={testbedNodeTypes}
+          comingSoonText={
+            <span>
+              The Environment Builder is currently in development. The
+              recommended way to design environments is to use the
+              <a
+                href="https://github.com/halidom/halidom"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="whitespace-nowrap text-blue-400 hover:underline pl-1.5"
+              >
+                Halidom Python framework
+              </a>
+              .
+            </span>
+          }
         />
       </div>
     </div>

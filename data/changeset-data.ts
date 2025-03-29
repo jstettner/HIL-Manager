@@ -289,7 +289,7 @@ export const changesets: Changeset[] = [
     description:
       "AI-powered system to prevent historically destructive temporal modifications",
     author: "Elena Martinez",
-    status: "open",
+    status: "merged",
     createdAt: "2025-03-25T19:15:00Z",
     updatedAt: "2025-03-25T20:45:00Z",
     testCases: [testCases[7].id],
@@ -297,7 +297,7 @@ export const changesets: Changeset[] = [
       {
         name: "Historical Impact Analysis",
         description: "Verify ethical implications of temporal changes",
-        status: "pending",
+        status: "passed",
       },
       {
         name: "Butterfly Effect Simulator",
@@ -320,7 +320,7 @@ export const changesets: Changeset[] = [
     verificationObjectives: [
       {
         objective: "Zero harmful butterfly effects",
-        status: "pending",
+        status: "verified",
         notes: "Currently at 99.7% accuracy",
       },
     ],
@@ -346,7 +346,7 @@ export const changesets: Changeset[] = [
     description:
       "Interactive 4D visualization of temporal branch points and consequences",
     author: "Sophia Kim",
-    status: "open",
+    status: "merged",
     createdAt: "2025-03-25T20:00:00Z",
     updatedAt: "2025-03-25T20:50:00Z",
     testCases: [testCases[8].id],
@@ -354,7 +354,7 @@ export const changesets: Changeset[] = [
       {
         name: "Timeline Rendering",
         description: "Test 4D visualization accuracy",
-        status: "pending",
+        status: "passed",
       },
     ],
     impactedSubsystems: [
@@ -367,7 +367,7 @@ export const changesets: Changeset[] = [
     verificationObjectives: [
       {
         objective: "Real-time timeline updates",
-        status: "pending",
+        status: "verified",
       },
     ],
     plausibleFallout: [
@@ -392,7 +392,7 @@ export const changesets: Changeset[] = [
     description:
       "Secure communication system for coordinating across different temporal points",
     author: "Robert Chang",
-    status: "open",
+    status: "merged",
     createdAt: "2025-03-25T20:30:00Z",
     updatedAt: "2025-03-25T20:55:00Z",
     testCases: [testCases[9].id],
@@ -400,7 +400,7 @@ export const changesets: Changeset[] = [
       {
         name: "Temporal Encryption",
         description: "Verify message integrity across timelines",
-        status: "pending",
+        status: "passed",
       },
     ],
     impactedSubsystems: [
@@ -413,7 +413,7 @@ export const changesets: Changeset[] = [
     verificationObjectives: [
       {
         objective: "Message causality preservation",
-        status: "pending",
+        status: "verified",
       },
     ],
     plausibleFallout: [
@@ -541,7 +541,7 @@ export const changesets: Changeset[] = [
     description:
       "Automated maintenance and self-repair capabilities for temporal systems",
     author: "James Wright",
-    status: "open",
+    status: "merged",
     createdAt: "2025-03-25T20:50:00Z",
     updatedAt: "2025-03-25T20:56:45Z",
     testCases: [testCases[12].id],
@@ -549,7 +549,7 @@ export const changesets: Changeset[] = [
       {
         name: "Self-Repair Protocols",
         description: "Test automated maintenance procedures",
-        status: "pending",
+        status: "passed",
       },
     ],
     impactedSubsystems: [
@@ -562,7 +562,7 @@ export const changesets: Changeset[] = [
     verificationObjectives: [
       {
         objective: "24/7 system availability",
-        status: "pending",
+        status: "verified",
       },
     ],
     plausibleFallout: [
@@ -587,7 +587,7 @@ export const changesets: Changeset[] = [
     description:
       "Advanced system for managing atmospheric conditions during temporal transitions",
     author: "Sarah Storm",
-    status: "open",
+    status: "merged",
     createdAt: "2025-03-25T20:57:00Z",
     updatedAt: "2025-03-25T20:58:30Z",
     testCases: [testCases[13].id],
@@ -595,7 +595,7 @@ export const changesets: Changeset[] = [
       {
         name: "Atmospheric Stabilization",
         description: "Test weather pattern normalization during jumps",
-        status: "pending",
+        status: "passed",
       },
       {
         name: "Climate Interference",
@@ -613,7 +613,7 @@ export const changesets: Changeset[] = [
     verificationObjectives: [
       {
         objective: "Zero weather anomalies",
-        status: "pending",
+        status: "verified",
         notes: "Currently at 99.5% stability",
       },
     ],
@@ -639,7 +639,7 @@ export const changesets: Changeset[] = [
     description:
       "Advanced system for monitoring traveler health during temporal transitions",
     author: "Maria Santos",
-    status: "open",
+    status: "merged",
     createdAt: "2025-03-25T20:57:30Z",
     updatedAt: "2025-03-25T20:58:35Z",
     testCases: [testCases[14].id],
@@ -647,7 +647,7 @@ export const changesets: Changeset[] = [
       {
         name: "Biometric Tracking",
         description: "Test real-time health monitoring accuracy",
-        status: "pending",
+        status: "passed",
       },
     ],
     impactedSubsystems: [
@@ -660,7 +660,7 @@ export const changesets: Changeset[] = [
     verificationObjectives: [
       {
         objective: "100% health monitoring accuracy",
-        status: "pending",
+        status: "verified",
       },
     ],
     plausibleFallout: [
@@ -685,7 +685,7 @@ export const changesets: Changeset[] = [
     description:
       "Secure storage system for preserving historical artifacts during temporal operations",
     author: "Alex Thompson",
-    status: "open",
+    status: "merged",
     createdAt: "2025-03-25T20:58:00Z",
     updatedAt: "2025-03-25T20:58:40Z",
     testCases: [testCases[15].id],
@@ -693,7 +693,7 @@ export const changesets: Changeset[] = [
       {
         name: "Artifact Preservation",
         description: "Test temporal stasis field stability",
-        status: "pending",
+        status: "passed",
       },
     ],
     impactedSubsystems: [
@@ -706,7 +706,7 @@ export const changesets: Changeset[] = [
     verificationObjectives: [
       {
         objective: "Perfect artifact preservation",
-        status: "pending",
+        status: "verified",
       },
     ],
     plausibleFallout: [
