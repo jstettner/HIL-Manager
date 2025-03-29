@@ -23,9 +23,10 @@ const fetchChangesets = async () => {
 interface ChangesetsTableProps {
   page: number;
   itemsPerPage: number;
+  selectedChangeset?: string;
 }
 
-export function ChangesetsTable({ page, itemsPerPage }: ChangesetsTableProps) {
+export function ChangesetsTable({ page, itemsPerPage, selectedChangeset }: ChangesetsTableProps) {
   const [loading, setLoading] = useState(true);
   const [changesets, setChangesets] = useState<typeof sampleChangesets>([]);
 
@@ -77,7 +78,11 @@ export function ChangesetsTable({ page, itemsPerPage }: ChangesetsTableProps) {
               </TableRow>
             ))
           : currentChangesets.map((changeset) => (
-              <ChangesetDialog key={changeset.id} changeset={changeset} />
+              <ChangesetDialog 
+                key={changeset.id} 
+                changeset={changeset}
+                isOpen={selectedChangeset === changeset.id}
+              />
             ))}
       </TableBody>
     </Table>

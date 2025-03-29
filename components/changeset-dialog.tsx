@@ -1,4 +1,7 @@
-import { Changeset } from "@/data/changeset-data";
+"use client";
+
+import { useRouter, useSearchParams } from "next/navigation";
+import { Changeset, changesets } from "@/data/changeset-data";
 import { testCases } from "@/data/sample-data";
 import {
   Dialog,
@@ -17,7 +20,19 @@ import {
   Zap,
 } from "lucide-react";
 
-export function ChangesetDialog({ changeset }: { changeset: Changeset }) {
+export function ChangesetDialog({ changeset, isOpen = false }: { changeset: Changeset; isOpen?: boolean }) {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const handleOpenChange = (open: boolean) => {
+    const params = new URLSearchParams(searchParams.toString());
+    if (!open) {
+      params.delete('changeset');
+    } else {
+      params.set('changeset', changeset.id);
+    }
+    router.push(`/changesets?${params.toString()}`);
+  };
   const getTestStatus = () => {
     const hasFailedTests = changeset.bespoke_tests.some(
       (test) => test.status === "failed",
@@ -37,9 +52,19 @@ export function ChangesetDialog({ changeset }: { changeset: Changeset }) {
   );
 
   return (
-    <Dialog>
+    <Dialog open={isOpen} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>
-        <TableRow className="cursor-pointer hover:bg-muted/50">
+        <TableRow 
+          className="cursor-pointer hover:bg-muted/50"
+          onClick={() => {
+            if (!isOpen) {
+              const params = new URLSearchParams(searchParams.toString());
+              const page = Math.ceil((changesets.findIndex((c: Changeset) => c.id === changeset.id) + 1) / 10);
+              params.set('page', page.toString());
+              params.set('changeset', changeset.id);
+              router.push(`/changesets?${params.toString()}`);
+            }
+          }}>
           <TableCell className="p-3">
             <div className="flex items-center gap-2">
               <span

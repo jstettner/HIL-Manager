@@ -28,8 +28,10 @@ export default async function ChangesetsPage({
 }: {
   searchParams?: { [key: string]: string | string[] | undefined } | undefined;
 }) {
+  const params = await Promise.resolve(searchParams);
   const page =
-    typeof searchParams?.page === "string" ? parseInt(searchParams.page) : 1;
+    typeof params?.page === "string" ? parseInt(params.page) : 1;
+  const selectedChangeset = typeof params?.changeset === "string" ? params.changeset : undefined;
   const itemsPerPage = 10;
   const totalItems = changesets.length;
   const totalPages = Math.ceil(totalItems / itemsPerPage);
@@ -58,7 +60,7 @@ export default async function ChangesetsPage({
           </h3>
         </div>
       </div>
-      <ChangesetsTable page={page} itemsPerPage={itemsPerPage} />
+      <ChangesetsTable page={page} itemsPerPage={itemsPerPage} selectedChangeset={selectedChangeset} />
       <div className="mt-4">
         <Pagination>
           <PaginationContent>

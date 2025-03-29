@@ -1,0 +1,10 @@
+name: Halidom Actions
+run-name: ${{ github.actor }} dispatched tests to Halidom
+on: [push]
+jobs:
+  Dispatch-Halidom-Tests:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "${{ github.ref }} was automatically sent to Halidom for verification."
+      # TODO: Use a self-hosted docker runner to dispatch changeset to Halidom
+      - run: echo "View your changeset in the Halidom dashboard. https://halidom.ai/changesets/${{ github.ref }}"
