@@ -28,10 +28,9 @@ export default async function ChangesetsPage({
 }: {
   searchParams?: { [key: string]: string | string[] | undefined } | undefined;
 }) {
-  const params = await Promise.resolve(searchParams);
   const page =
-    typeof params?.page === "string" ? parseInt(params.page) : 1;
-  const selectedChangeset = typeof params?.changeset === "string" ? params.changeset : undefined;
+    typeof searchParams?.page === "string" ? parseInt(searchParams.page) : 1;
+  const selectedChangeset = typeof searchParams?.changeset === "string" ? searchParams.changeset : undefined;
   const itemsPerPage = 10;
   const totalItems = changesets.length;
   const totalPages = Math.ceil(totalItems / itemsPerPage);
