@@ -10,6 +10,8 @@ import {
   GalleryVerticalEnd,
 } from "lucide-react";
 
+import { usePathname } from 'next/navigation';
+
 import { NavMain } from "@/components/nav-main";
 import { NavUser } from "@/components/nav-user";
 import {
@@ -20,6 +22,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  useSidebar,
 } from "@/components/ui/sidebar";
 
 const data = {
@@ -93,6 +96,10 @@ const data = {
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const { isVisible } = useSidebar();
+
+  // Only display the sidebar if we are in the application.
+  if (!isVisible) return null;
   return (
     <Sidebar className="border-r" variant="inset" {...props}>
       <SidebarHeader>

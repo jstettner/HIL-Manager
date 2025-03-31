@@ -47,7 +47,7 @@ export function TestcaseFailureOriginChart() {
       <CardContent>
         <ChartContainer
           config={chartConfig}
-          className="w-full aspect-square max-h-[250px]"
+          className="w-full h-[250px]"
         >
           <RadarChart
             data={chartData}
