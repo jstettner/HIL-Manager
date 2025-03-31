@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
-import { ChangesetDialog } from "@/components/changeset-dialog";
+import { ChangesetDialog } from "@/app/changesets/changeset-dialog";
 import {
   Table,
   TableBody,
