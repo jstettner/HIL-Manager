@@ -45,10 +45,7 @@ export function TestcaseFailureOriginChart() {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <ChartContainer
-          config={chartConfig}
-          className="w-full h-[250px]"
-        >
+        <ChartContainer config={chartConfig} className="w-full h-[250px]">
           <RadarChart
             data={chartData}
             margin={{

@@ -4,6 +4,7 @@ import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { VariantProps, cva } from "class-variance-authority";
 import { PanelLeftIcon } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
@@ -67,7 +68,7 @@ function SidebarProvider({
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
 }) {
-  const pathname = typeof window !== 'undefined' ? window.location.pathname : '';
+  const pathname = usePathname();
   const publicRoutes = ["/landing", "/login", "/docs"];
   const isVisible = !publicRoutes.includes(pathname);
   const isMobile = useIsMobile();
@@ -128,7 +129,16 @@ function SidebarProvider({
       toggleSidebar,
       isVisible,
     }),
-    [state, open, setOpen, isMobile, openMobile, setOpenMobile, toggleSidebar, isVisible],
+    [
+      state,
+      open,
+      setOpen,
+      isMobile,
+      openMobile,
+      setOpenMobile,
+      toggleSidebar,
+      isVisible,
+    ],
   );
 
   return (

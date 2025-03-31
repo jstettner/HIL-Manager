@@ -10,7 +10,7 @@ import {
   GalleryVerticalEnd,
 } from "lucide-react";
 
-import { usePathname } from 'next/navigation';
+import { usePathname } from "next/navigation";
 
 import { NavMain } from "@/components/nav-main";
 import { NavUser } from "@/components/nav-user";
