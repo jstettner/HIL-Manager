@@ -3,8 +3,14 @@
 import React from "react";
 import { CodeBlock } from "@/components/codeblock";
 
-const sampleCode = `def main():
-    print("Hello World")`;
+const sampleCode = `class HIL1(HalidomPhysicalEnvironment):
+    components = [
+      PowerSupply(),
+    ]
+    
+    @override
+    def setup():
+      self.components[0].connect_to(self.components[1])`;
 
 export function CodePreview() {
   return (

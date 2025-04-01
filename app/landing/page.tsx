@@ -5,9 +5,12 @@ export default function DashboardPage() {
     <div className="flex flex-col">
       <div className="h-[90vh] w-full hero bg-[url('/images/hero-bg-2.png')] bg-cover bg-left">
         <div className="h-full flex flex-col sm:flex-row justify-around items-center gap-12 px-4">
-          <div className="flex flex-col">
-            <h1 className="hero-text">Test Anything</h1>
-            <h2 className="hero-subtext">AI-Native Verification</h2>
+          <div className="flex flex-col max-w-2xl">
+            <h1 className="hero-text">Fortify your Product</h1>
+            <h2 className="hero-subtext">
+              Protect against costly real-world failures with AI-Agents for
+              Hardware Verification.
+            </h2>
           </div>
           <div className="w-full max-w-2xl">
             <CodePreview />
