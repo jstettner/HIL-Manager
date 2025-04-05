@@ -1,6 +1,6 @@
 "use client";
 import * as React from "react";
-import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
+import { Bar, BarChart, CartesianGrid, XAxis, Cell } from "recharts";
 import {
   Card,
   CardContent,
@@ -113,13 +113,63 @@ const chartConfig = {
   },
   CI: {
     label: "Continuous Integration",
-    color: "var(--chart-1)",
+    color: "url(#colorCI)",
   },
   prs: {
     label: "Pull-Requests",
-    color: "var(--chart-2)",
+    color: "url(#colorPRs)",
   },
 } satisfies ChartConfig;
+
+// Gradient colors that match the image
+const gradientColors = {
+  CI: {
+    start: "#135ab4",
+    end: "#ff6b8b",
+  },
+  prs: {
+    start: "#135ab4",
+    end: "#ff7d5e",
+  },
+};
+
+// Function to generate colors along the gradient
+const getColorAlongGradient = (
+  index: number,
+  total: number,
+  activeChart: string,
+) => {
+  // Calculate position along the gradient (0 to 1)
+  const position = total <= 1 ? 0.5 : index / (total - 1);
+
+  // Get start and end colors based on active chart
+  const startColor =
+    gradientColors[activeChart as keyof typeof gradientColors].start;
+  const endColor =
+    gradientColors[activeChart as keyof typeof gradientColors].end;
+
+  // Parse hex colors to RGB
+  const startRGB = {
+    r: parseInt(startColor.slice(1, 3), 16),
+    g: parseInt(startColor.slice(3, 5), 16),
+    b: parseInt(startColor.slice(5, 7), 16),
+  };
+
+  const endRGB = {
+    r: parseInt(endColor.slice(1, 3), 16),
+    g: parseInt(endColor.slice(3, 5), 16),
+    b: parseInt(endColor.slice(5, 7), 16),
+  };
+
+  // Interpolate between colors
+  const r = Math.round(startRGB.r + (endRGB.r - startRGB.r) * position);
+  const g = Math.round(startRGB.g + (endRGB.g - startRGB.g) * position);
+  const b = Math.round(startRGB.b + (endRGB.b - startRGB.b) * position);
+
+  // Convert back to hex
+  return `#${r.toString(16).padStart(2, "0")}${g.toString(16).padStart(2, "0")}${b.toString(16).padStart(2, "0")}`;
+};
+
 export function TestcasesChangesetsChart() {
   const [activeChart, setActiveChart] =
     React.useState<keyof typeof chartConfig>("CI");
@@ -203,7 +253,18 @@ export function TestcasesChangesetsChart() {
                 />
               }
             />
-            <Bar dataKey={activeChart} fill={`var(--color-${activeChart})`} />
+            <Bar dataKey={activeChart}>
+              {chartData.map((entry, index) => (
+                <Cell
+                  key={`cell-${index}`}
+                  fill={getColorAlongGradient(
+                    index,
+                    chartData.length,
+                    activeChart,
+                  )}
+                />
+              ))}
+            </Bar>
           </BarChart>
         </ChartContainer>
       </CardContent>

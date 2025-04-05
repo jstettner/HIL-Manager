@@ -1,19 +1,26 @@
 // import { CodePreview } from "@/app/landing/code-preview";
 import { LandingFeature } from "./landing-feature";
+import Link from "next/link";
 
 export default function DashboardPage() {
   return (
     <div className="flex flex-col">
       <div className="h-[90vh] w-full hero bg-[url('/images/hero-bg-2.png')] bg-cover bg-left">
-        <div className="h-full flex flex-col sm:flex-row justify-around items-center gap-12 px-4">
-          <div className="flex flex-col max-w-2xl">
+        <div className="h-full flex flex-col sm:flex-row justify-around items-center gap-12 px-20">
+          <div className="flex flex-col max-w-2xl text-center lg:text-left">
             <h1 className="hero-text">Fortify your Product</h1>
             <h2 className="hero-subtext">
               Protect against costly real-world failures with AI-Agents for
               Hardware Verification.
             </h2>
+            <Link
+              href="/signin"
+              className="mt-4 bg-white text-gray-900 hover:bg-gray-100 transition-colors px-4 py-2 rounded-md font-medium w-min whitespace-nowrap"
+            >
+              Schedule a Demo
+            </Link>
           </div>
-          <div className="w-full max-w-2xl">
+          <div className="w-full max-w-2xl sm:mt-30">
             <LandingFeature />
           </div>
         </div>

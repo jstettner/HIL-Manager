@@ -254,10 +254,10 @@
 }
 
 .hero-text {
-  /* font-family: var(--font-dotgothic16); */
   font-family: var(--font-geist);
   font-size: 4rem;
   font-weight: 500;
+  line-height: 1.2;
 }
 
 .hero-subtext {
