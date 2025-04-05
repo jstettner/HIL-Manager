@@ -91,6 +91,17 @@ export default function DashboardPage() {
           </div>
         </div>
       </div>
+      <div className="min-h-80 bg-[url('/images/banner-med-grad.png')] bg-cover bg-left flex items-center justify-center">
+        <Link
+          href="/signin"
+          className="mt-4 bg-white/50 text-gray-900 hover:bg-gray-100 transition-colors px-4 py-2 rounded-md font-medium text-4xl w-min whitespace-nowrap"
+        >
+          Schedule a Demo
+        </Link>
+      </div>
+      <footer className="w-full py-6 text-center text-zinc-400 text-sm">
+        © 2025 Helium AI. All rights reserved.
+      </footer>
     </div>
   );
 }
