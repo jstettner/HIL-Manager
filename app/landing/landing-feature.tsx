@@ -72,7 +72,7 @@ export function LandingFeature() {
       <div className="h-4 w-0.5 bg-stone-700/60"></div>
       <div className="w-full rounded-lg overflow-hidden bg-stone-100 backdrop-blur-sm shadow-2xl border border-gray-700 p-4">
         <div className="grid lg:grid-cols-3 auto-rows-min gap-2">
-          <div className="flex flex-col gap-1 border-r border-gray-300 pr-2">
+          <div className="flex flex-col gap-1 border-b lg:border-b-0 lg:border-r border-gray-300 pr-2">
             <span className="font-semibold text-gray-900 whitespace-nowrap flex flex-row items-center gap-2">
               <Text className="w-5 h-5" />
               Auto-Summary
@@ -82,7 +82,7 @@ export function LandingFeature() {
               throttle or braking.
             </span>
           </div>
-          <div className="flex flex-col gap-1 border-r border-gray-300 pr-2">
+          <div className="flex flex-col gap-1 border-b lg:border-b-0 lg:border-r border-gray-300 pr-2">
             <span className="font-semibold text-gray-900 whitespace-nowrap flex flex-row items-center gap-2">
               <ShieldCheck className="w-5 h-5" />
               Impacts
