@@ -17,12 +17,12 @@ export default function DashboardPage() {
             </h2>
             <Link
               href="/signin"
-              className="mt-4 bg-white text-gray-900 hover:bg-gray-100 transition-colors px-4 py-2 rounded-md font-medium w-min whitespace-nowrap"
+              className="mt-4 bg-[#4494FD] text-white hover:bg-gray-100 transition-colors px-4 py-2 rounded-md font-medium w-min whitespace-nowrap"
             >
               Schedule a Demo
             </Link>
           </div>
-          <div className="w-full max-w-5xl sm:mt-50">
+          <div className="w-full max-w-5xl sm:mt-40">
             <FeatureWrapper>
               <LandingFeature />
             </FeatureWrapper>

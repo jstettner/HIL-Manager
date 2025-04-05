@@ -23,7 +23,7 @@ export function FeatureWrapper({ children }: FeatureWrapperProps) {
   }, [hasScrolled]);
 
   return (
-    <div className={`transition-opacity duration-500 ${hasScrolled ? 'opacity-100' : 'opacity-40'}`}>
+    <div className={`transition-opacity duration-500 ${hasScrolled ? 'opacity-80' : 'opacity-40'}`}>
       {children}
     </div>
   );
