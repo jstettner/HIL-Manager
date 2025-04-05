@@ -1,6 +1,7 @@
 // import { CodePreview } from "@/app/landing/code-preview";
 import { LandingFeature } from "./landing-feature";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function DashboardPage() {
   return (
@@ -25,12 +26,42 @@ export default function DashboardPage() {
           </div>
         </div>
       </div>
-      <div className="min-h-[90vh] flex flex-1 flex-col gap-5 px-4 pt-7 pb-10 w-full">
-        <div className="grid auto-rows-min gap-7 md:grid-cols-3 h-min-content">
-          <div className="rounded-xl h-full bg-muted-foreground"></div>
-          <div className="rounded-xl h-full bg-muted-foreground"></div>
-          <div className="rounded-xl h-full bg-muted-foreground"></div>
+      <div className="min-h-80 flex flex-1 flex-col gap-5 w-full px-15 sm:px-40 justify-center items-center">
+        <div className="h-full my-15 grid auto-rows-min gap-15 lg:gap-7 lg:grid-cols-3">
+          <div className="text-center max-w-sm">
+            <h2 className="text-4xl mb-2">Adaptive</h2>
+            <p className="text-gray-400 text-lg">
+              We analyze your system requirements, design, and implementation to
+              create comprehensive test plans on a change-by-change basis.
+            </p>
+          </div>
+
+          <div className="text-center max-w-sm">
+            <h2 className="text-4xl mb-2">Thorough</h2>
+            <p className="text-gray-400 text-lg">
+              We'll perform both regression testing and new feature validation
+              to ensure your system is working as expected.
+            </p>
+          </div>
+
+          <div className="text-center max-w-sm">
+            <h2 className="text-4xl mb-2">Insightful</h2>
+            <p className="text-gray-400 text-lg">
+              We'll provide data-driven insights to help you understand the
+              impact of your changes and generate verification reports for
+              compliance.
+            </p>
+          </div>
         </div>
+      </div>
+      <div className="min-h-[90vh] bg-[url('/images/landing-section-2.png')] bg-cover bg-left flex flex-1 flex-col justify-center gap-5 w-full items-center">
+        <Image
+          src="/images/envs-screenshot.png"
+          alt="Environment Management"
+          width={1000}
+          height={1000}
+          className="w-full max-w-9/10 lg:max-w-3/4 rounded-lg"
+        />
       </div>
     </div>
   );

@@ -6,7 +6,7 @@ import Image from "next/image";
 
 export function NavigationMenuDemo() {
   return (
-    <nav className="fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-6xl bg-gray-800/30 backdrop-blur-sm rounded-md px-3 py-3 flex items-center justify-between">
+    <nav className="fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-6xl bg-gray-800/30 backdrop-blur-sm rounded-md px-3 py-3 flex items-center justify-between z-50">
       <div className="flex items-center gap-2">
         <Image
           src="/logo.svg"
