@@ -1,5 +1,6 @@
 // import { CodePreview } from "@/app/landing/code-preview";
 import { LandingFeature } from "./landing-feature";
+import { FeatureWrapper } from "./feature-wrapper";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -8,7 +9,7 @@ export default function DashboardPage() {
     <div className="flex flex-col bg-zinc-900">
       <div className="min-h-[90vh] w-full hero bg-[url('/images/hero-bg-2.png')] bg-cover bg-left pb-10">
         <div className="h-full flex flex-col justify-around items-center gap-12 px-15 sm:px-20">
-          <div className="flex flex-col max-w-2xl items-center text-center mt-50 sm:mt-75">
+          <div className="flex flex-col max-w-2xl items-center text-center mt-[40vh]">
             <h1 className="hero-text">Fortify your Product</h1>
             <h2 className="hero-subtext">
               Protect against costly real-world failures with AI-Agents for
@@ -21,8 +22,10 @@ export default function DashboardPage() {
               Schedule a Demo
             </Link>
           </div>
-          <div className="w-full max-w-4xl sm:mt-30">
-            <LandingFeature />
+          <div className="w-full max-w-5xl sm:mt-50">
+            <FeatureWrapper>
+              <LandingFeature />
+            </FeatureWrapper>
           </div>
         </div>
       </div>
