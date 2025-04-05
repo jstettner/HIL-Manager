@@ -60,7 +60,7 @@ export default function DashboardPage() {
           alt="Environment Management"
           width={1000}
           height={1000}
-          className="w-full max-w-9/10 lg:max-w-3/4 rounded-lg"
+          className="w-full max-w-9/10 xl:max-w-3/4 rounded-lg"
         />
       </div>
       <div className="min-h-80 flex flex-1 flex-col gap-5 w-full px-15 sm:px-40 justify-center items-center">
