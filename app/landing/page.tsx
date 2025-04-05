@@ -1,4 +1,5 @@
-import { CodePreview } from "@/app/landing/code-preview";
+// import { CodePreview } from "@/app/landing/code-preview";
+import { LandingFeature } from "./landing-feature";
 
 export default function DashboardPage() {
   return (
@@ -13,7 +14,7 @@ export default function DashboardPage() {
             </h2>
           </div>
           <div className="w-full max-w-2xl">
-            <CodePreview />
+            <LandingFeature />
           </div>
         </div>
       </div>
