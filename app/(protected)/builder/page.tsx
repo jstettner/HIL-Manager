@@ -1,5 +1,5 @@
 import { SquareDashedMousePointer } from "lucide-react";
-import { TestbedCanvas } from "@/app/builder/testbed-canvas";
+import { TestbedCanvas } from "@/app/(protected)/builder/testbed-canvas";
 
 export default function TestbedBuilderPage() {
   return (

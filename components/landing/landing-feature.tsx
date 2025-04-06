@@ -136,53 +136,51 @@ export function LandingFeature() {
           ))}
         </div>
       </div>
-      <div className="mt-4 px-12 w-full">
-        <div className="w-full px-12 lg:px-0 flex flex-col items-center bg-gray-600/30 pt-4 pb-2 rounded-lg backdrop-blur-sm">
+      <div className="mt-4 w-full">
+        <div className="w-full relative flex flex-row items-center justify-between bg-gray-600/30 pt-4 pb-2 rounded-[60px] backdrop-blur-sm">
           {/* Progress bar with circles */}
-          <div className="relative w-full max-w-3xl">
-            {/* Progress bar line */}
-            <div className="mx-9 absolute top-5 left-0 right-0 h-[2px] bg-gray-100/60 z-0"></div>
+          {/* Progress bar line */}
+          <div className="mx-20 absolute top-9 left-0 right-0 h-[2px] bg-gray-100/60 z-0"></div>
 
-            {/* Circles with labels */}
-            <div className="flex justify-between relative">
-              {/* First circle - Done */}
-              <div className="flex flex-col items-center">
-                <div className="w-10 h-10 rounded-full bg-green-500 text-white flex items-center justify-center z-10">
-                  <CheckCircle className="w-6 h-6" />
-                </div>
-                <div className="text-center mt-2">
-                  <span className="text-sm font-medium text-white block">
-                    Detect Changes
-                  </span>
-                </div>
+          {/* Circles with labels */}
+          <div className="px-9 w-full flex justify-between relative">
+            {/* First circle - Done */}
+            <div className="flex flex-col items-center">
+              <div className="w-10 h-10 rounded-full bg-green-500 text-white flex items-center justify-center z-10">
+                <CheckCircle className="w-6 h-6" />
               </div>
-
-              {/* Second circle - Done */}
-              <div className="flex flex-col items-center">
-                <div className="w-10 h-10 rounded-full bg-green-500 text-white flex items-center justify-center z-10">
-                  <CheckCircle className="w-6 h-6" />
-                </div>
-                <div className="text-center mt-2">
-                  <span className="text-sm font-medium text-white block">
-                    Assess and Dispatch Tests
-                  </span>
-                </div>
+              <div className="text-center mt-2">
+                <span className="text-sm font-medium text-white block">
+                  Detect Changes
+                </span>
               </div>
+            </div>
 
-              {/* Third circle - In Progress with animation */}
-              <div className="flex flex-col items-center">
-                <div className="relative">
-                  <div className="w-10 h-10 rounded-full bg-blue-500 text-white flex items-center justify-center z-10">
-                    <Circle className="w-6 h-6" />
-                  </div>
-                  {/* Radiating animation */}
-                  <div className="absolute top-0 left-0 w-10 h-10 rounded-full bg-blue-300 opacity-70 animate-ping"></div>
+            {/* Second circle - Done */}
+            <div className="flex flex-col items-center">
+              <div className="w-10 h-10 rounded-full bg-green-500 text-white flex items-center justify-center z-10">
+                <CheckCircle className="w-6 h-6" />
+              </div>
+              <div className="text-center mt-2">
+                <span className="text-sm font-medium text-white block">
+                  Assess and Dispatch Tests
+                </span>
+              </div>
+            </div>
+
+            {/* Third circle - In Progress with animation */}
+            <div className="flex flex-col items-center">
+              <div className="relative">
+                <div className="w-10 h-10 rounded-full bg-blue-500 text-white flex items-center justify-center z-10">
+                  <Circle className="w-6 h-6" />
                 </div>
-                <div className="text-center mt-2">
-                  <span className="text-sm font-medium text-white block">
-                    Compile Results
-                  </span>
-                </div>
+                {/* Radiating animation */}
+                <div className="absolute top-0 left-0 w-10 h-10 rounded-full bg-blue-300 opacity-70 animate-ping"></div>
+              </div>
+              <div className="text-center mt-2">
+                <span className="text-sm font-medium text-white block">
+                  Compile Results
+                </span>
               </div>
             </div>
           </div>

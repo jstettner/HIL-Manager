@@ -1,5 +1,5 @@
 import { GalleryVerticalEnd } from "lucide-react";
-import { TestbedsGrid } from "@/components/testbeds/testbeds-grid";
+import { TestbedsGrid } from "@/app/(protected)/testbeds/testbeds-grid";
 
 export default function TestbedsPage() {
   return (

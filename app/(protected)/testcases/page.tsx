@@ -1,6 +1,6 @@
 import { Library } from "lucide-react";
 import { TipsFooter } from "@/components/ui/tips-footer";
-import { TestcasesTable } from "@/components/testcases/testcases-table";
+import { TestcasesTable } from "@/app/(protected)/testcases/testcases-table";
 
 export default function TestcasesPage() {
   return (
