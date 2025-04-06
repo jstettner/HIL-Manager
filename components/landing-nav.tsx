@@ -7,7 +7,7 @@ import Image from "next/image";
 export function NavigationMenuDemo() {
   return (
     <nav className="fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-6xl bg-gray-800/30 backdrop-blur-sm rounded-md px-3 py-3 flex items-center justify-between z-50">
-      <div className="flex items-center gap-2">
+      <Link href="/" className="flex items-center gap-2">
         <Image
           src="/logo.svg"
           alt="Halidom logo"
@@ -16,7 +16,7 @@ export function NavigationMenuDemo() {
           className="brightness-0 invert" // This makes the SVG white
         />
         <span className="text-white text-xl font-semibold">Halidom</span>
-      </div>
+      </Link>
 
       <div className="flex items-center gap-4">
         <Link
@@ -26,7 +26,7 @@ export function NavigationMenuDemo() {
           Docs
         </Link>
         <Link
-          href="/contact"
+          href="mailto:founders@halidom.ai"
           className="text-gray-200 hover:text-white transition-colors px-4 py-2 rounded-md hover:bg-gray-700/50"
         >
           Contact

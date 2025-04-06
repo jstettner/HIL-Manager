@@ -18,6 +18,7 @@ export function FeatureWrapper({ children }: FeatureWrapperProps) {
       }
     };
 
+    handleScroll();
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, [hasScrolled]);
