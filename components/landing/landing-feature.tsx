@@ -49,8 +49,8 @@ export function LandingFeature() {
           <h1 className="text-slate-800 text-4xl font-semibold mb-2">
             Improve Collision Detection #5991
           </h1>
-          <div className="flex flex-col lg:flex-row items-center gap-2">
-            <div className="w-full lg:w-auto">
+          <div className="flex flex-row items-center gap-2">
+            <div className="w-auto">
               <div className="w-min bg-green-600 text-white px-3 py-1 rounded-full flex items-center gap-2">
                 <GitPullRequestArrow className="w-5 h-5" />
                 <span>Open</span>
@@ -110,7 +110,7 @@ export function LandingFeature() {
           <BookOpenCheck className="w-5 h-5" />
           Suggested Test Plan
         </span>
-        <div className="grid lg:grid-cols-2 xl:grid-cols-3 auto-rows-min gap-2">
+        <div className="grid lg:grid-cols-3 auto-rows-min gap-2">
           {hilTestCases.map((testCase) => (
             <div key={testCase} className="flex flex-col gap-1">
               <span className="text-gray-700">{testCase}</span>
@@ -136,8 +136,8 @@ export function LandingFeature() {
           ))}
         </div>
       </div>
-      <div className="mt-8 sm:px-8 w-full">
-        <div className="w-full flex flex-col items-center">
+      <div className="mt-4 px-12 w-full">
+        <div className="w-full px-12 lg:px-0 flex flex-col items-center bg-gray-600/30 pt-4 pb-2 rounded-lg backdrop-blur-sm">
           {/* Progress bar with circles */}
           <div className="relative w-full max-w-3xl">
             {/* Progress bar line */}
@@ -151,11 +151,8 @@ export function LandingFeature() {
                   <CheckCircle className="w-6 h-6" />
                 </div>
                 <div className="text-center mt-2">
-                  <span className="text-sm font-medium text-white sm:text-gray-700 block">
+                  <span className="text-sm font-medium text-white block">
                     Detect Changes
-                  </span>
-                  <span className="text-xs hidden sm:block text-green-600 block">
-                    Completed
                   </span>
                 </div>
               </div>
@@ -166,11 +163,8 @@ export function LandingFeature() {
                   <CheckCircle className="w-6 h-6" />
                 </div>
                 <div className="text-center mt-2">
-                  <span className="text-sm font-medium text-white sm:text-gray-700 block">
+                  <span className="text-sm font-medium text-white block">
                     Assess and Dispatch Tests
-                  </span>
-                  <span className="text-xs hidden sm:block text-green-600 block">
-                    Completed
                   </span>
                 </div>
               </div>
@@ -185,11 +179,8 @@ export function LandingFeature() {
                   <div className="absolute top-0 left-0 w-10 h-10 rounded-full bg-blue-300 opacity-70 animate-ping"></div>
                 </div>
                 <div className="text-center mt-2">
-                  <span className="text-sm font-medium text-white sm:text-gray-700 block">
+                  <span className="text-sm font-medium text-white block">
                     Compile Results
-                  </span>
-                  <span className="text-xs hidden sm:block text-blue-600 block">
-                    In Progress
                   </span>
                 </div>
               </div>
