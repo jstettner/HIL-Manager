@@ -15,7 +15,10 @@ export default function Home() {
               Hardware Verification.
             </h2>
             <Link
-              href={process.env.BOOK_DEMO_URL || "mailto:founders@halidom.ai?subject=Demo"}
+              href={
+                process.env.BOOK_DEMO_URL ||
+                "mailto:founders@halidom.ai?subject=Demo"
+              }
               className="mt-4 bg-[#4494FD] text-white hover:bg-gray-600 transition-colors px-4 py-2 rounded-md font-medium w-min whitespace-nowrap"
             >
               Schedule a Demo
@@ -80,7 +83,7 @@ export default function Home() {
             </p>
           </div>
         </div>
-        <div className="w-1/2 border-b border-gray-500 my-20"/>
+        <div className="w-1/2 border-b border-gray-500 my-20" />
         <div className="h-full mb-30">
           <div className="text-center max-w-xl">
             <h2 className="text-4xl mb-2">Backed By</h2>
@@ -96,7 +99,10 @@ export default function Home() {
       </div>
       <div className="min-h-80 bg-[url('/images/banner-med-grad.png')] bg-cover bg-left flex items-center justify-center">
         <Link
-          href={process.env.BOOK_DEMO_URL || "mailto:founders@halidom.ai?subject=Demo"}
+          href={
+            process.env.BOOK_DEMO_URL ||
+            "mailto:founders@halidom.ai?subject=Demo"
+          }
           className="mt-4 bg-white/50 text-gray-900 hover:bg-gray-100 transition-colors px-4 py-2 rounded-md font-medium text-4xl w-min whitespace-nowrap"
         >
           Schedule a Demo

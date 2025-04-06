@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { ReactNode, useEffect, useState } from "react";
 
@@ -19,12 +19,14 @@ export function FeatureWrapper({ children }: FeatureWrapperProps) {
     };
 
     handleScroll();
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, [hasScrolled]);
 
   return (
-    <div className={`transition-opacity duration-500 ${hasScrolled ? 'opacity-80' : 'opacity-40'}`}>
+    <div
+      className={`transition-opacity duration-500 ${hasScrolled ? "opacity-80" : "opacity-40"}`}
+    >
       {children}
     </div>
   );

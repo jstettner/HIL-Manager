@@ -69,7 +69,16 @@ function SidebarProvider({
   onOpenChange?: (open: boolean) => void;
 }) {
   const pathname = usePathname();
-  const privateRoutes = ["/builder", "/changesets", "/dashboard", "/lab", "/settings", "/support", "/testbeds", "/testcases"];
+  const privateRoutes = [
+    "/builder",
+    "/changesets",
+    "/dashboard",
+    "/lab",
+    "/settings",
+    "/support",
+    "/testbeds",
+    "/testcases",
+  ];
   const isVisible = privateRoutes.includes(pathname);
   const isMobile = useIsMobile();
   const [openMobile, setOpenMobile] = React.useState(false);
