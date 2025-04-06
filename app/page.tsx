@@ -32,7 +32,18 @@ export default function Home() {
         </div>
       </div>
       <div className="min-h-80 flex flex-1 flex-col gap-5 w-full px-15 sm:px-40 justify-center items-center">
-        <div className="h-full my-30 grid auto-rows-min gap-30 lg:gap-7 lg:grid-cols-3">
+        <div className="h-full mt-20">
+          <div className="text-center max-w-3xl">
+            <h2 className="text-4xl">HIL and SIL</h2>
+            <p className="text-gray-300 text-lg">
+              Our framework is designed for both hardware-in-the-loop
+              (HIL) and software-in-the-loop (SIL) environments–reducing the friction of setting up and running tests.
+              Tests are written to execute remotely and intelligently in both environments.
+            </p>
+          </div>
+        </div>
+        <div className="w-1/2 border-b border-gray-500 my-20" />
+        <div className="h-full mb-30 grid auto-rows-min gap-30 lg:gap-7 lg:grid-cols-3">
           <div className="text-center max-w-sm">
             <h2 className="text-4xl mb-2">Adaptive</h2>
             <p className="text-gray-300 text-lg">

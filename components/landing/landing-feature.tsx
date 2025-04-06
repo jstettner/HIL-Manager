@@ -44,7 +44,7 @@ const hilTestBeds = [
 export function LandingFeature() {
   return (
     <div className="w-full flex flex-col items-center">
-      <div className="w-full rounded-lg overflow-hidden bg-stone-100 backdrop-blur-sm shadow-2xl border border-gray-700 p-4">
+      <div className="w-full rounded-lg overflow-hidden bg-stone-100/90 backdrop-blur-sm shadow-2xl border border-gray-700 p-4">
         <div className="flex flex-col gap-2">
           <h1 className="text-slate-800 text-4xl font-semibold mb-2">
             Improve Collision Detection #5991
@@ -57,7 +57,7 @@ export function LandingFeature() {
               </div>
             </div>
             <span className="text-gray-700">
-              jstettner wants to merge 1 commit into
+              hford wants to merge 1 commit into
               <span className="bg-blue-500 text-white px-2 py-0.5 rounded-md mx-1 whitespace-nowrap">
                 main
               </span>
@@ -70,7 +70,7 @@ export function LandingFeature() {
         </div>
       </div>
       <div className="h-4 w-0.5 bg-stone-700/60"></div>
-      <div className="w-full rounded-lg overflow-hidden bg-stone-100 backdrop-blur-sm shadow-2xl border border-gray-700 p-4">
+      <div className="w-full rounded-lg overflow-hidden bg-stone-100/90 backdrop-blur-sm shadow-2xl border border-gray-700 p-4">
         <div className="grid lg:grid-cols-3 auto-rows-min gap-2">
           <div className="flex flex-col gap-1 border-b lg:border-b-0 lg:border-r border-gray-300 pr-2">
             <span className="font-semibold text-gray-900 whitespace-nowrap flex flex-row items-center gap-2">
@@ -104,7 +104,7 @@ export function LandingFeature() {
         </div>
       </div>
       <div className="h-4 w-0.5 bg-stone-700/60"></div>
-      <div className="w-full rounded-lg max-h-[170px] overflow-hidden bg-stone-100 backdrop-blur-sm shadow-2xl border border-gray-700 p-4 flex flex-col relative">
+      <div className="w-full rounded-lg max-h-[170px] overflow-hidden bg-stone-100/90 backdrop-blur-sm shadow-2xl border border-gray-700 p-4 flex flex-col relative">
         <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-stone-100 to-transparent pointer-events-none"></div>
         <span className="font-semibold text-gray-900 whitespace-nowrap flex flex-row items-center gap-2 pb-1">
           <BookOpenCheck className="w-5 h-5" />
@@ -119,7 +119,7 @@ export function LandingFeature() {
         </div>
       </div>
       <div className="h-4 w-0.5 bg-stone-700/60"></div>
-      <div className="w-full rounded-lg max-h-[170px] overflow-hidden bg-stone-100 backdrop-blur-sm shadow-2xl border border-gray-700 p-4 flex flex-col relative">
+      <div className="w-full rounded-lg max-h-[170px] overflow-hidden bg-stone-100/90 backdrop-blur-sm shadow-2xl border border-gray-700 p-4 flex flex-col relative">
         <span className="font-semibold text-gray-900 whitespace-nowrap flex flex-row items-center gap-2 pb-1">
           <Container className="w-5 h-5" />
           Your Compatible Environments
