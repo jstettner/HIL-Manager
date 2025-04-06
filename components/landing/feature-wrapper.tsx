@@ -25,7 +25,7 @@ export function FeatureWrapper({ children }: FeatureWrapperProps) {
 
   return (
     <div
-      className={`transition-opacity duration-500 ${hasScrolled ? "opacity-80" : "opacity-40"}`}
+      className={`transition-opacity duration-500 ${hasScrolled ? "opacity-90" : "opacity-40"}`}
     >
       {children}
     </div>
