@@ -38,7 +38,7 @@ export default function Home() {
             <p className="text-gray-300 text-lg">
               Our framework is designed for both hardware-in-the-loop
               (HIL) and software-in-the-loop (SIL) environments–reducing the friction of setting up and running tests.
-              Tests are written to execute remotely and intelligently in both environments.
+              Tests are written to execute remotely and intelligently in all environments.
             </p>
           </div>
         </div>
