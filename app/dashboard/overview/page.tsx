@@ -1,7 +1,7 @@
-import { TestcaseCountChart } from "@/app/(protected)/dashboard/testcase-count";
-import { TestcasePassFailChart } from "@/app/(protected)/dashboard/testcase-pass-fail";
-import { TestcaseFailureOriginChart } from "@/app/(protected)/dashboard/testcase-failure-origin";
-import { TestcasesChangesetsChart } from "@/app/(protected)/dashboard/testcase-changesets";
+import { TestcaseCountChart } from "@/app/dashboard/overview/testcase-count";
+import { TestcasePassFailChart } from "@/app/dashboard/overview/testcase-pass-fail";
+import { TestcaseFailureOriginChart } from "@/app/dashboard/overview/testcase-failure-origin";
+import { TestcasesChangesetsChart } from "@/app/dashboard/overview/testcase-changesets";
 import { LayoutDashboard } from "lucide-react";
 import { AnnouncementsSection } from "@/components/announcements/announcements-section";
 

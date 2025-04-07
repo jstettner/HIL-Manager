@@ -33,18 +33,18 @@ const data = {
   },
   navMain: [
     {
-      title: "Overview",
+      title: "Dashboard",
       url: "#",
       icon: LayoutDashboard,
       isActive: true,
       items: [
         {
-          title: "Dashboard",
-          url: "/dashboard",
+          title: "Overview",
+          url: "/dashboard/overview",
         },
         {
           title: "Changesets",
-          url: "/changesets",
+          url: "/dashboard/changesets",
         },
       ],
     },
@@ -56,11 +56,11 @@ const data = {
       items: [
         {
           title: "Library",
-          url: "/testcases",
+          url: "/dashboard/testcases",
         },
         {
           title: "Lab",
-          url: "/lab",
+          url: "/dashboard/lab",
         },
       ],
     },
@@ -72,11 +72,11 @@ const data = {
       items: [
         {
           title: "Armory",
-          url: "/testbeds",
+          url: "/dashboard/testbeds",
         },
         {
           title: "Builder",
-          url: "/builder",
+          url: "/dashboard/builder",
         },
       ],
     },

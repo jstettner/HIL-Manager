@@ -32,7 +32,7 @@ export function NavigationMenuDemo() {
           Contact
         </Link>
         <Link
-          href="/signin"
+          href="/sign-in"
           className="bg-white text-gray-900 hover:bg-gray-100 transition-colors px-4 py-2 rounded-md font-medium"
         >
           Sign In

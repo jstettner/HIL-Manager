@@ -11,13 +11,13 @@ import {
 } from "@/components/ui/breadcrumb";
 
 const routeMap: Record<string, { title: string; parent?: string }> = {
-  "/": { title: "Overview" },
-  "/dashboard": { title: "Dashboard", parent: "Overview" },
-  "/changesets": { title: "Changesets", parent: "Overview" },
-  "/testcases": { title: "Library", parent: "Testcases" },
-  "/lab": { title: "Lab", parent: "Testcases" },
-  "/testbeds": { title: "Armory", parent: "Environments " },
-  "/builder": { title: "Builder", parent: "Environments" },
+  "/dashboard": { title: "Overview" },
+  "/dashboard/overview": { title: "Overview", parent: "Dashboard" },
+  "/dashboard/changesets": { title: "Changesets", parent: "Dashboard" },
+  "/dashboard/testcases": { title: "Library", parent: "Testcases" },
+  "/dashboard/lab": { title: "Lab", parent: "Testcases" },
+  "/dashboard/testbeds": { title: "Armory", parent: "Environments " },
+  "/dashboard/builder": { title: "Builder", parent: "Environments" },
 };
 
 export function BreadcrumbNav() {

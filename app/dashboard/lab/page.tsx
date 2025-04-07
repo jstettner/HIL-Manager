@@ -1,5 +1,5 @@
 import { FlaskConical } from "lucide-react";
-import { TestcaseCanvas } from "@/app/(protected)/lab/testcase-canvas";
+import { TestcaseCanvas } from "@/app/dashboard/lab/testcase-canvas";
 
 export default function TestcaseLabPage() {
   return (

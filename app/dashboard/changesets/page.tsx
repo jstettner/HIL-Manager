@@ -1,7 +1,7 @@
 import { GitPullRequest } from "lucide-react";
 import { TipsFooter } from "@/components/ui/tips-footer";
 import { changesets } from "@/data/changeset-data";
-import { ChangesetsTable } from "@/app/(protected)/changesets/changesets-table";
+import { ChangesetsTable } from "@/app/dashboard/changesets/changesets-table";
 
 import {
   Pagination,

@@ -24,6 +24,7 @@
     "@radix-ui/react-slot": "^1.1.2",
     "@radix-ui/react-switch": "^1.1.3",
     "@radix-ui/react-tooltip": "^1.1.8",
+    "@supabase/ssr": "^0.6.1",
     "@types/mdx": "^2.0.13",
     "@wooorm/starry-night": "^3.7.0",
     "@xyflow/react": "^12.4.4",

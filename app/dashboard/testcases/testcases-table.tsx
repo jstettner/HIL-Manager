@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { Skeleton } from "@/components/ui/skeleton";
-import { TestCaseDialog } from "@/app/(protected)/testcases/test-case-dialog";
+import { TestCaseDialog } from "@/app/dashboard/testcases/test-case-dialog";
 import {
   Table,
   TableBody,
