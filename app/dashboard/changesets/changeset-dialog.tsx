@@ -37,7 +37,7 @@ export function ChangesetDialog({
     } else {
       params.set("changeset", changeset.id);
     }
-    router.push(`/changesets?${params.toString()}`);
+    router.push(`/dashboard/changesets?${params.toString()}`);
   };
   const getTestStatus = () => {
     const hasFailedTests = changeset.bespoke_tests.some(
@@ -79,7 +79,7 @@ export function ChangesetDialog({
               );
               params.set("page", page.toString());
               params.set("changeset", changeset.id);
-              router.push(`/changesets?${params.toString()}`);
+              router.push(`/dashboard/changesets?${params.toString()}`);
             }
           }}
         >

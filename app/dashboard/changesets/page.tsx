@@ -39,7 +39,10 @@ export default async function ChangesetsPage({
     for (let i = 1; i <= totalPages; i++) {
       items.push(
         <PaginationItem key={i}>
-          <PaginationLink href={`/changesets?page=${i}`} isActive={page === i}>
+          <PaginationLink
+            href={`/dashboard/changesets?page=${i}`}
+            isActive={page === i}
+          >
             {i}
           </PaginationLink>
         </PaginationItem>,
@@ -68,7 +71,7 @@ export default async function ChangesetsPage({
           <PaginationContent>
             <PaginationItem>
               <PaginationPrevious
-                href={page > 1 ? `/changesets?page=${page - 1}` : "#"}
+                href={page > 1 ? `/dashboard/changesets?page=${page - 1}` : "#"}
               />
             </PaginationItem>
 
@@ -76,7 +79,11 @@ export default async function ChangesetsPage({
 
             <PaginationItem>
               <PaginationNext
-                href={page < totalPages ? `/changesets?page=${page + 1}` : "#"}
+                href={
+                  page < totalPages
+                    ? `/dashboard/changesets?page=${page + 1}`
+                    : "#"
+                }
               />
             </PaginationItem>
           </PaginationContent>

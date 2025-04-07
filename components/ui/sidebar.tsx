@@ -69,7 +69,7 @@ function SidebarProvider({
   onOpenChange?: (open: boolean) => void;
 }) {
   const pathname = usePathname();
-  const isVisible = pathname.includes('/dashboard');
+  const isVisible = pathname.startsWith("/dashboard");
   const isMobile = useIsMobile();
   const [openMobile, setOpenMobile] = React.useState(false);
 

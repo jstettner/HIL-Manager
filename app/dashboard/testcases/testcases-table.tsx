@@ -57,7 +57,10 @@ export function TestcasesTable() {
     for (let i = 1; i <= totalPages; i++) {
       items.push(
         <PaginationItem key={i}>
-          <PaginationLink href={`/testcases?page=${i}`} isActive={page === i}>
+          <PaginationLink
+            href={`/dashboard/testcases?page=${i}`}
+            isActive={page === i}
+          >
             {i}
           </PaginationLink>
         </PaginationItem>,
@@ -106,7 +109,7 @@ export function TestcasesTable() {
         <PaginationContent>
           <PaginationItem>
             <PaginationPrevious
-              href={page > 1 ? `/testcases?page=${page - 1}` : "#"}
+              href={page > 1 ? `/dashboard/testcases?page=${page - 1}` : "#"}
             />
           </PaginationItem>
 
@@ -114,7 +117,11 @@ export function TestcasesTable() {
 
           <PaginationItem>
             <PaginationNext
-              href={page < totalPages ? `/testcases?page=${page + 1}` : "#"}
+              href={
+                page < totalPages
+                  ? `/dashboard/testcases?page=${page + 1}`
+                  : "#"
+              }
             />
           </PaginationItem>
         </PaginationContent>
