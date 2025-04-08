@@ -22,8 +22,8 @@ const dotGothic16 = DotGothic16({
 });
 
 export const metadata: Metadata = {
-  title: "HalidomAI",
-  description: "Test",
+  title: "Halidom",
+  description: "Product Verification for the Modern Age.",
 };
 
 export default function RootLayout({

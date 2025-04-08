@@ -16,23 +16,26 @@ function getBackgroundImage(srcSet = "") {
 }
 
 export default function Home() {
-  const getBackgroundStyle = (src: string) => {
+  const getBackgroundStyle = (src: string, width: number, height: number, priority: boolean = false) => {
     const {
       props: { srcSet },
     } = getImageProps({
       alt: "Background Image",
-      width: 1920,
-      height: 1080,
+      width,
+      height,
       quality: 100,
+      priority,
+      blurDataURL: src,
+      placeholder: "blur",
       src,
     });
     const backgroundImage = getBackgroundImage(srcSet);
     return { backgroundImage };
   };
 
-  const bgStyle = getBackgroundStyle("/images/hero-bg-2.png");
-  const bgStyle2 = getBackgroundStyle("/images/landing-section-alt.png");
-  const bgStyle3 = getBackgroundStyle("/images/banner-med-grad.png");
+  const bgStyle = getBackgroundStyle("/images/hero-bg-2.png", 1920, 1080, true);
+  const bgStyle2 = getBackgroundStyle("/images/landing-section-alt.png", 1920, 1080, false);
+  const bgStyle3 = getBackgroundStyle("/images/banner-med-grad.png", 1920, 1080, false);
 
   return (
     <div className="flex flex-col bg-zinc-900">
