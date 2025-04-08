@@ -3,6 +3,7 @@ export interface TestCase {
   name: string;
   description: string;
   duration: number; // in seconds
+  lastRun: string | null;
   priority: "low" | "medium" | "high";
   compatibleTestbeds?: string[];
 }

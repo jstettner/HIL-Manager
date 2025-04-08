@@ -21,10 +21,6 @@ const testcaseNodeTypes = {
   input: InputNode,
 };
 
-async function fetchTestcaseFlows() {
-  return SAMPLE_FLOW_DATA;
-}
-
 export function TestcaseCanvas() {
   const {
     nodes,

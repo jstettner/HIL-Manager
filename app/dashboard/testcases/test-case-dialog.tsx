@@ -11,14 +11,7 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { TableRow, TableCell } from "@/components/ui/table";
 
-interface TestCase {
-  id: string;
-  name: string;
-  description: string;
-  lastRun: string;
-  duration: number;
-  compatibleTestbeds?: string[];
-}
+import { TestCase } from "@/types";
 
 interface TestCaseDialogRowProps {
   testCase: TestCase;
@@ -33,7 +26,9 @@ export function TestCaseDialogRow({ testCase }: TestCaseDialogRowProps) {
           {testCase.description}
         </TableCell>
         <TableCell className="p-3 text-muted-foreground">
-          {new Date(testCase.lastRun).toLocaleString()}
+          {testCase.lastRun
+            ? new Date(testCase.lastRun).toLocaleString()
+            : "Never Run"}
         </TableCell>
         <TableCell className="p-3 text-muted-foreground">
           {testCase.duration}s
@@ -65,7 +60,9 @@ export function TestCaseDialog({ testCase }: TestCaseDialogRowProps) {
             <div>
               <h4 className="text-sm font-medium">Last Run</h4>
               <p className="text-sm text-muted-foreground">
-                {new Date(testCase.lastRun).toLocaleString()}
+                {testCase.lastRun
+                  ? new Date(testCase.lastRun).toLocaleString()
+                  : "Never Run"}
               </p>
             </div>
             <div>

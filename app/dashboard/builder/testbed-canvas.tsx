@@ -12,10 +12,6 @@ import {
   testbedNodeTypes,
 } from "@/constants/testbed-nodes";
 
-async function fetchTestbedConfigurationFlows() {
-  return SAMPLE_FLOW_DATA;
-}
-
 export function TestbedCanvas() {
   const {
     nodes,

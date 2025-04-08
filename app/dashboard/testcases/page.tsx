@@ -1,6 +1,7 @@
 import { Library } from "lucide-react";
 import { TipsFooter } from "@/components/ui/tips-footer";
 import { TestcasesTable } from "@/app/dashboard/testcases/testcases-table";
+import { Suspense } from "react";
 
 export default function TestcasesPage() {
   return (
@@ -13,7 +14,9 @@ export default function TestcasesPage() {
         </div>
       </div>
 
-      <TestcasesTable />
+      <Suspense>
+        <TestcasesTable />
+      </Suspense>
 
       <TipsFooter />
     </div>

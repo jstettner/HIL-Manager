@@ -2,11 +2,44 @@ import { LandingFeature } from "@/components/landing/landing-feature";
 import { FeatureWrapper } from "@/components/landing/feature-wrapper";
 import Link from "next/link";
 import Image from "next/image";
+import { getImageProps } from "next/image";
+
+function getBackgroundImage(srcSet = "") {
+  const imageSet = srcSet
+    .split(", ")
+    .map((str) => {
+      const [url, dpi] = str.split(" ");
+      return `url("${url}") ${dpi}`;
+    })
+    .join(", ");
+  return `image-set(${imageSet})`;
+}
 
 export default function Home() {
+  const getBackgroundStyle = (src: string) => {
+    const {
+      props: { srcSet },
+    } = getImageProps({
+      alt: "Background Image",
+      width: 1920,
+      height: 1080,
+      quality: 100,
+      src,
+    });
+    const backgroundImage = getBackgroundImage(srcSet);
+    return { backgroundImage };
+  };
+
+  const bgStyle = getBackgroundStyle("/images/hero-bg-2.png");
+  const bgStyle2 = getBackgroundStyle("/images/landing-section-alt.png");
+  const bgStyle3 = getBackgroundStyle("/images/banner-med-grad.png");
+
   return (
     <div className="flex flex-col bg-zinc-900">
-      <div className="min-h-[90vh] w-full hero bg-[url('/images/hero-bg-2.png')] bg-cover bg-left pb-10">
+      <div
+        className="min-h-[90vh] w-full hero bg-cover bg-left pb-10"
+        style={bgStyle}
+      >
         <div className="h-full flex flex-col justify-around items-center gap-12 px-15 sm:px-20">
           <div className="flex flex-col max-w-2xl items-center text-center mt-[30vh] sm:mt-[40vh]">
             <h1 className="hero-text">Fortify your Product</h1>
@@ -56,22 +89,24 @@ export default function Home() {
           <div className="text-center max-w-sm">
             <h2 className="text-4xl mb-2">Thorough</h2>
             <p className="text-gray-300 text-lg">
-              We'll perform both regression testing and new feature validation
-              to ensure your system is working as expected.
+              We perform both regression testing and new feature validation to
+              ensure your system is working as expected.
             </p>
           </div>
 
           <div className="text-center max-w-sm">
             <h2 className="text-4xl mb-2">Insightful</h2>
             <p className="text-gray-300 text-lg">
-              We'll provide data-driven insights to help you understand the
-              impact of your changes and generate verification reports for
-              compliance.
+              We provide data-driven insights to help you understand the impact
+              of your changes and generate verification reports for compliance.
             </p>
           </div>
         </div>
       </div>
-      <div className="min-h-[90vh] bg-[url('/images/landing-section-alt.png')] bg-cover bg-left flex flex-1 flex-col justify-center gap-5 w-full items-center">
+      <div
+        className="min-h-[90vh] bg-cover bg-left flex flex-1 flex-col justify-center gap-5 w-full items-center"
+        style={bgStyle2}
+      >
         <Image
           src="/images/envs-screenshot.png"
           alt="Environment Management"
@@ -109,7 +144,10 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="min-h-80 bg-[url('/images/banner-med-grad.png')] bg-cover bg-left flex items-center justify-center">
+      <div
+        className="min-h-80 bg-cover bg-left flex items-center justify-center"
+        style={bgStyle3}
+      >
         <Link
           href={
             process.env.BOOK_DEMO_URL ||
