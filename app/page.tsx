@@ -47,7 +47,7 @@ export default function Home() {
           <div className="flex flex-col max-w-2xl items-center text-center mt-[30vh] sm:mt-[40vh]">
             <h1 className="hero-text">Catch Critical Failures<br/> Before they Happen.</h1>
             <h2 className="hero-subtext">
-              AI agents that connect to your hardware and test like your most experienced engineer - reducing days of testing to seconds.
+              AI agents that connect to your hardware and test like your most experienced engineers - reducing days of verification to seconds.
             </h2>
             <Link
               href={
@@ -85,7 +85,7 @@ export default function Home() {
           </div>
 
           <div className="text-center max-w-sm">
-            <h2 className="text-4xl mb-2">Comprehensive Validation</h2>
+            <h2 className="text-4xl mb-2">Comprehensive Verification</h2>
             <p className="text-gray-300 text-lg">
             From new features to regressions, Halidom verifies that your system behaves exactly as expected, every time.
 
