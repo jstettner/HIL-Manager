@@ -45,9 +45,10 @@ export default function Home() {
       >
         <div className="h-full flex flex-col justify-around items-center gap-12 px-15 sm:px-20">
           <div className="flex flex-col max-w-2xl items-center text-center mt-[30vh] sm:mt-[40vh]">
-            <h1 className="hero-text">Catch Critical Failures<br/> Before they Happen.</h1>
+            <h1 className="hero-text">Prevent Production Disasters</h1>
             <h2 className="hero-subtext">
-              AI agents that connect to your hardware and test like your most experienced engineers - reducing days of verification to seconds.
+            Protect against costly failures with AI Agents for firmware and hardware verification.
+
             </h2>
             <Link
               href={
@@ -69,9 +70,9 @@ export default function Home() {
       <div className="min-h-80 flex flex-1 flex-col gap-5 w-full px-15 sm:px-40 justify-center items-center">
         <div className="h-full mt-20">
           <div className="text-center max-w-3xl">
-            <h2 className="text-4xl"> One platform. Any test environment. </h2>
+            <h2 className="text-4xl"> One Platform. Any Test Environment. </h2>
             <p className="text-gray-300 text-lg">
-            Whether your team tests with physical hardware, simulations, or digital twins, Halidom helps you ship faster and catch issues earlier. We integrate diretly with your hardware-in-the-loop (HIL) and software-in-the-loop (SIL) environments, enabling frictionless test setup and execution for even the most complex systems.
+            Whether your team tests with physical hardware, simulations, or digital twins, Halidom helps you ship faster and catch issues earlier. We integrate directly with your hardware-in-the-loop (HIL) and software-in-the-loop (SIL) environments, enabling frictionless test setup and execution for even the most complex systems.
             </p>
           </div>
         </div>
@@ -85,7 +86,7 @@ export default function Home() {
           </div>
 
           <div className="text-center max-w-sm">
-            <h2 className="text-4xl mb-2">Comprehensive Verification</h2>
+            <h2 className="text-4xl mb-2">Comprehensive Verificationy</h2>
             <p className="text-gray-300 text-lg">
             From new features to regressions, Halidom verifies that your system behaves exactly as expected, every time.
 
@@ -117,12 +118,12 @@ export default function Home() {
       <div className="min-h-80 flex flex-1 flex-col gap-5 w-full px-15 sm:px-40 justify-center items-center">
         <div className="h-full mt-20">
           <div className="text-center max-w-xl">
-            <h2 className="text-4xl">AI native, built for the physical world.</h2>
+            <h2 className="text-4xl">AI Native, Built for the Physical World.</h2>
             <p className="text-gray-300 text-lg">
-              Halidom enables your physical systems to interface seamlessly with today's most advanced AI models, helping you ship faster, smarter and safer. We bridge the gap between bleeding-edge AI in the digital world with the messy challenges of shipping in the physical world.
+            Whether your team tests with physical hardware, simulations, or digital twins, Halidom helps you ship faster and catch issues earlier. We integrate directly with your hardware-in-the-loop (HIL) and software-in-the-loop (SIL) environments, enabling frictionless test setup and execution for even the most complex systems.
               <br />
               <br />
-              Our world-class engineering team has built and validated some of the world’s most complex physical systems — and now we’re building the platform we always wished we had.
+              Our world-class engineering team has built and validated some of the most complex physical systems on earth — and now we’re building the platform we always wished we had.
 
             </p>
           </div>
