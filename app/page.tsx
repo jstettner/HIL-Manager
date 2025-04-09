@@ -44,9 +44,9 @@ export default function Home() {
         style={bgStyle}
       >
         <div className="h-full flex flex-col justify-around items-center gap-12 px-15 sm:px-20">
-          <div className="flex flex-col max-w-2xl items-center text-center mt-[30vh] sm:mt-[40vh]">
+          <div className="flex flex-col  items-center text-center mt-[30vh] sm:mt-[40vh]">
             <h1 className="hero-text">Prevent Production Disasters</h1>
-            <h2 className="hero-subtext">
+            <h2 className="hero-subtext max-w-xl">
             Protect against costly failures with AI Agents for firmware and hardware verification.
 
             </h2>
