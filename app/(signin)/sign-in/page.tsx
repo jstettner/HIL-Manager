@@ -12,7 +12,7 @@ export default async function SignInPage({
   const params = await searchParams;
   return (
     <div className="w-full h-full bg-black">
-      <div className="h-full max-w-3/4 border-l border-r border-white bg-black mx-auto px-15 pt-30">
+      <div className="h-full sm:max-w-3/4 border-l border-r border-white bg-black mx-auto px-5 sm:px-15 pt-30">
         <form className="flex-1 flex flex-col min-w-64">
           <h1 className="text-4xl">Sign In</h1>
           <div className="flex flex-col gap-2 [&>input]:mb-3 mt-8">

@@ -86,14 +86,14 @@ export function SwivelText() {
   return (
     <div
       ref={containerRef}
-      className="inline-flex items-baseline text-6xl font-semibold"
+      className="inline-flex flex-wrap items-baseline text-3xl md:text-6xl font-semibold"
     >
       <span ref={staticTextRef} className="mr-4">
         Test
       </span>
       <div
         ref={changingTextRef}
-        className="relative inline-block h-[1.2em] w-[8em] overflow-hidden"
+        className="relative inline-block h-[1.2em] w-[5em] md:w-[8em] overflow-hidden"
       >
         <span ref={word1Ref} className="inline-block">
           Anything

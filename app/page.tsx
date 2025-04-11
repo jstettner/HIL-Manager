@@ -62,7 +62,7 @@ export default function Home() {
           <div className="flex flex-col  items-center text-center mt-[30vh] sm:mt-[40vh]">
             <h1 className="hero-text">Prevent Production Disasters</h1>
             <h2 className="hero-subtext max-w-xl">
-              Protect against costly failures with AI Agents for firmware and
+              Protect against costly failures with AI agents for firmware and
               hardware verification.
             </h2>
             <Link
@@ -106,7 +106,7 @@ export default function Home() {
             </h2>
             <p className="text-gray-300 text-lg">
               Our AI agents generate tailored test plans for every code change,
-              revealing issues even your most cautious engineers might miss.
+              revealing issues even your most diligent engineers might miss.
             </p>
           </div>
 

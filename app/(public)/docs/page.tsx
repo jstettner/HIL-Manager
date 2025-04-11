@@ -3,8 +3,8 @@ import { SwivelText } from "@/components/swivel-text";
 
 export default function DocsPage() {
   return (
-    <div className="w-full h-full bg-black">
-      <div className="h-full max-w-3/4 border-l border-r border-white bg-black mx-auto px-15 pt-30">
+    <div className="flex flex-col bg-black">
+      <div className="h-full sm:max-w-3/4 border-l border-r border-white bg-black mx-auto px-5 sm:px-15 pt-30">
         <SwivelText />
         <Docs />
         <footer className="w-full py-6 text-center text-white text-sm mt-20">
