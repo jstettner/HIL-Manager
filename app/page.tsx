@@ -16,7 +16,12 @@ function getBackgroundImage(srcSet = "") {
 }
 
 export default function Home() {
-  const getBackgroundStyle = (src: string, width: number, height: number, priority: boolean = false) => {
+  const getBackgroundStyle = (
+    src: string,
+    width: number,
+    height: number,
+    priority: boolean = false,
+  ) => {
     const {
       props: { srcSet },
     } = getImageProps({
@@ -34,8 +39,18 @@ export default function Home() {
   };
 
   const bgStyle = getBackgroundStyle("/images/hero-bg-2.png", 1920, 1080, true);
-  const bgStyle2 = getBackgroundStyle("/images/landing-section-alt.png", 1920, 1080, false);
-  const bgStyle3 = getBackgroundStyle("/images/banner-med-grad.png", 1920, 1080, false);
+  const bgStyle2 = getBackgroundStyle(
+    "/images/landing-section-alt.png",
+    1920,
+    1080,
+    false,
+  );
+  const bgStyle3 = getBackgroundStyle(
+    "/images/banner-med-grad.png",
+    1920,
+    1080,
+    false,
+  );
 
   return (
     <div className="flex flex-col bg-zinc-900">
@@ -44,11 +59,11 @@ export default function Home() {
         style={bgStyle}
       >
         <div className="h-full flex flex-col justify-around items-center gap-12 px-15 sm:px-20">
-          <div className="flex flex-col max-w-2xl items-center text-center mt-[30vh] sm:mt-[40vh]">
-            <h1 className="hero-text">Fortify your Product</h1>
-            <h2 className="hero-subtext">
-              Protect against costly real-world failures with AI-Agents for
-              Hardware Verification.
+          <div className="flex flex-col  items-center text-center mt-[30vh] sm:mt-[40vh]">
+            <h1 className="hero-text">Prevent Production Disasters</h1>
+            <h2 className="hero-subtext max-w-xl">
+              Protect against costly failures with AI Agents for firmware and
+              hardware verification.
             </h2>
             <Link
               href={
@@ -70,38 +85,45 @@ export default function Home() {
       <div className="min-h-80 flex flex-1 flex-col gap-5 w-full px-15 sm:px-40 justify-center items-center">
         <div className="h-full mt-20">
           <div className="text-center max-w-3xl">
-            <h2 className="text-4xl">HIL and SIL</h2>
+            <h2 className="text-4xl mb-2">
+              One Platform. Any Test Environment.
+            </h2>
             <p className="text-gray-300 text-lg">
-              Our framework is designed for both hardware-in-the-loop (HIL) and
-              software-in-the-loop (SIL) environments–reducing the friction of
-              setting up and running tests. Tests are written to execute
-              remotely and intelligently in all environments.
+              Whether your team tests with physical hardware, simulations, or
+              digital twins, Halidom helps you ship faster and catch issues
+              earlier. We integrate directly with your hardware-in-the-loop
+              (HIL) and software-in-the-loop (SIL) environments, enabling
+              frictionless test setup and execution for even the most complex
+              systems.
             </p>
           </div>
         </div>
         <div className="w-1/2 border-b border-gray-500 my-20" />
         <div className="h-full mb-30 grid auto-rows-min gap-30 lg:gap-7 lg:grid-cols-3">
           <div className="text-center max-w-sm">
-            <h2 className="text-4xl mb-2">Adaptive</h2>
+            <h2 className="text-4xl mb-2">
+              Automated <br /> Test Planning
+            </h2>
             <p className="text-gray-300 text-lg">
-              We analyze your system requirements, design, and implementation to
-              create comprehensive test plans on a change-by-change basis.
+              Our AI agents generate tailored test plans for every code change,
+              revealing issues even your most cautious engineers might miss.
             </p>
           </div>
 
           <div className="text-center max-w-sm">
-            <h2 className="text-4xl mb-2">Thorough</h2>
+            <h2 className="text-4xl mb-2">Comprehensive Verification</h2>
             <p className="text-gray-300 text-lg">
-              We perform both regression testing and new feature validation to
-              ensure your system is working as expected.
+              From new features to regressions, Halidom verifies that your
+              system behaves exactly as expected, every time.
             </p>
           </div>
 
           <div className="text-center max-w-sm">
-            <h2 className="text-4xl mb-2">Insightful</h2>
+            <h2 className="text-4xl mb-2"> Compliance-Ready Reporting </h2>
             <p className="text-gray-300 text-lg">
-              We provide data-driven insights to help you understand the impact
-              of your changes and generate verification reports for compliance.
+              Get instant insights into how changes impact your system with
+              auto-generated reports for audits, certifications, and safety
+              standards.
             </p>
           </div>
         </div>
@@ -120,16 +142,14 @@ export default function Home() {
       </div>
       <div className="min-h-80 flex flex-1 flex-col gap-5 w-full px-15 sm:px-40 justify-center items-center">
         <div className="h-full mt-20">
-          <div className="text-center max-w-xl">
-            <h2 className="text-4xl">AI Native</h2>
+          <div className="text-center max-w-3xl">
+            <h2 className="text-4xl mb-2">
+              AI Native, Built for the Physical World.
+            </h2>
             <p className="text-gray-300 text-lg">
-              Halidom is built from the ground up around bleeding edge AI
-              techniques. Our entire stack, from change analysis to test
-              execution to data review, is powered by generative AI.
-              <br />
-              <br />
-              We deliver a level of flexibility that has never been possible
-              with traditional testing tools.
+              Our world-class engineering team has built and validated some of
+              the most complex physical systems on Earth — and now we’re
+              building the platform we always wished we had.
             </p>
           </div>
         </div>
