@@ -44,24 +44,25 @@ const hilTestBeds = [
 export function LandingFeature() {
   return (
     <div className="w-full flex flex-col items-center">
-      <div className="w-full rounded-lg overflow-hidden bg-stone-100/90 backdrop-blur-sm shadow-2xl border border-gray-700 p-4">
+      <div className="w-full rounded-lg overflow-hidden bg-stone-100/90 backdrop-blur-sm shadow-2xl border border-gray-700 p-4 text-left">
         <div className="flex flex-col gap-2">
           <h1 className="text-slate-800 text-4xl font-semibold mb-2">
             Improve Collision Detection #5991
           </h1>
-          <div className="flex flex-row items-center gap-2">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-2">
             <div className="w-auto">
               <div className="w-min bg-green-600 text-white px-3 py-1 rounded-full flex items-center gap-2">
                 <GitPullRequestArrow className="w-5 h-5" />
                 <span>Open</span>
               </div>
             </div>
-            <span className="text-gray-700">
+            <span className="text-gray-700 ">
               hford wants to merge 1 commit into
               <span className="bg-blue-500 text-white px-2 py-0.5 rounded-md mx-1 whitespace-nowrap">
                 main
               </span>
               from
+              <br className="sm:hidden" />
               <span className="bg-blue-500 text-white px-2 py-0.5 rounded-md mx-1 whitespace-nowrap">
                 feat/safety-9921
               </span>

@@ -10,7 +10,11 @@ export function NavigationMenuDemo() {
   return (
     <nav className="fixed top-4 left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] max-w-[min(95%,_75rem)] bg-gray-800/30 backdrop-blur-sm rounded-md px-3 py-3 z-50">
       <div className="flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2" onClick={() => setIsOpen(false)}>
+        <Link
+          href="/"
+          className="flex items-center gap-2"
+          onClick={() => setIsOpen(false)}
+        >
           <Image
             src="/logo.svg"
             alt="Halidom logo"
@@ -70,7 +74,7 @@ export function NavigationMenuDemo() {
       {/* Mobile menu */}
       <div
         className={`sm:hidden ${
-          isOpen ? 'max-h-48 opacity-100' : 'max-h-0 opacity-0'
+          isOpen ? "max-h-48 opacity-100" : "max-h-0 opacity-0"
         } overflow-hidden transition-all duration-300 ease-in-out`}
       >
         <div className="flex flex-col gap-2 pt-4">
