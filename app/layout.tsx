@@ -23,7 +23,7 @@ const dotGothic16 = DotGothic16({
 
 export const metadata: Metadata = {
   title: "Halidom",
-  description: "Product Verification for the Modern Age.",
+  description: "Protect against costly failures with AI agents for firmware and hardware verification.",
 };
 
 export default function RootLayout({
