@@ -8,7 +8,7 @@ export default function DocsPage() {
         <SwivelText />
         <Docs />
         <footer className="w-full py-6 text-center text-white text-sm mt-20">
-          © 2025 Helium AI. All rights reserved.
+          © 2025 Halidom. All rights reserved.
         </footer>
       </div>
     </div>

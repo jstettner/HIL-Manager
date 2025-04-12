@@ -59,7 +59,7 @@ export default function Home() {
         style={bgStyle}
       >
         <div className="h-full flex flex-col justify-around items-center gap-12 px-5 sm:px-20">
-          <div className="flex flex-col mb-5 sm:mb-0 items-center text-center mt-[30vh] sm:mt-[40vh]">
+          <div className="flex flex-col mb-5 sm:mb-0 items-center text-center mt-[23vh] sm:mt-[40vh]">
             <h1 className="hero-text">Prevent Production Disasters</h1>
             <h2 className="hero-subtext px-10 sm:px-0 max-w-xl">
               Protect against costly failures with AI agents for firmware and
@@ -182,7 +182,7 @@ export default function Home() {
         </Link>
       </div>
       <footer className="w-full py-6 text-center text-zinc-400 text-sm">
-        © 2025 Helium AI. All rights reserved.
+        © 2025 Halidom. All rights reserved.
       </footer>
     </div>
   );
