@@ -41,7 +41,7 @@ export function AnnouncementsSection() {
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
         <div className="flex items-center space-x-2">
           <Bell className="h-4 w-4" />
-          <CardTitle className="text-sm font-medium">Announcements</CardTitle>
+          <CardTitle className="font-medium">Announcements</CardTitle>
         </div>
       </CardHeader>
       <CardContent>

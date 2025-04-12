@@ -56,7 +56,7 @@ export function LandingFeature() {
                 <span>Open</span>
               </div>
             </div>
-            <span className="text-gray-700 ">
+            <span className="text-gray-700">
               hford wants to merge 1 commit into
               <span className="bg-blue-500 text-white px-2 py-0.5 rounded-md mx-1 whitespace-nowrap">
                 main
