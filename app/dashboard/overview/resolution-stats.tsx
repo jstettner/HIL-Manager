@@ -55,7 +55,7 @@ function StatContainer({
 }: React.ComponentProps<"div"> & {
   title: string;
   description: string;
-  trend: "up" | "down";
+  trend: "up" | "down" | "none";
 }) {
   return (
     <div
