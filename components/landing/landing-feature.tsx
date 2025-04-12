@@ -62,7 +62,6 @@ export function LandingFeature() {
                 main
               </span>
               from
-              <br className="sm:hidden" />
               <span className="bg-blue-500 text-white px-2 py-0.5 rounded-md mx-1 whitespace-nowrap">
                 feat/safety-9921
               </span>
