@@ -58,10 +58,10 @@ export default function Home() {
         className="min-h-[90vh] w-full hero bg-cover bg-left pb-10"
         style={bgStyle}
       >
-        <div className="h-full flex flex-col justify-around items-center gap-12 px-15 sm:px-20">
-          <div className="flex flex-col  items-center text-center mt-[30vh] sm:mt-[40vh]">
+        <div className="h-full flex flex-col justify-around items-center gap-12 px-5 sm:px-20">
+          <div className="flex flex-col mb-5 sm:mb-0 items-center text-center mt-[30vh] sm:mt-[40vh]">
             <h1 className="hero-text">Prevent Production Disasters</h1>
-            <h2 className="hero-subtext max-w-xl">
+            <h2 className="hero-subtext px-10 sm:px-0 max-w-xl">
               Protect against costly failures with AI agents for firmware and
               hardware verification.
             </h2>
@@ -129,7 +129,7 @@ export default function Home() {
         </div>
       </div>
       <div
-        className="min-h-[90vh] bg-cover bg-left flex flex-1 flex-col justify-center gap-5 w-full items-center"
+        className="min-h-[90vh] bg-cover bg-left flex flex-1 flex-col justify-center gap-5 w-full items-start sm:items-center overflow-hidden"
         style={bgStyle2}
       >
         <Image
@@ -137,7 +137,7 @@ export default function Home() {
           alt="Environment Management"
           width={1000}
           height={1000}
-          className="sm:max-w-9/10 xl:max-w-3/4 rounded-lg"
+          className="h-[80vh] w-auto max-w-none sm:h-auto sm:w-full sm:max-w-9/10 xl:max-w-3/4 sm:rounded-lg"
         />
       </div>
       <div className="min-h-80 flex flex-1 flex-col gap-5 w-full px-15 sm:px-40 justify-center items-center">
