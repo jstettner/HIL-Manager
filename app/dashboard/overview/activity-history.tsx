@@ -75,23 +75,25 @@ function HistoryItem({
   event_info,
 }: React.ComponentProps<"div"> & { event_info: EventInfo }) {
   return (
-    <div
-      className={cn(
-        "flex flex-row justify-between items-center gap-2 hover:bg-gray-500/20 rounded-md p-2 border-1 border-dashed",
-        event_info.sentiment === "neutral" && "border-blue-500/60",
-        event_info.sentiment === "positive" && "border-green-500/60",
-        event_info.sentiment === "negative" && "border-red-500/60",
-        className,
-      )}
-    >
-      <div className="flex flex-col gap-1">
-        <div className="flex flex-row items-center gap-2">
-          <span className="font-semibold">{event_info.title}</span>
-          <span className="text-xs">{event_info.date}</span>
+    <div className="w-full border-l-10 border-muted rounded-md">
+      <div
+        className={cn(
+          "flex flex-row justify-between items-center gap-2 hover:bg-gray-500/20 rounded-r-md p-2 border-1 border-dashed",
+          event_info.sentiment === "neutral" && "border-blue-500/60",
+          event_info.sentiment === "positive" && "border-green-500/60",
+          event_info.sentiment === "negative" && "border-red-500/60",
+          className,
+        )}
+      >
+        <div className="flex flex-col gap-1">
+          <div className="flex flex-row items-center gap-2">
+            <span className="font-semibold">{event_info.title}</span>
+            <span className="text-xs">{event_info.date}</span>
+          </div>
+          <span className="text-xs">{event_info.description}</span>
         </div>
-        <span className="text-xs">{event_info.description}</span>
+        <ChevronRight className="h-4 w-4" />
       </div>
-      <ChevronRight className="h-4 w-4" />
     </div>
   );
 }

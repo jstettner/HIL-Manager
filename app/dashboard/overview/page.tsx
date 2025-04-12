@@ -34,7 +34,7 @@ export default function DashboardPage() {
         <LayoutDashboard className="w-6 h-6" />
         <div className="flex flex-row items-baseline gap-2">
           <h1 className="text-2xl">Dashboard</h1>
-          <h3 className="text-xl text-muted-foreground">Test Anything</h3>
+          <h3 className="text-xl text-muted-foreground">System Monitoring</h3>
         </div>
       </div>
       <DashboardSection>

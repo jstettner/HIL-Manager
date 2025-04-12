@@ -149,6 +149,11 @@ export async function SystemStatus() {
           />
         ))}
       </CardContent>
+      <CardContent className="w-full">
+        <Button className="w-full" variant="outline">
+          Show Previously Acknowledged
+        </Button>
+      </CardContent>
     </Card>
   );
 }

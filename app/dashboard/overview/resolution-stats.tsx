@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ClockFading } from "lucide-react";
+import { ClockFading, TrendingDown, TrendingUp } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import { ResolutionStats as ResolutionStatsType } from "./types";
@@ -10,16 +10,19 @@ const sampleResolutionStats: ResolutionStatsType = {
       id: "1",
       title: "Average Time to Resolution",
       description: "~2.5hr",
+      trend: "up",
     },
     {
       id: "2",
       title: "Average Testcase Duration",
       description: "~1.8hr",
+      trend: "up",
     },
     {
       id: "3",
       title: "Average Testcase Overhead",
       description: "~10m",
+      trend: "none",
     },
   ],
 };
@@ -48,7 +51,12 @@ function StatContainer({
   className,
   title,
   description,
-}: React.ComponentProps<"div"> & { title: string; description: string }) {
+  trend,
+}: React.ComponentProps<"div"> & {
+  title: string;
+  description: string;
+  trend: "up" | "down";
+}) {
   return (
     <div
       className={cn(
@@ -56,7 +64,11 @@ function StatContainer({
         className,
       )}
     >
-      <span className="text-2xl font-semibold">{title}</span>
+      <span className="text-2xl font-semibold flex flex-row items-center">
+        {title}
+        {trend === "up" && <TrendingUp className="ml-2 h-6 w-6" />}
+        {trend === "down" && <TrendingDown className="ml-2 h-6 w-6" />}
+      </span>
       <span className="text-[6em] font-semibold">{description}</span>
     </div>
   );
@@ -87,6 +99,7 @@ export async function ResolutionStats() {
               key={stat.id}
               title={stat.title}
               description={stat.description}
+              trend={stat.trend}
             />
           ))}
         </div>

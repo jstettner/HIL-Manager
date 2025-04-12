@@ -33,5 +33,6 @@ export type ResolutionStats = {
     id: string;
     title: string;
     description: string;
+    trend: "up" | "down" | "none";
   }[];
 };
