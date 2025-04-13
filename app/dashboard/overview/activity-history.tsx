@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Activity, ChevronRight } from "lucide-react";
+import { Activity, ChevronRight, Circle } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ActivityHistory as ActivityHistoryType, EventInfo } from "./types";
 import { cn } from "@/lib/utils";
@@ -79,14 +79,19 @@ function HistoryItem({
       <div
         className={cn(
           "flex flex-row justify-between items-center gap-2 hover:bg-gray-500/20 rounded-r-md p-2 border-1",
-          event_info.sentiment === "neutral" && "border-blue-500/60 bg-blue-500/20 hover:bg-blue-500/4",
-          event_info.sentiment === "positive" && "border-green-500/60 bg-green-500/20 hover:bg-green-500/4",
-          event_info.sentiment === "negative" && "border-red-500/60 bg-red-500/20 hover:bg-red-500/4",
           className,
         )}
       >
         <div className="flex flex-col gap-1">
           <div className="flex flex-row items-center gap-2">
+            <Circle
+              className={cn(
+                "h-4 w-4 border-1 rounded-full",
+                event_info.sentiment === "neutral" && "text-blue-500",
+                event_info.sentiment === "positive" && "text-green-500",
+                event_info.sentiment === "negative" && "text-red-500",
+              )}
+            />
             <span className="font-semibold">{event_info.title}</span>
             <span className="text-xs">{event_info.date}</span>
           </div>
