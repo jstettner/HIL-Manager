@@ -78,10 +78,10 @@ function HistoryItem({
     <div className="w-full border-l-10 border-muted rounded-md">
       <div
         className={cn(
-          "flex flex-row justify-between items-center gap-2 hover:bg-gray-500/20 rounded-r-md p-2 border-1 border-dashed",
-          event_info.sentiment === "neutral" && "border-blue-500/60",
-          event_info.sentiment === "positive" && "border-green-500/60",
-          event_info.sentiment === "negative" && "border-red-500/60",
+          "flex flex-row justify-between items-center gap-2 hover:bg-gray-500/20 rounded-r-md p-2 border-1",
+          event_info.sentiment === "neutral" && "border-blue-500/60 bg-blue-500/20 hover:bg-blue-500/4",
+          event_info.sentiment === "positive" && "border-green-500/60 bg-green-500/20 hover:bg-green-500/4",
+          event_info.sentiment === "negative" && "border-red-500/60 bg-red-500/20 hover:bg-red-500/4",
           className,
         )}
       >
