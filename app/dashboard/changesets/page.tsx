@@ -1,82 +1,45 @@
 import { GitPullRequest } from "lucide-react";
 import { TipsFooter } from "@/components/ui/tips-footer";
 import { changesets } from "@/data/changeset-data";
-import { ChangesetsTable } from "@/app/dashboard/changesets/changesets-table";
-
 import {
-  Pagination,
-  PaginationContent,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from "@/components/ui/pagination";
+  ChangesetsTable,
+  ChangesetsTableLoading,
+} from "@/app/dashboard/changesets/changesets-table";
+import { ChangesetsPagination } from "./pagination";
+import { Suspense } from "react";
+import { CHANGESET_PAGE_SIZE } from "./constants";
+import PageHeader from "@/components/page-header";
 
-export default async function ChangesetsPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ [key: string]: string | undefined }>;
+// Mock API
+const fetchChangesetPages = async (query: string) => {
+  await new Promise((resolve) => setTimeout(resolve, 400));
+  return Math.ceil(changesets.length / CHANGESET_PAGE_SIZE);
+};
+
+export default async function ChangesetsPage(props: {
+  searchParams?: Promise<{
+    query?: string;
+    page?: string;
+  }>;
 }) {
-  const params = await searchParams;
-  const page = parseInt(params.page || "1");
-  const itemsPerPage = 10;
-  const totalItems = changesets.length;
-  const totalPages = Math.ceil(totalItems / itemsPerPage);
+  const searchParams = await props.searchParams;
+  const query = searchParams?.query || "";
+  const currentPage = Number(searchParams?.page) || 1;
 
-  const generatePaginationItems = () => {
-    const items = [];
-    for (let i = 1; i <= totalPages; i++) {
-      items.push(
-        <PaginationItem key={i}>
-          <PaginationLink
-            href={`/dashboard/changesets?page=${i}`}
-            isActive={page === i}
-          >
-            {i}
-          </PaginationLink>
-        </PaginationItem>,
-      );
-    }
-    return items;
-  };
+  const totalPages = await fetchChangesetPages(query);
+
   return (
     <div className="p-6">
-      <div className="flex items-center gap-2 mb-6 page-header">
-        <GitPullRequest className="w-6 h-6" />
-        <div className="flex flex-row items-baseline gap-2">
-          <h1 className="text-2xl">Changesets</h1>
-          <h3 className="text-xl text-muted-foreground">
-            Verification Reports
-          </h3>
-        </div>
-      </div>
-      <ChangesetsTable
-        page={page}
-        itemsPerPage={itemsPerPage}
-        selectedChangeset={params.changeset}
+      <PageHeader
+        title="Changesets"
+        description="Track Your Testsets"
+        icon={<GitPullRequest className="w-6 h-6" />}
       />
+      <Suspense fallback={<ChangesetsTableLoading />}>
+        <ChangesetsTable query={query} page={currentPage} />
+      </Suspense>
       <div className="mt-4">
-        <Pagination>
-          <PaginationContent>
-            <PaginationItem>
-              <PaginationPrevious
-                href={page > 1 ? `/dashboard/changesets?page=${page - 1}` : "#"}
-              />
-            </PaginationItem>
-
-            {generatePaginationItems()}
-
-            <PaginationItem>
-              <PaginationNext
-                href={
-                  page < totalPages
-                    ? `/dashboard/changesets?page=${page + 1}`
-                    : "#"
-                }
-              />
-            </PaginationItem>
-          </PaginationContent>
-        </Pagination>
+        <ChangesetsPagination totalPages={totalPages} />
       </div>
       <TipsFooter />
     </div>

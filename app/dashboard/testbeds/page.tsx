@@ -1,18 +1,15 @@
 import { GalleryVerticalEnd } from "lucide-react";
 import { TestbedsGrid } from "@/app/dashboard/testbeds/testbeds-grid";
+import PageHeader from "@/components/page-header";
 
 export default function TestbedsPage() {
   return (
     <div className="p-6">
-      <div className="flex items-center gap-2 mb-6 page-header">
-        <GalleryVerticalEnd className="w-6 h-6" />
-        <div className="flex flex-row items-baseline gap-2">
-          <h1 className="text-2xl">Armory</h1>
-          <h3 className="text-xl text-muted-foreground">
-            Your Collection of Test Environments
-          </h3>
-        </div>
-      </div>
+      <PageHeader
+        title="Armory"
+        description="Your Collection of Test Environments"
+        icon={<GalleryVerticalEnd className="w-6 h-6" />}
+      />
       <TestbedsGrid />
     </div>
   );

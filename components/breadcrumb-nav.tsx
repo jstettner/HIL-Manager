@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import { usePathname } from "next/navigation";
 import {
   Breadcrumb,
@@ -10,18 +11,42 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 
-const routeMap: Record<
-  string,
-  { title: string; parent?: string; child?: string }
-> = {
-  "/dashboard$": { title: "Overview" },
-  "/dashboard/overview$": { title: "Overview", parent: "Dashboard" },
-  "/dashboard/changesets$": { title: "Changesets", parent: "Dashboard" },
-  "/dashboard/changesets/(.*)$": { title: "Changeset", parent: "Dashboard" },
-  "/dashboard/testcases$": { title: "Library", parent: "Testcases" },
-  "/dashboard/lab$": { title: "Lab", parent: "Testcases" },
-  "/dashboard/testbeds$": { title: "Armory", parent: "Environments " },
-  "/dashboard/builder$": { title: "Builder", parent: "Environments" },
+type BreadcrumbItem = {
+  name: string;
+  link: string;
+};
+
+const routeMap: Record<string, BreadcrumbItem[]> = {
+  "/dashboard$": [{ name: "Overview", link: "/dashboard" }],
+  "/dashboard/overview$": [
+    { name: "Dashboard", link: "/dashboard" },
+    { name: "Overview", link: "/dashboard/overview" },
+  ],
+  "/dashboard/changesets$": [
+    { name: "Dashboard", link: "/dashboard" },
+    { name: "Changesets", link: "/dashboard/changesets" },
+  ],
+  "/dashboard/changesets/(.*)$": [
+    { name: "Dashboard", link: "/dashboard" },
+    { name: "Changesets", link: "/dashboard/changesets" },
+    { name: "Details", link: "" }, // Will be populated with actual ID
+  ],
+  "/dashboard/testcases$": [
+    { name: "Testcases", link: "/dashboard/testcases" },
+    { name: "Library", link: "/dashboard/testcases" },
+  ],
+  "/dashboard/lab$": [
+    { name: "Testcases", link: "/dashboard/testcases" },
+    { name: "Lab", link: "/dashboard/lab" },
+  ],
+  "/dashboard/testbeds$": [
+    { name: "Environments", link: "/dashboard/testbeds" },
+    { name: "Armory", link: "/dashboard/testbeds" },
+  ],
+  "/dashboard/builder$": [
+    { name: "Environments", link: "/dashboard/builder" },
+    { name: "Builder", link: "/dashboard/builder" },
+  ],
 };
 
 export function BreadcrumbNav() {
@@ -39,28 +64,31 @@ export function BreadcrumbNav() {
 
   const route = routeMap[route_key];
 
+  if (!route) return null;
+
+  // For dynamic routes with IDs, update the last item's link
+  const breadcrumbs = [...route];
+  if (child && breadcrumbs.length > 0) {
+    const lastItem = breadcrumbs[breadcrumbs.length - 1];
+    lastItem.link = `${pathname}`;
+    lastItem.name = child;
+  }
+
   return (
     <Breadcrumb>
       <BreadcrumbList>
-        {route.parent && (
-          <>
+        {breadcrumbs.map((item, index) => (
+          <React.Fragment key={item.name}>
             <BreadcrumbItem>
-              <BreadcrumbLink href="/">{route.parent}</BreadcrumbLink>
+              {index === breadcrumbs.length - 1 ? (
+                <BreadcrumbPage>{item.name}</BreadcrumbPage>
+              ) : (
+                <BreadcrumbLink href={item.link}>{item.name}</BreadcrumbLink>
+              )}
             </BreadcrumbItem>
-            <BreadcrumbSeparator />
-          </>
-        )}
-        <BreadcrumbItem>
-          <BreadcrumbPage>{route.title}</BreadcrumbPage>
-        </BreadcrumbItem>
-        {child && (
-          <>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <BreadcrumbLink href={child}>{child}</BreadcrumbLink>
-            </BreadcrumbItem>
-          </>
-        )}
+            {index < breadcrumbs.length - 1 && <BreadcrumbSeparator />}
+          </React.Fragment>
+        ))}
       </BreadcrumbList>
     </Breadcrumb>
   );

@@ -13,6 +13,7 @@ import { ControlPanel } from "@/app/dashboard/overview/control-panel";
 import { Suspense } from "react";
 import { cn } from "@/lib/utils";
 import { ActivityHistory, ActivityHistoryLoading } from "./activity-history";
+import PageHeader from "@/components/page-header";
 
 function DashboardSection({
   className,
@@ -30,13 +31,11 @@ function DashboardSection({
 export default function DashboardPage() {
   return (
     <div className="flex flex-col h-[calc(100vh-5rem)] p-6">
-      <div className="flex flex-row items-center gap-2 mb-6 page-header">
-        <LayoutDashboard className="w-6 h-6" />
-        <div className="flex flex-row items-baseline gap-2">
-          <h1 className="text-2xl">Dashboard</h1>
-          <h3 className="text-xl text-muted-foreground">System Monitoring</h3>
-        </div>
-      </div>
+      <PageHeader
+        title="Dashboard"
+        description="System Monitoring"
+        icon={<LayoutDashboard className="w-6 h-6" />}
+      />
       <DashboardSection>
         <Suspense fallback={<SystemStatusLoading />}>
           <SystemStatus />
