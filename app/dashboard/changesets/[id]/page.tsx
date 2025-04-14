@@ -13,7 +13,7 @@ import PageHeader from "@/components/page-header";
 import { testCases } from "@/data/sample-data";
 
 type PageProps = {
-  params: { id: string };
+  id: string;
 };
 
 function ChangesetOverview({ changeset }: { changeset: Changeset }) {
@@ -63,7 +63,7 @@ const fetchChangeset = (id: string) => {
   return changeset;
 };
 
-export default async function ChangesetPage({ params }: PageProps) {
+export default async function ChangesetPage({ params }: { params: Promise<PageProps> }) {
   const pageParams = await params;
   const changesetId = pageParams.id;
 

@@ -1,13 +1,4 @@
 import { Skeleton } from "@/components/ui/skeleton";
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
 import { changesets as sampleChangesets } from "@/data/changeset-data";
 import { CHANGESET_PAGE_SIZE } from "./constants";
 import { ChangesetRow } from "./changeset-row";

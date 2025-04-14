@@ -11,7 +11,7 @@ import { CHANGESET_PAGE_SIZE } from "./constants";
 import PageHeader from "@/components/page-header";
 
 // Mock API
-const fetchChangesetPages = async (query: string) => {
+const fetchChangesetPages = async () => {
   await new Promise((resolve) => setTimeout(resolve, 400));
   return Math.ceil(changesets.length / CHANGESET_PAGE_SIZE);
 };
@@ -26,7 +26,8 @@ export default async function ChangesetsPage(props: {
   const query = searchParams?.query || "";
   const currentPage = Number(searchParams?.page) || 1;
 
-  const totalPages = await fetchChangesetPages(query);
+  // TODO: This will ultimately also take the query.
+  const totalPages = await fetchChangesetPages();
 
   return (
     <div className="p-6">
