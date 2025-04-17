@@ -3,6 +3,7 @@
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
+import { useRouter } from "next/navigation";
 
 function Table({ className, ...props }: React.ComponentProps<"table">) {
   return (
@@ -52,9 +53,15 @@ function TableFooter({ className, ...props }: React.ComponentProps<"tfoot">) {
   );
 }
 
-function TableRow({ className, ...props }: React.ComponentProps<"tr">) {
+function TableRow({
+  className,
+  href,
+  ...props
+}: React.ComponentProps<"tr"> & { href?: string }) {
+  const router = useRouter();
   return (
     <tr
+      onClick={() => href && router.push(href)}
       data-slot="table-row"
       className={cn(
         "hover:bg-muted/50 data-[state=selected]:bg-muted border-b transition-colors",

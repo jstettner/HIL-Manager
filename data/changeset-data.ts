@@ -1,9 +1,11 @@
 import { testCases } from "./sample-data";
 
+// TODO: Update teststatus so it's not horrible
 export interface Changeset {
   id: string;
   title: string;
   description: string;
+  testStatus?: "passed" | "failed" | "running";
   author: string;
   status: "open" | "merged" | "closed";
   createdAt: string;
@@ -904,3 +906,20 @@ export const changesets: Changeset[] = [
     ],
   },
 ];
+
+function deriveTestStatus(
+  testCases: { status: "passed" | "failed" | "pending" }[],
+): "passed" | "failed" | "running" {
+  if (testCases.some((tc) => tc.status === "failed")) {
+    return "failed";
+  } else if (testCases.some((tc) => tc.status === "pending")) {
+    return "running";
+  } else {
+    return "passed";
+  }
+}
+
+export const updatedChangesets = changesets.map((cs) => ({
+  ...cs,
+  testStatus: deriveTestStatus(cs.testCases),
+}));

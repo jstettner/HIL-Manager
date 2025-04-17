@@ -2,17 +2,16 @@ import { Library } from "lucide-react";
 import { TipsFooter } from "@/components/ui/tips-footer";
 import { TestcasesTable } from "@/app/dashboard/testcases/testcases-table";
 import { Suspense } from "react";
+import PageHeader from "@/components/page-header";
 
 export default function TestcasesPage() {
   return (
     <div className="p-6">
-      <div className="flex flex-row items-center gap-2 mb-6 page-header">
-        <Library className="w-6 h-6" />
-        <div className="flex flex-row items-baseline gap-2">
-          <h1 className="text-2xl">Test Library</h1>
-          <h3 className="text-xl text-muted-foreground">Your Go-To Tests</h3>
-        </div>
-      </div>
+      <PageHeader
+        title="Test Library"
+        description="Your Go-To Tests"
+        icon={<Library className="w-6 h-6" />}
+      />
 
       <Suspense>
         <TestcasesTable />
