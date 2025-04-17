@@ -10,7 +10,7 @@ function ChangesetStatusCircle({
   testStatus,
   changeSetStatus,
 }: {
-  testStatus: string;
+  testStatus: "passed" | "failed" | "running";
   changeSetStatus: string;
 }) {
   const borderStyle =
@@ -46,19 +46,7 @@ function ChangesetStatusCircle({
 }
 
 export function ChangesetRow({ changeset }: { changeset: Changeset }) {
-  const getTestStatus = () => {
-    const hasFailedTests = changeset.bespoke_tests.some(
-      (test) => test.status === "failed",
-    );
-    const hasRunningTests = changeset.bespoke_tests.some(
-      (test) => test.status === "pending",
-    );
-
-    if (hasFailedTests) return "failed";
-    if (hasRunningTests) return "running";
-    return changeset.bespoke_tests.length > 0 ? "passed" : "running";
-  };
-  const testStatus = getTestStatus();
+  const testStatus = changeset.testStatus ?? "running";
 
   return (
     <Link href={`/dashboard/changesets/${changeset.id}`}>

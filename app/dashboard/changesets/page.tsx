@@ -9,11 +9,18 @@ import { ChangesetsPagination } from "./pagination";
 import { Suspense } from "react";
 import { CHANGESET_PAGE_SIZE } from "./constants";
 import PageHeader from "@/components/page-header";
+import Search from "@/components/search";
+import { ChangesetFilter } from "./changeset-filter";
 
 // Mock API
-const fetchChangesetPages = async () => {
+const fetchChangesetPages = async (query: string) => {
   await new Promise((resolve) => setTimeout(resolve, 400));
-  return Math.ceil(changesets.length / CHANGESET_PAGE_SIZE);
+  // Share this logic with the table
+  return Math.ceil(
+    changesets.filter((changeset) =>
+      changeset.title.toLowerCase().includes(query.toLowerCase()),
+    ).length / CHANGESET_PAGE_SIZE,
+  );
 };
 
 export default async function ChangesetsPage(props: {
@@ -24,10 +31,14 @@ export default async function ChangesetsPage(props: {
 }) {
   const searchParams = await props.searchParams;
   const query = searchParams?.query || "";
-  const currentPage = Number(searchParams?.page) || 1;
 
-  // TODO: This will ultimately also take the query.
-  const totalPages = await fetchChangesetPages();
+  const totalPages = await fetchChangesetPages(query);
+
+  // TODO: Maybe we want this actually redirect to the last page
+  const currentPage =
+    Number(searchParams?.page) > totalPages
+      ? totalPages
+      : Number(searchParams?.page) || 1;
 
   return (
     <div className="p-6">
@@ -36,8 +47,12 @@ export default async function ChangesetsPage(props: {
         description="Track Your Testsets"
         icon={<GitPullRequest className="w-6 h-6" />}
       />
+      <div className="w-full flex flex-row mb-4">
+        <ChangesetFilter />
+        <Search placeholder="Search changesets..." />
+      </div>
       <Suspense fallback={<ChangesetsTableLoading />}>
-        <ChangesetsTable query={query} page={currentPage} />
+        <ChangesetsTable searchParams={searchParams} page={currentPage} />
       </Suspense>
       <div className="mt-4">
         <ChangesetsPagination totalPages={totalPages} />

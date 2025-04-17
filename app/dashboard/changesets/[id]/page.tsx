@@ -63,7 +63,11 @@ const fetchChangeset = (id: string) => {
   return changeset;
 };
 
-export default async function ChangesetPage({ params }: { params: Promise<PageProps> }) {
+export default async function ChangesetPage({
+  params,
+}: {
+  params: Promise<PageProps>;
+}) {
   const pageParams = await params;
   const changesetId = pageParams.id;
 
