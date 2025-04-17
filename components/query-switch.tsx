@@ -35,7 +35,7 @@ export default function QuerySwitch({
       const newUrl = `${window.location.pathname}?${newParams.toString()}`;
       router.replace(newUrl);
     },
-    [searchParams, queryKey],
+    [searchParams, queryKey, router],
   );
 
   return (

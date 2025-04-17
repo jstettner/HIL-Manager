@@ -1,6 +1,6 @@
 import { GitPullRequest } from "lucide-react";
 import { TipsFooter } from "@/components/ui/tips-footer";
-import { changesets } from "@/data/changeset-data";
+import { updatedChangesets } from "@/data/changeset-data";
 import {
   ChangesetsTable,
   ChangesetsTableLoading,
@@ -12,33 +12,46 @@ import PageHeader from "@/components/page-header";
 import Search from "@/components/search";
 import { ChangesetFilter } from "./changeset-filter";
 
-// Mock API
-const fetchChangesetPages = async (query: string) => {
-  await new Promise((resolve) => setTimeout(resolve, 400));
-  // Share this logic with the table
-  return Math.ceil(
-    changesets.filter((changeset) =>
-      changeset.title.toLowerCase().includes(query.toLowerCase()),
-    ).length / CHANGESET_PAGE_SIZE,
+type ChangeSetQuery = {
+  query?: string;
+  failed?: string;
+  running?: string;
+  passed?: string;
+}
+
+// Mock API fetch function
+const fetchChangesets = async (searchParams: ChangeSetQuery, page: number) => {
+  await new Promise((resolve) => setTimeout(resolve, 200));
+
+  const filteredChangesets = updatedChangesets.filter(
+    (changeset) =>
+      changeset.title
+        .toLowerCase()
+        .includes(searchParams?.query?.toLowerCase() || "") &&
+      ((searchParams?.failed === "true" && changeset.testStatus === "failed") ||
+        (searchParams?.running === "true" &&
+          changeset.testStatus === "running") ||
+        (searchParams?.passed === "true" &&
+          changeset.testStatus === "passed") ||
+        (!searchParams?.failed &&
+          !searchParams?.running &&
+          !searchParams?.passed)),
   );
+  const startIndex = (page - 1) * CHANGESET_PAGE_SIZE;
+  const endIndex = startIndex + CHANGESET_PAGE_SIZE;
+  return [filteredChangesets.slice(startIndex, endIndex), Math.ceil(filteredChangesets.length / CHANGESET_PAGE_SIZE)] as const;
 };
 
 export default async function ChangesetsPage(props: {
   searchParams?: Promise<{
-    query?: string;
     page?: string;
-  }>;
+  } & ChangeSetQuery>;
 }) {
-  const searchParams = await props.searchParams;
-  const query = searchParams?.query || "";
+  const { page, ...query }: { page?: string } & ChangeSetQuery = await props.searchParams || {};
 
-  const totalPages = await fetchChangesetPages(query);
+  const pageNumber = Number(page) || 1;
 
-  // TODO: Maybe we want this actually redirect to the last page
-  const currentPage =
-    Number(searchParams?.page) > totalPages
-      ? totalPages
-      : Number(searchParams?.page) || 1;
+  const [changesets, totalPages] = await fetchChangesets(query, pageNumber);
 
   return (
     <div className="p-6">
@@ -52,7 +65,7 @@ export default async function ChangesetsPage(props: {
         <Search placeholder="Search changesets..." />
       </div>
       <Suspense fallback={<ChangesetsTableLoading />}>
-        <ChangesetsTable searchParams={searchParams} page={currentPage} />
+        <ChangesetsTable changesets={changesets} />
       </Suspense>
       <div className="mt-4">
         <ChangesetsPagination totalPages={totalPages} />
