@@ -15,11 +15,7 @@ export function ChangesetsTableLoading() {
   );
 }
 
-export function ChangesetsTable({
-  changesets,
-}: {
-  changesets: Changeset[];
-}) {
+export function ChangesetsTable({ changesets }: { changesets: Changeset[] }) {
   return (
     <div className="flex flex-col rounded-md border border-1 border-muted overflow-hidden">
       {changesets.map((changeset) => (

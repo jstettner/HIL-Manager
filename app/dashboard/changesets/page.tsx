@@ -17,7 +17,7 @@ type ChangeSetQuery = {
   failed?: string;
   running?: string;
   passed?: string;
-}
+};
 
 // Mock API fetch function
 const fetchChangesets = async (searchParams: ChangeSetQuery, page: number) => {
@@ -39,15 +39,21 @@ const fetchChangesets = async (searchParams: ChangeSetQuery, page: number) => {
   );
   const startIndex = (page - 1) * CHANGESET_PAGE_SIZE;
   const endIndex = startIndex + CHANGESET_PAGE_SIZE;
-  return [filteredChangesets.slice(startIndex, endIndex), Math.ceil(filteredChangesets.length / CHANGESET_PAGE_SIZE)] as const;
+  return [
+    filteredChangesets.slice(startIndex, endIndex),
+    Math.ceil(filteredChangesets.length / CHANGESET_PAGE_SIZE),
+  ] as const;
 };
 
 export default async function ChangesetsPage(props: {
-  searchParams?: Promise<{
-    page?: string;
-  } & ChangeSetQuery>;
+  searchParams?: Promise<
+    {
+      page?: string;
+    } & ChangeSetQuery
+  >;
 }) {
-  const { page, ...query }: { page?: string } & ChangeSetQuery = await props.searchParams || {};
+  const { page, ...query }: { page?: string } & ChangeSetQuery =
+    (await props.searchParams) || {};
 
   const pageNumber = Number(page) || 1;
 

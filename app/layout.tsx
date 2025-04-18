@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, DotGothic16 } from "next/font/google";
 import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
 import { AppHeader } from "@/components/app-header";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -41,7 +42,10 @@ export default function RootLayout({
           <AppSidebar />
           <SidebarInset>
             <AppHeader />
-            <main style={{ flex: 1 }}>{children}</main>
+            <main style={{ flex: 1 }}>
+              {children}
+              <SpeedInsights />
+            </main>
           </SidebarInset>
         </SidebarProvider>
       </body>
