@@ -31,6 +31,7 @@ export default function QuerySwitch({
       } else {
         newParams.delete(queryKey);
       }
+      newParams.set("page", "1");
 
       const newUrl = `${window.location.pathname}?${newParams.toString()}`;
       router.replace(newUrl);

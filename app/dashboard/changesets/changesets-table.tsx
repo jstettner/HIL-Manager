@@ -15,7 +15,7 @@ export function ChangesetsTableLoading() {
   );
 }
 
-export async function ChangesetsTable({
+export function ChangesetsTable({
   changesets,
 }: {
   changesets: Changeset[];
