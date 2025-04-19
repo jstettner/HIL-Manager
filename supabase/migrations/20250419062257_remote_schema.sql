@@ -156,6 +156,42 @@ CREATE TYPE "public"."verification_status" AS ENUM (
 ALTER TYPE "public"."verification_status" OWNER TO "postgres";
 
 
+CREATE OR REPLACE FUNCTION "public"."complete_testcase_run"("p_invocation_id" "uuid", "p_status" "public"."test_status", "p_result" "jsonb" DEFAULT NULL::"jsonb", "p_logs" "text" DEFAULT NULL::"text") RETURNS "uuid"
+    LANGUAGE "plpgsql"
+    AS $$
+DECLARE
+  v_testcase_id uuid;
+  v_changeset_id uuid;
+BEGIN
+  -- Update the invocation with completion info
+  UPDATE testcase_invocations
+  SET 
+    status = p_status,
+    completed_at = now(),
+    result = p_result,
+    logs = p_logs
+  WHERE id = p_invocation_id
+  RETURNING testcase_id, changeset_id INTO v_testcase_id, v_changeset_id;
+  
+  -- If this was a changeset-related test, update changeset_testcases if it exists
+  IF v_changeset_id IS NOT NULL THEN
+    UPDATE changeset_testcases
+    SET 
+      status = p_status,
+      last_run = now()
+    WHERE 
+      changeset_id = v_changeset_id AND
+      testcase_id = v_testcase_id;
+  END IF;
+  
+  RETURN p_invocation_id;
+END;
+$$;
+
+
+ALTER FUNCTION "public"."complete_testcase_run"("p_invocation_id" "uuid", "p_status" "public"."test_status", "p_result" "jsonb", "p_logs" "text") OWNER TO "postgres";
+
+
 CREATE OR REPLACE FUNCTION "public"."create_sample_data"("org_id" "uuid") RETURNS "void"
     LANGUAGE "plpgsql" SECURITY DEFINER
     AS $$
@@ -318,6 +354,110 @@ $$;
 
 
 ALTER FUNCTION "public"."generate_uuid_from_string"("input_string" "text") OWNER TO "postgres";
+
+
+CREATE OR REPLACE FUNCTION "public"."get_test_stats"("p_organization_id" "uuid", "p_time_range" "text" DEFAULT '7 days'::"text") RETURNS "json"
+    LANGUAGE "plpgsql"
+    AS $$
+DECLARE
+  start_date timestamp with time zone;
+  result JSON;
+BEGIN
+  -- Determine the start date based on time range
+  IF p_time_range = '24 hours' THEN
+    start_date := now() - INTERVAL '24 hours';
+  ELSIF p_time_range = '7 days' THEN
+    start_date := now() - INTERVAL '7 days';
+  ELSIF p_time_range = '30 days' THEN
+    start_date := now() - INTERVAL '30 days';
+  ELSE
+    start_date := now() - INTERVAL '7 days'; -- Default to 7 days
+  END IF;
+  
+  -- Get summary statistics
+  WITH invocations AS (
+    SELECT 
+      ti.status,
+      ti.started_at::date as run_date
+    FROM testcase_invocations ti
+    JOIN testcases t ON ti.testcase_id = t.id
+    WHERE t.organization_id = p_organization_id
+      AND ti.started_at >= start_date
+  ),
+  summary AS (
+    SELECT
+      COUNT(*) as total,
+      COUNT(*) FILTER (WHERE status = 'passed') as passed,
+      COUNT(*) FILTER (WHERE status = 'failed') as failed,
+      COUNT(*) FILTER (WHERE status = 'running') as running,
+      COUNT(*) FILTER (WHERE status = 'pending') as pending,
+      CASE 
+        WHEN COUNT(*) > 0 THEN 
+          ROUND((COUNT(*) FILTER (WHERE status = 'passed')::numeric / COUNT(*)::numeric) * 100)
+        ELSE 0
+      END as pass_rate
+    FROM invocations
+  ),
+  daily_stats AS (
+    SELECT
+      run_date as date,
+      COUNT(*) as total,
+      COUNT(*) FILTER (WHERE status = 'passed') as passed,
+      COUNT(*) FILTER (WHERE status = 'failed') as failed
+    FROM invocations
+    GROUP BY run_date
+    ORDER BY run_date
+  )
+  SELECT json_build_object(
+    'summary', (SELECT row_to_json(summary) FROM summary),
+    'dailyStats', (SELECT json_agg(daily_stats) FROM daily_stats)
+  ) INTO result;
+  
+  RETURN result;
+END;
+$$;
+
+
+ALTER FUNCTION "public"."get_test_stats"("p_organization_id" "uuid", "p_time_range" "text") OWNER TO "postgres";
+
+
+CREATE OR REPLACE FUNCTION "public"."get_testcase_invocations"() RETURNS TABLE("id" "uuid", "testcase_id" "uuid", "testcase_name" "text", "environment_id" "uuid", "environment_name" "text", "changeset_id" "uuid", "changeset_title" "text", "status" "public"."test_status", "started_at" timestamp with time zone, "completed_at" timestamp with time zone, "duration_seconds" integer, "result" "jsonb", "logs" "text", "is_bespoke_test" boolean)
+    LANGUAGE "plpgsql"
+    AS $$
+BEGIN
+  RETURN QUERY
+  SELECT 
+    ti.id,
+    ti.testcase_id,
+    t.name,
+    ti.environment_id,
+    e.name,
+    ti.changeset_id,
+    c.title,
+    ti.status,
+    ti.started_at,
+    ti.completed_at,
+    CASE 
+      WHEN ti.completed_at IS NOT NULL AND ti.started_at IS NOT NULL
+      THEN EXTRACT(EPOCH FROM (ti.completed_at - ti.started_at))::integer
+      ELSE ti.duration
+    END,
+    ti.result,
+    ti.logs,
+    CASE 
+      WHEN t.changeset_id IS NOT NULL 
+      THEN true 
+      ELSE false 
+    END
+  FROM testcase_invocations ti
+  JOIN testcases t ON ti.testcase_id = t.id
+  LEFT JOIN environments e ON ti.environment_id = e.id
+  LEFT JOIN changesets c ON ti.changeset_id = c.id;
+END;
+$$;
+
+
+ALTER FUNCTION "public"."get_testcase_invocations"() OWNER TO "postgres";
 
 
 CREATE OR REPLACE FUNCTION "public"."handle_new_organization"() RETURNS "trigger"
@@ -723,6 +863,44 @@ $$;
 ALTER FUNCTION "public"."import_verification_objective"("changeset_id" "uuid", "objective" "text", "status" "public"."verification_status", "notes" "text") OWNER TO "postgres";
 
 
+CREATE OR REPLACE FUNCTION "public"."run_testcase"("p_testcase_id" "uuid", "p_environment_id" "uuid" DEFAULT NULL::"uuid", "p_changeset_id" "uuid" DEFAULT NULL::"uuid") RETURNS "uuid"
+    LANGUAGE "plpgsql"
+    AS $$
+DECLARE
+  v_invocation_id uuid;
+BEGIN
+  -- Insert a new invocation record
+  INSERT INTO testcase_invocations (
+    id,
+    testcase_id,
+    environment_id,
+    changeset_id,
+    status,
+    started_at
+  )
+  VALUES (
+    gen_random_uuid(),
+    p_testcase_id,
+    p_environment_id,
+    p_changeset_id,
+    'running',
+    now()
+  )
+  RETURNING id INTO v_invocation_id;
+  
+  -- Update the testcase last_run time
+  UPDATE testcases
+  SET last_run = now()
+  WHERE id = p_testcase_id;
+  
+  RETURN v_invocation_id;
+END;
+$$;
+
+
+ALTER FUNCTION "public"."run_testcase"("p_testcase_id" "uuid", "p_environment_id" "uuid", "p_changeset_id" "uuid") OWNER TO "postgres";
+
+
 CREATE OR REPLACE FUNCTION "public"."set_updated_at"() RETURNS "trigger"
     LANGUAGE "plpgsql"
     AS $$
@@ -750,6 +928,24 @@ $$;
 
 
 ALTER FUNCTION "public"."update_changeset_test_status"() OWNER TO "postgres";
+
+
+CREATE OR REPLACE FUNCTION "public"."update_testcase_last_run"() RETURNS "trigger"
+    LANGUAGE "plpgsql" SECURITY DEFINER
+    AS $$
+BEGIN
+  IF NEW.completed_at IS NOT NULL AND (OLD.completed_at IS NULL OR NEW.completed_at != OLD.completed_at) THEN
+    UPDATE public.testcases
+    SET last_run = NEW.completed_at,
+        updated_at = now()
+    WHERE id = NEW.testcase_id;
+  END IF;
+  RETURN NEW;
+END;
+$$;
+
+
+ALTER FUNCTION "public"."update_testcase_last_run"() OWNER TO "postgres";
 
 
 CREATE OR REPLACE FUNCTION "public"."user_is_in_changeset_organization"("changeset_id" "uuid") RETURNS boolean
@@ -971,6 +1167,29 @@ SELECT
 ALTER TABLE "public"."testcase_details" OWNER TO "postgres";
 
 
+CREATE OR REPLACE VIEW "public"."testcase_details_view" AS
+SELECT
+    NULL::"uuid" AS "id",
+    NULL::"text" AS "name",
+    NULL::"text" AS "description",
+    NULL::integer AS "duration",
+    NULL::timestamp with time zone AS "last_run",
+    NULL::"public"."priority_level" AS "priority",
+    NULL::"uuid" AS "organization_id",
+    NULL::timestamp with time zone AS "created_at",
+    NULL::timestamp with time zone AS "updated_at",
+    NULL::"uuid" AS "changeset_id",
+    NULL::"text" AS "organization_name",
+    NULL::"uuid"[] AS "compatible_environment_ids",
+    NULL::"text"[] AS "compatible_environment_names",
+    NULL::"jsonb" AS "last_invocation",
+    NULL::boolean AS "is_bespoke",
+    NULL::"text" AS "bespoke_changeset_title";
+
+
+ALTER TABLE "public"."testcase_details_view" OWNER TO "postgres";
+
+
 CREATE TABLE IF NOT EXISTS "public"."testcase_environments" (
     "id" "uuid" DEFAULT "gen_random_uuid"() NOT NULL,
     "testcase_id" "uuid" NOT NULL,
@@ -982,6 +1201,25 @@ CREATE TABLE IF NOT EXISTS "public"."testcase_environments" (
 ALTER TABLE "public"."testcase_environments" OWNER TO "postgres";
 
 
+CREATE TABLE IF NOT EXISTS "public"."testcase_invocations" (
+    "id" "uuid" DEFAULT "gen_random_uuid"() NOT NULL,
+    "testcase_id" "uuid" NOT NULL,
+    "environment_id" "uuid",
+    "changeset_id" "uuid",
+    "status" "public"."test_status" DEFAULT 'pending'::"public"."test_status" NOT NULL,
+    "started_at" timestamp with time zone DEFAULT "now"(),
+    "completed_at" timestamp with time zone,
+    "duration" integer,
+    "result" "jsonb",
+    "logs" "text",
+    "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    "updated_at" timestamp with time zone DEFAULT "now"() NOT NULL
+);
+
+
+ALTER TABLE "public"."testcase_invocations" OWNER TO "postgres";
+
+
 CREATE TABLE IF NOT EXISTS "public"."testcases" (
     "id" "uuid" DEFAULT "gen_random_uuid"() NOT NULL,
     "name" "text" NOT NULL,
@@ -991,11 +1229,50 @@ CREATE TABLE IF NOT EXISTS "public"."testcases" (
     "priority" "public"."priority_level" DEFAULT 'medium'::"public"."priority_level" NOT NULL,
     "organization_id" "uuid" NOT NULL,
     "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
-    "updated_at" timestamp with time zone DEFAULT "now"() NOT NULL
+    "updated_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    "changeset_id" "uuid"
 );
 
 
 ALTER TABLE "public"."testcases" OWNER TO "postgres";
+
+
+COMMENT ON COLUMN "public"."testcases"."changeset_id" IS 'For bespoke testcases, references the changeset that spawned them';
+
+
+
+CREATE OR REPLACE VIEW "public"."testcase_invocations_view" AS
+ SELECT "ti"."id",
+    "ti"."testcase_id",
+    "t"."name" AS "testcase_name",
+    "t"."description" AS "testcase_description",
+    "ti"."environment_id",
+    "e"."name" AS "environment_name",
+    "ti"."changeset_id",
+    "c"."title" AS "changeset_title",
+    "ti"."status",
+    "ti"."started_at",
+    "ti"."completed_at",
+    "ti"."duration",
+    "ti"."result",
+    "ti"."logs",
+    "ti"."created_at",
+    "ti"."updated_at",
+    "t"."organization_id",
+    "o"."name" AS "organization_name",
+    "t"."changeset_id" AS "bespoke_testcase_changeset_id",
+        CASE
+            WHEN ("t"."changeset_id" IS NOT NULL) THEN true
+            ELSE false
+        END AS "is_bespoke"
+   FROM (((("public"."testcase_invocations" "ti"
+     JOIN "public"."testcases" "t" ON (("ti"."testcase_id" = "t"."id")))
+     JOIN "public"."organizations" "o" ON (("t"."organization_id" = "o"."id")))
+     LEFT JOIN "public"."environments" "e" ON (("ti"."environment_id" = "e"."id")))
+     LEFT JOIN "public"."changesets" "c" ON (("ti"."changeset_id" = "c"."id")));
+
+
+ALTER TABLE "public"."testcase_invocations_view" OWNER TO "postgres";
 
 
 CREATE OR REPLACE VIEW "public"."user_current_organization" AS
@@ -1113,6 +1390,11 @@ ALTER TABLE ONLY "public"."testcase_environments"
 
 
 
+ALTER TABLE ONLY "public"."testcase_invocations"
+    ADD CONSTRAINT "testcase_invocations_pkey" PRIMARY KEY ("id");
+
+
+
 ALTER TABLE ONLY "public"."testcases"
     ADD CONSTRAINT "testcases_pkey" PRIMARY KEY ("id");
 
@@ -1120,6 +1402,22 @@ ALTER TABLE ONLY "public"."testcases"
 
 ALTER TABLE ONLY "public"."verification_objectives"
     ADD CONSTRAINT "verification_objectives_pkey" PRIMARY KEY ("id");
+
+
+
+CREATE INDEX "idx_testcase_invocations_changeset_id" ON "public"."testcase_invocations" USING "btree" ("changeset_id");
+
+
+
+CREATE INDEX "idx_testcase_invocations_environment_id" ON "public"."testcase_invocations" USING "btree" ("environment_id");
+
+
+
+CREATE INDEX "idx_testcase_invocations_status" ON "public"."testcase_invocations" USING "btree" ("status");
+
+
+
+CREATE INDEX "idx_testcase_invocations_testcase_id" ON "public"."testcase_invocations" USING "btree" ("testcase_id");
 
 
 
@@ -1139,6 +1437,41 @@ CREATE OR REPLACE VIEW "public"."testcase_details" AS
      JOIN "public"."organizations" "o" ON (("t"."organization_id" = "o"."id")))
      LEFT JOIN "public"."testcase_environments" "te" ON (("t"."id" = "te"."testcase_id")))
   GROUP BY "t"."id", "o"."name", "o"."id";
+
+
+
+CREATE OR REPLACE VIEW "public"."testcase_details_view" AS
+ SELECT "t"."id",
+    "t"."name",
+    "t"."description",
+    "t"."duration",
+    "t"."last_run",
+    "t"."priority",
+    "t"."organization_id",
+    "t"."created_at",
+    "t"."updated_at",
+    "t"."changeset_id",
+    "o"."name" AS "organization_name",
+    "array_agg"(DISTINCT "te"."environment_id") FILTER (WHERE ("te"."environment_id" IS NOT NULL)) AS "compatible_environment_ids",
+    "array_agg"(DISTINCT "e"."name") FILTER (WHERE ("e"."name" IS NOT NULL)) AS "compatible_environment_names",
+    ( SELECT "jsonb_build_object"('id', "ti"."id", 'status', "ti"."status", 'started_at', "ti"."started_at", 'completed_at', "ti"."completed_at", 'environment_id', "ti"."environment_id", 'environment_name', "e_last"."name", 'changeset_id', "ti"."changeset_id", 'changeset_title', "c_last"."title") AS "jsonb_build_object"
+           FROM (("public"."testcase_invocations" "ti"
+             LEFT JOIN "public"."environments" "e_last" ON (("ti"."environment_id" = "e_last"."id")))
+             LEFT JOIN "public"."changesets" "c_last" ON (("ti"."changeset_id" = "c_last"."id")))
+          WHERE ("ti"."testcase_id" = "t"."id")
+          ORDER BY "ti"."completed_at" DESC NULLS LAST, "ti"."started_at" DESC
+         LIMIT 1) AS "last_invocation",
+        CASE
+            WHEN ("t"."changeset_id" IS NOT NULL) THEN true
+            ELSE false
+        END AS "is_bespoke",
+    "bc"."title" AS "bespoke_changeset_title"
+   FROM (((("public"."testcases" "t"
+     JOIN "public"."organizations" "o" ON (("t"."organization_id" = "o"."id")))
+     LEFT JOIN "public"."testcase_environments" "te" ON (("t"."id" = "te"."testcase_id")))
+     LEFT JOIN "public"."environments" "e" ON (("te"."environment_id" = "e"."id")))
+     LEFT JOIN "public"."changesets" "bc" ON (("t"."changeset_id" = "bc"."id")))
+  GROUP BY "t"."id", "o"."name", "o"."id", "bc"."title";
 
 
 
@@ -1199,6 +1532,10 @@ CREATE OR REPLACE TRIGGER "update_changeset_status_from_bespoke_tests" AFTER INS
 
 
 CREATE OR REPLACE TRIGGER "update_changeset_status_from_testcases" AFTER INSERT OR DELETE OR UPDATE ON "public"."changeset_testcases" FOR EACH ROW EXECUTE FUNCTION "public"."update_changeset_test_status"();
+
+
+
+CREATE OR REPLACE TRIGGER "update_testcase_last_run_trigger" AFTER INSERT OR UPDATE ON "public"."testcase_invocations" FOR EACH ROW EXECUTE FUNCTION "public"."update_testcase_last_run"();
 
 
 
@@ -1269,6 +1606,26 @@ ALTER TABLE ONLY "public"."testcase_environments"
 
 ALTER TABLE ONLY "public"."testcase_environments"
     ADD CONSTRAINT "testcase_environments_testcase_id_fkey" FOREIGN KEY ("testcase_id") REFERENCES "public"."testcases"("id") ON DELETE CASCADE;
+
+
+
+ALTER TABLE ONLY "public"."testcase_invocations"
+    ADD CONSTRAINT "testcase_invocations_changeset_id_fkey" FOREIGN KEY ("changeset_id") REFERENCES "public"."changesets"("id") ON DELETE SET NULL;
+
+
+
+ALTER TABLE ONLY "public"."testcase_invocations"
+    ADD CONSTRAINT "testcase_invocations_environment_id_fkey" FOREIGN KEY ("environment_id") REFERENCES "public"."environments"("id") ON DELETE SET NULL;
+
+
+
+ALTER TABLE ONLY "public"."testcase_invocations"
+    ADD CONSTRAINT "testcase_invocations_testcase_id_fkey" FOREIGN KEY ("testcase_id") REFERENCES "public"."testcases"("id") ON DELETE CASCADE;
+
+
+
+ALTER TABLE ONLY "public"."testcases"
+    ADD CONSTRAINT "testcases_changeset_id_fkey" FOREIGN KEY ("changeset_id") REFERENCES "public"."changesets"("id") ON DELETE SET NULL;
 
 
 
@@ -1487,6 +1844,34 @@ CREATE POLICY "Testcase environments are viewable by organization members" ON "p
 
 
 
+CREATE POLICY "Testcase invocations are deletable by organization admins and o" ON "public"."testcase_invocations" FOR DELETE USING ((EXISTS ( SELECT 1
+   FROM ("public"."testcases" "t"
+     JOIN "public"."organization_members" "om" ON (("t"."organization_id" = "om"."organization_id")))
+  WHERE (("t"."id" = "testcase_invocations"."testcase_id") AND ("om"."user_id" = "auth"."uid"()) AND ("om"."role" = ANY (ARRAY['admin'::"public"."user_role", 'owner'::"public"."user_role"]))))));
+
+
+
+CREATE POLICY "Testcase invocations are insertable by organization members" ON "public"."testcase_invocations" FOR INSERT WITH CHECK ((EXISTS ( SELECT 1
+   FROM ("public"."testcases" "t"
+     JOIN "public"."organization_members" "om" ON (("t"."organization_id" = "om"."organization_id")))
+  WHERE (("t"."id" = "testcase_invocations"."testcase_id") AND ("om"."user_id" = "auth"."uid"())))));
+
+
+
+CREATE POLICY "Testcase invocations are updatable by organization members" ON "public"."testcase_invocations" FOR UPDATE USING ((EXISTS ( SELECT 1
+   FROM ("public"."testcases" "t"
+     JOIN "public"."organization_members" "om" ON (("t"."organization_id" = "om"."organization_id")))
+  WHERE (("t"."id" = "testcase_invocations"."testcase_id") AND ("om"."user_id" = "auth"."uid"())))));
+
+
+
+CREATE POLICY "Testcase invocations are viewable by organization members" ON "public"."testcase_invocations" FOR SELECT USING ((EXISTS ( SELECT 1
+   FROM ("public"."testcases" "t"
+     JOIN "public"."organization_members" "om" ON (("t"."organization_id" = "om"."organization_id")))
+  WHERE (("t"."id" = "testcase_invocations"."testcase_id") AND ("om"."user_id" = "auth"."uid"())))));
+
+
+
 CREATE POLICY "Testcases are deletable by organization admins and owners" ON "public"."testcases" FOR DELETE USING (("auth"."uid"() IN ( SELECT "organization_members"."user_id"
    FROM "public"."organization_members"
   WHERE (("organization_members"."organization_id" = "testcases"."organization_id") AND ("organization_members"."role" = ANY (ARRAY['admin'::"public"."user_role", 'owner'::"public"."user_role"]))))));
@@ -1566,6 +1951,9 @@ ALTER TABLE "public"."profiles" ENABLE ROW LEVEL SECURITY;
 
 
 ALTER TABLE "public"."testcase_environments" ENABLE ROW LEVEL SECURITY;
+
+
+ALTER TABLE "public"."testcase_invocations" ENABLE ROW LEVEL SECURITY;
 
 
 ALTER TABLE "public"."testcases" ENABLE ROW LEVEL SECURITY;
@@ -1763,6 +2151,12 @@ GRANT USAGE ON SCHEMA "public" TO "service_role";
 
 
 
+GRANT ALL ON FUNCTION "public"."complete_testcase_run"("p_invocation_id" "uuid", "p_status" "public"."test_status", "p_result" "jsonb", "p_logs" "text") TO "anon";
+GRANT ALL ON FUNCTION "public"."complete_testcase_run"("p_invocation_id" "uuid", "p_status" "public"."test_status", "p_result" "jsonb", "p_logs" "text") TO "authenticated";
+GRANT ALL ON FUNCTION "public"."complete_testcase_run"("p_invocation_id" "uuid", "p_status" "public"."test_status", "p_result" "jsonb", "p_logs" "text") TO "service_role";
+
+
+
 GRANT ALL ON FUNCTION "public"."create_sample_data"("org_id" "uuid") TO "anon";
 GRANT ALL ON FUNCTION "public"."create_sample_data"("org_id" "uuid") TO "authenticated";
 GRANT ALL ON FUNCTION "public"."create_sample_data"("org_id" "uuid") TO "service_role";
@@ -1778,6 +2172,18 @@ GRANT ALL ON FUNCTION "public"."derive_test_status"("changeset_id" "uuid") TO "s
 GRANT ALL ON FUNCTION "public"."generate_uuid_from_string"("input_string" "text") TO "anon";
 GRANT ALL ON FUNCTION "public"."generate_uuid_from_string"("input_string" "text") TO "authenticated";
 GRANT ALL ON FUNCTION "public"."generate_uuid_from_string"("input_string" "text") TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."get_test_stats"("p_organization_id" "uuid", "p_time_range" "text") TO "anon";
+GRANT ALL ON FUNCTION "public"."get_test_stats"("p_organization_id" "uuid", "p_time_range" "text") TO "authenticated";
+GRANT ALL ON FUNCTION "public"."get_test_stats"("p_organization_id" "uuid", "p_time_range" "text") TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."get_testcase_invocations"() TO "anon";
+GRANT ALL ON FUNCTION "public"."get_testcase_invocations"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."get_testcase_invocations"() TO "service_role";
 
 
 
@@ -1853,6 +2259,12 @@ GRANT ALL ON FUNCTION "public"."import_verification_objective"("changeset_id" "u
 
 
 
+GRANT ALL ON FUNCTION "public"."run_testcase"("p_testcase_id" "uuid", "p_environment_id" "uuid", "p_changeset_id" "uuid") TO "anon";
+GRANT ALL ON FUNCTION "public"."run_testcase"("p_testcase_id" "uuid", "p_environment_id" "uuid", "p_changeset_id" "uuid") TO "authenticated";
+GRANT ALL ON FUNCTION "public"."run_testcase"("p_testcase_id" "uuid", "p_environment_id" "uuid", "p_changeset_id" "uuid") TO "service_role";
+
+
+
 GRANT ALL ON FUNCTION "public"."set_updated_at"() TO "anon";
 GRANT ALL ON FUNCTION "public"."set_updated_at"() TO "authenticated";
 GRANT ALL ON FUNCTION "public"."set_updated_at"() TO "service_role";
@@ -1862,6 +2274,12 @@ GRANT ALL ON FUNCTION "public"."set_updated_at"() TO "service_role";
 GRANT ALL ON FUNCTION "public"."update_changeset_test_status"() TO "anon";
 GRANT ALL ON FUNCTION "public"."update_changeset_test_status"() TO "authenticated";
 GRANT ALL ON FUNCTION "public"."update_changeset_test_status"() TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."update_testcase_last_run"() TO "anon";
+GRANT ALL ON FUNCTION "public"."update_testcase_last_run"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."update_testcase_last_run"() TO "service_role";
 
 
 
@@ -1964,15 +2382,33 @@ GRANT ALL ON TABLE "public"."testcase_details" TO "service_role";
 
 
 
+GRANT ALL ON TABLE "public"."testcase_details_view" TO "anon";
+GRANT ALL ON TABLE "public"."testcase_details_view" TO "authenticated";
+GRANT ALL ON TABLE "public"."testcase_details_view" TO "service_role";
+
+
+
 GRANT ALL ON TABLE "public"."testcase_environments" TO "anon";
 GRANT ALL ON TABLE "public"."testcase_environments" TO "authenticated";
 GRANT ALL ON TABLE "public"."testcase_environments" TO "service_role";
 
 
 
+GRANT ALL ON TABLE "public"."testcase_invocations" TO "anon";
+GRANT ALL ON TABLE "public"."testcase_invocations" TO "authenticated";
+GRANT ALL ON TABLE "public"."testcase_invocations" TO "service_role";
+
+
+
 GRANT ALL ON TABLE "public"."testcases" TO "anon";
 GRANT ALL ON TABLE "public"."testcases" TO "authenticated";
 GRANT ALL ON TABLE "public"."testcases" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."testcase_invocations_view" TO "anon";
+GRANT ALL ON TABLE "public"."testcase_invocations_view" TO "authenticated";
+GRANT ALL ON TABLE "public"."testcase_invocations_view" TO "service_role";
 
 
 
