@@ -24,3 +24,5 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **Security** Make sure to use row level security on all tables
 - **Authentication** Always check authentication close to where data is being accessed
 - **Users and Organizations** Structure authentication such that each user belongs to an organization.
+- **Data Population** When adding data, do not use hardcoded fallbacks, instead, add example data directly to the database.
+- **Migrations** When creating migrations remotely, also make sure to add them to supabase/migrations to keep the local project in sync with the remote.
