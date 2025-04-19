@@ -23,10 +23,26 @@ The page auto-updates as you edit files.
 
 Install [Docker Desktop](https://docs.docker.com/desktop/setup/install/mac-install/).
 
+```bash
+supabase login
+supabase link --project-ref evsiyukxzqxyxdfgrytq
+```
+
+Pull and seed your local database
+```bash
+supabase db pull
+supabase db dump --data-only > supabase/seed.sql
+supabase db reset
+```
+
 Start a local instance of supabase:
 ```bash
 supabase start
 ```
+
+**Important**
+If you're setting up an mcp server for supabase make sure you use the local postgres url instead of directly modifying
+the remote instance, as the migrations will get out of sync and can be a pain in the ass to fix.
 
 ## Learn More
 
