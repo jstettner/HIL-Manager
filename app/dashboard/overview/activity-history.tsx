@@ -4,54 +4,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { ActivityHistory as ActivityHistoryType, EventInfo } from "./types";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-
-const sampleActivityHistory: ActivityHistoryType = {
-  events: [
-    {
-      id: "4",
-      title: "Test Set Queued",
-      description:
-        "Changeset #1923 assessment was approved. Test set queued for execution.",
-      date: "30 minutes ago",
-      sentiment: "neutral",
-    },
-    {
-      id: "1",
-      title: "Host Offline - TM-STATION-001",
-      description:
-        "Environment server is currently unreachable (122.170.31.17).",
-      date: "2 hours ago",
-      sentiment: "negative",
-    },
-    {
-      id: "2",
-      title: "Current Draw Back Within Bounds - TM-POD-001",
-      description: "TM-POD-001 is healthy once again.",
-      date: "3 hours ago",
-      sentiment: "neutral",
-    },
-    {
-      id: "3",
-      title: "Overcurrent Protection Triggered - TM-POD-001",
-      description: "Overcurrent protection triggered on TM-POD-001.",
-      date: "3 hours ago",
-      sentiment: "negative",
-    },
-    {
-      id: "5",
-      title: "Test Set Passed",
-      description: "Changeset #1922 Test set passed.",
-      date: "4 hours ago",
-      sentiment: "positive",
-    },
-  ],
-};
-
-// Mocked API
-const fetchActivityHistory: () => Promise<ActivityHistoryType> = async () => {
-  await new Promise((resolve) => setTimeout(resolve, 400));
-  return sampleActivityHistory;
-};
+import { getActivityHistory } from "@/utils/supabase/schema";
 
 // TODO: Make this more closely match the actual component
 export function ActivityHistoryLoading() {
@@ -104,7 +57,7 @@ function HistoryItem({
 }
 
 export async function ActivityHistory() {
-  const history = await fetchActivityHistory();
+  const history = await getActivityHistory();
   return (
     <Card className="w-full">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
