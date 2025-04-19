@@ -8,15 +8,20 @@ import {
   Bot,
   Library,
 } from "lucide-react";
-import { Changeset, changesets } from "@/data/changeset-data";
 import PageHeader from "@/components/page-header";
 import { testCases } from "@/data/sample-data";
+import {
+  getChangesetDetails,
+  getCurrentUserOrganization,
+} from "@/utils/supabase/schema";
+import { Changeset } from "@/utils/supabase/types";
+import { redirect } from "next/navigation";
 
 type PageProps = {
   id: string;
 };
 
-function ChangesetOverview({ changeset }: { changeset: Changeset }) {
+function ChangesetOverview({ changeset }: { changeset: any }) {
   return (
     <div>
       <div className="flex items-center gap-4 mt-2 text-sm text-muted-foreground">
@@ -58,35 +63,86 @@ function ChangesetInfoCard({
   );
 }
 
-const fetchChangeset = (id: string) => {
-  const changeset = changesets.find((c) => c.id === id);
-  return changeset;
-};
-
 export default async function ChangesetPage({
   params,
 }: {
   params: Promise<PageProps>;
 }) {
+  // Check if user is authenticated by trying to get their organization
+  try {
+    const currentOrg = await getCurrentUserOrganization();
+    if (!currentOrg?.organization_id) {
+      redirect("/sign-in");
+    }
+  } catch (error) {
+    console.error("Error checking user organization:", error);
+    redirect("/sign-in");
+  }
+
   const pageParams = await params;
   const changesetId = pageParams.id;
 
-  const changeset = await fetchChangeset(changesetId);
+  // Fetch changeset details from Supabase
+  let changesetData;
+  try {
+    changesetData = await getChangesetDetails(changesetId);
 
-  if (!changeset) {
-    return <div>Changeset {changesetId} not found</div>;
+    if (!changesetData.changeset) {
+      return <div>Changeset {changesetId} not found</div>;
+    }
+  } catch (error) {
+    console.error("Error fetching changeset details:", error);
+    return <div>Error loading changeset {changesetId}</div>;
   }
 
-  const associatedTests = testCases
-    .filter((test) =>
-      changeset.testCases.some((testResult) => testResult.id === test.id),
-    )
-    .map((test) => ({
-      ...test,
-      status:
-        changeset.testCases.find((testResult) => testResult.id === test.id)
-          ?.status || "pending",
-    }));
+  // Adapt data for the UI
+  const changeset = {
+    id: changesetData.changeset.id || "",
+    title: changesetData.changeset.title || "",
+    description: changesetData.changeset.description || "",
+    testStatus: changesetData.changeset.test_status || "running",
+    author: changesetData.changeset.author || "",
+    status: changesetData.changeset.status || "open",
+    createdAt: changesetData.changeset.created_at || new Date().toISOString(),
+    updatedAt: changesetData.changeset.updated_at || new Date().toISOString(),
+    impactedSubsystems: changesetData.impactedSubsystems.map((s) => ({
+      name: s.name,
+      riskLevel: s.risk_level,
+      description: s.description || "",
+    })),
+    verificationObjectives: changesetData.verificationObjectives.map((o) => ({
+      objective: o.objective,
+      status: o.status,
+      notes: o.notes || undefined,
+    })),
+    plausibleFallout: changesetData.plausibleFallout.map((f) => ({
+      scenario: f.scenario,
+      severity: f.severity,
+      mitigation: f.mitigation || "",
+    })),
+    changedFiles: changesetData.changedFiles.map((f) => ({
+      path: f.path,
+      changeType: f.change_type,
+      linesAdded: f.lines_added,
+      linesRemoved: f.lines_removed,
+    })),
+    bespoke_tests: changesetData.bespokeTests.map((t) => ({
+      name: t.name,
+      description: t.description || "",
+      status: t.status,
+    })),
+  };
+
+  // Get associated testcases
+  const associatedTests = changesetData.testcases.map((testResult) => {
+    const testcase = testResult.testcase;
+    return {
+      id: testcase.id,
+      name: testcase.name,
+      duration: testcase.duration,
+      status: testResult.status,
+    };
+  });
 
   return (
     <div className="p-6">
@@ -216,9 +272,9 @@ export default async function ChangesetPage({
           }
           content={
             <div className="space-y-2">
-              {changeset.changedFiles.map((file) => (
+              {changeset.changedFiles.map((file, index) => (
                 <div
-                  key={file.path}
+                  key={index}
                   className="flex items-center gap-2 text-sm p-2 rounded-md bg-muted"
                 >
                   <FileCode className="w-4 h-4" />

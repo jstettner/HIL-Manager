@@ -1,4 +1,4 @@
-import { Changeset } from "@/data/changeset-data";
+import { TestStatus } from "@/utils/supabase/types";
 import Link from "next/link";
 import {
   GitMerge,
@@ -6,11 +6,29 @@ import {
   GitPullRequestArrow,
 } from "lucide-react";
 
+// Adapted Changeset type to match the UI expectations
+export interface UIChangeset {
+  id: string;
+  title: string;
+  description: string;
+  testStatus?: TestStatus;
+  author: string;
+  status: "open" | "merged" | "closed";
+  createdAt: string;
+  updatedAt: string;
+  testCases: any[]; // Not needed for row display
+  bespoke_tests: any[];
+  impactedSubsystems: any[];
+  verificationObjectives: any[];
+  plausibleFallout: any[];
+  changedFiles: any[];
+}
+
 function ChangesetStatusCircle({
   testStatus,
   changeSetStatus,
 }: {
-  testStatus: "passed" | "failed" | "running";
+  testStatus: TestStatus;
   changeSetStatus: string;
 }) {
   const borderStyle =
@@ -45,7 +63,7 @@ function ChangesetStatusCircle({
   );
 }
 
-export function ChangesetRow({ changeset }: { changeset: Changeset }) {
+export function ChangesetRow({ changeset }: { changeset: UIChangeset }) {
   const testStatus = changeset.testStatus ?? "running";
 
   return (

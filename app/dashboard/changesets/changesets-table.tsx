@@ -1,6 +1,5 @@
 import { Skeleton } from "@/components/ui/skeleton";
-import { Changeset } from "@/data/changeset-data";
-import { ChangesetRow } from "./changeset-row";
+import { ChangesetRow, UIChangeset } from "./changeset-row";
 
 export function ChangesetsTableLoading() {
   return (
@@ -15,7 +14,7 @@ export function ChangesetsTableLoading() {
   );
 }
 
-export function ChangesetsTable({ changesets }: { changesets: Changeset[] }) {
+export function ChangesetsTable({ changesets }: { changesets: UIChangeset[] }) {
   return (
     <div className="flex flex-col rounded-md border border-1 border-muted overflow-hidden">
       {changesets.map((changeset) => (

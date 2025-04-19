@@ -5,6 +5,7 @@ Make sure you have a recent version node.js version (v22.14.0) installed.
 I'd recommend installing pnpm instead of npm.
 
 Install project dependencies (this includes dev dependencies):
+
 ```bash
 pnpm install
 ```
@@ -28,7 +29,18 @@ supabase login
 supabase link --project-ref evsiyukxzqxyxdfgrytq
 ```
 
+Don't use this. Hard fix for migrations
+
+```bash
+# For each migration that exists remotely
+supabase migration repair --status reverted <>
+rm -rf supabase/migrations
+supabase db pull
+# Say yes to update remote migrations.
+```
+
 Pull and seed your local database
+
 ```bash
 supabase db pull
 supabase db dump --data-only > supabase/seed.sql
@@ -36,6 +48,7 @@ supabase db reset
 ```
 
 Start a local instance of supabase:
+
 ```bash
 supabase start
 ```
