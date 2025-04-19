@@ -12,12 +12,21 @@ pnpm install
 First, run the development server:
 
 ```bash
-pnpm run dev
+pnpm dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 The page auto-updates as you edit files.
+
+## Database
+
+Install [Docker Desktop](https://docs.docker.com/desktop/setup/install/mac-install/).
+
+Start a local instance of supabase:
+```bash
+supabase start
+```
 
 ## Learn More
 
