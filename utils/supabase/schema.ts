@@ -28,8 +28,14 @@ export const getCurrentUserOrganization = async () => {
   const supabase = await createClient();
 
   // First, try to get the current authenticated user
-  const { data: authData } = await supabase.auth.getSession();
-  const userId = authData?.session?.user?.id;
+  const { data: userData, error } = await supabase.auth.getUser();
+
+  if (error) {
+    console.error("Error fetching user:", error);
+    throw error;
+  }
+
+  const userId = userData?.user?.id;
 
   if (!userId) {
     console.error("No authenticated user found");
@@ -37,15 +43,15 @@ export const getCurrentUserOrganization = async () => {
   }
 
   // Get the organization for the current user
-  const { data, error } = await supabase
+  const { data, error: orgError } = await supabase
     .from("user_current_organization")
     .select("*")
     .eq("user_id", userId)
     .maybeSingle();
 
-  if (error) {
-    console.error("Error fetching current organization:", error);
-    throw error;
+  if (orgError) {
+    console.error("Error fetching current organization:", orgError);
+    throw orgError;
   }
 
   if (!data) {
@@ -154,12 +160,46 @@ export const getChangesetDetails = async (changesetId: string) => {
         return data;
       }),
     supabase
-      .from("bespoke_tests")
-      .select("*")
+      .from("testcases")
+      .select(
+        `
+        id, name, description, priority, duration, last_run,
+        invocations:testcase_invocations(status, completed_at)
+      `,
+      )
       .eq("changeset_id", changesetId)
-      .then(({ data, error }) => {
+      .then(async ({ data, error }) => {
         if (error) throw error;
-        return data;
+
+        // Transform testcases with changeset_id into bespoke tests format
+        return data.map((test) => {
+          // Get the most recent invocation status if available
+          let status = "pending";
+          if (test.invocations && test.invocations.length > 0) {
+            // Sort by completed_at to get the most recent completed invocation
+            const sortedInvocations = [...test.invocations]
+              .filter((inv) => inv.completed_at)
+              .sort((a, b) => {
+                const dateA = new Date(a.completed_at || 0);
+                const dateB = new Date(b.completed_at || 0);
+                return dateB.getTime() - dateA.getTime();
+              });
+
+            if (sortedInvocations.length > 0) {
+              status = sortedInvocations[0].status;
+            }
+          }
+
+          return {
+            id: test.id,
+            name: test.name,
+            description: test.description,
+            status: status,
+            priority: test.priority,
+            duration: test.duration,
+            last_run: test.last_run,
+          };
+        });
       }),
     supabase
       .from("impacted_subsystems")
@@ -284,6 +324,37 @@ export const createTestcase = async (
 
   if (error) {
     console.error("Error creating testcase:", error);
+    throw error;
+  }
+
+  return data;
+};
+
+export const createBespokeTest = async (bespokeTest: {
+  name: string;
+  description?: string;
+  priority?: Database["public"]["Enums"]["priority_level"];
+  duration?: number;
+  changeset_id: string;
+  organization_id: string;
+}) => {
+  // Bespoke tests are now just testcases with a changeset_id
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("testcases")
+    .insert({
+      name: bespokeTest.name,
+      description: bespokeTest.description,
+      priority: bespokeTest.priority || "medium",
+      duration: bespokeTest.duration || 0,
+      changeset_id: bespokeTest.changeset_id,
+      organization_id: bespokeTest.organization_id,
+    })
+    .select()
+    .single();
+
+  if (error) {
+    console.error("Error creating bespoke test:", error);
     throw error;
   }
 

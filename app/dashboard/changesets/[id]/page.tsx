@@ -127,9 +127,11 @@ export default async function ChangesetPage({
       linesRemoved: f.lines_removed,
     })),
     bespoke_tests: changesetData.bespokeTests.map((t) => ({
+      id: t.id,
       name: t.name,
       description: t.description || "",
       status: t.status,
+      priority: t.priority,
     })),
   };
 
@@ -308,9 +310,9 @@ export default async function ChangesetPage({
           }
           content={
             <div className="space-y-2">
-              {changeset.bespoke_tests.map((test, index) => (
+              {changeset.bespoke_tests.map((test) => (
                 <div
-                  key={index}
+                  key={test.id}
                   className="flex items-center gap-2 text-sm p-2 rounded-md bg-muted"
                 >
                   <Circle
@@ -328,6 +330,17 @@ export default async function ChangesetPage({
                       {test.description}
                     </div>
                   </div>
+                  <span
+                    className={`px-2 py-0.5 rounded-full text-xs ${
+                      test.priority === "high"
+                        ? "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300"
+                        : test.priority === "medium"
+                          ? "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300"
+                          : "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300"
+                    }`}
+                  >
+                    {test.priority}
+                  </span>
                 </div>
               ))}
             </div>
