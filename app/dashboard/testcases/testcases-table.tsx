@@ -78,9 +78,9 @@ function adaptTestCases(testcasesData: TestcaseDetails[]): TestCase[] {
 export async function TestcasesTable({
   searchParams,
 }: {
-  searchParams?: {
+  searchParams?: Promise<{
     page?: string;
-  };
+  }>;
 }) {
   const params = await searchParams;
   const page = Number(params?.page) || 1;

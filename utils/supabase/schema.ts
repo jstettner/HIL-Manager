@@ -748,15 +748,15 @@ export const getActivityHistory = async (
     };
 
     if (test.status === "passed") {
-      event.title = `Test Passed - ${test.testcase?.name || "Unknown Test"}`;
+      event.title = `Test Passed - ${(test.testcase as { name?: string })?.name || "Unknown Test"}`;
       event.description = `Test case passed successfully for changeset #${test.changeset_id}.`;
       event.sentiment = "positive";
     } else if (test.status === "failed") {
-      event.title = `Test Failed - ${test.testcase?.name || "Unknown Test"}`;
+      event.title = `Test Failed - ${(test.testcase as { name?: string })?.name || "Unknown Test"}`;
       event.description = `Test case failed for changeset #${test.changeset_id}.`;
       event.sentiment = "negative";
     } else if (test.status === "running") {
-      event.title = `Test Running - ${test.testcase?.name || "Unknown Test"}`;
+      event.title = `Test Running - ${(test.testcase as { name?: string })?.name || "Unknown Test"}`;
       event.description = `Test case is currently running for changeset #${test.changeset_id}.`;
       event.sentiment = "neutral";
     }

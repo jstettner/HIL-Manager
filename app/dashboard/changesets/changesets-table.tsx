@@ -52,13 +52,13 @@ function adaptChangesets(changesets: ChangesetSimple[]) {
 export async function ChangesetsTable({
   searchParams,
 }: {
-  searchParams?: {
+  searchParams?: Promise<{
     query?: string;
     page?: string;
     failed?: string;
     running?: string;
     passed?: string;
-  };
+  }>;
 }) {
   const params = await searchParams;
   // Get query parameters with defaults
@@ -109,7 +109,7 @@ export async function ChangesetsTable({
     // no difference since this is a server component?
     const startIndex = (page - 1) * CHANGESET_PAGE_SIZE;
     const endIndex = startIndex + CHANGESET_PAGE_SIZE;
-    const paginatedChangesets = filteredChangesets.snlice(startIndex, endIndex);
+    const paginatedChangesets = filteredChangesets.slice(startIndex, endIndex);
     const totalPages = Math.ceil(
       filteredChangesets.length / CHANGESET_PAGE_SIZE,
     );

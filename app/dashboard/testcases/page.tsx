@@ -10,9 +10,9 @@ import PageHeader from "@/components/page-header";
 export default function TestcasesPage({
   searchParams,
 }: {
-  searchParams?: {
+  searchParams?: Promise<{
     page?: string;
-  };
+  }>;
 }) {
   return (
     <div className="p-6">

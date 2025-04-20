@@ -12,13 +12,13 @@ import { Suspense } from "react";
 export default async function ChangesetsPage({
   searchParams,
 }: {
-  searchParams?: {
+  searchParams?: Promise<{
     query?: string;
     page?: string;
     failed?: string;
     running?: string;
     passed?: string;
-  };
+  }>;
 }) {
   return (
     <div className="p-6">
@@ -28,8 +28,12 @@ export default async function ChangesetsPage({
         icon={<GitPullRequest className="w-6 h-6" />}
       />
       <div className="w-full flex flex-row mb-4">
-        <ChangesetFilter />
-        <Search placeholder="Search changesets..." />
+        <Suspense fallback={<div className="w-1/2"></div>}>
+          <ChangesetFilter />
+        </Suspense>
+        <Suspense fallback={<div className="w-1/2"></div>}>
+          <Search placeholder="Search changesets..." />
+        </Suspense>
       </div>
       <Suspense fallback={<ChangesetsTableLoading />}>
         <ChangesetsTable searchParams={searchParams} />

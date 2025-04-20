@@ -16,7 +16,7 @@ import {
 import { Database } from "@/utils/supabase/types";
 import { redirect } from "next/navigation";
 
-type PageProps = {
+type ChangesetPageProps = {
   id: string;
 };
 
@@ -134,7 +134,7 @@ type ChangesetData = {
 export default async function ChangesetPage({
   params,
 }: {
-  params: Promise<PageProps>;
+  params: Promise<ChangesetPageProps>;
 }) {
   // Check if user is authenticated by trying to get their organization
   try {
