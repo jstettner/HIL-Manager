@@ -105,6 +105,8 @@ export async function ChangesetsTable({
     );
 
     // Pagination
+    // TODO: Should we move this to the getChangesets method or is there
+    // no difference since this is a server component?
     const startIndex = (page - 1) * CHANGESET_PAGE_SIZE;
     const endIndex = startIndex + CHANGESET_PAGE_SIZE;
     const paginatedChangesets = filteredChangesets.slice(startIndex, endIndex);

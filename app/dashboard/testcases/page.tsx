@@ -1,10 +1,19 @@
 import { Library } from "lucide-react";
 import { TipsFooter } from "@/components/ui/tips-footer";
-import { TestcasesTable } from "@/app/dashboard/testcases/testcases-table";
+import {
+  TestcasesTable,
+  TestcasesTableLoading,
+} from "@/app/dashboard/testcases/testcases-table";
 import { Suspense } from "react";
 import PageHeader from "@/components/page-header";
 
-export default function TestcasesPage() {
+export default function TestcasesPage({
+  searchParams,
+}: {
+  searchParams?: {
+    page?: string;
+  };
+}) {
   return (
     <div className="p-6">
       <PageHeader
@@ -13,8 +22,8 @@ export default function TestcasesPage() {
         icon={<Library className="w-6 h-6" />}
       />
 
-      <Suspense>
-        <TestcasesTable />
+      <Suspense fallback={<TestcasesTableLoading />}>
+        <TestcasesTable searchParams={searchParams} />
       </Suspense>
 
       <TipsFooter />
