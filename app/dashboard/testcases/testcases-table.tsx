@@ -82,7 +82,7 @@ export async function TestcasesTable({
     page?: string;
   };
 }) {
-  params = await searchParams;
+  const params = await searchParams;
   const page = Number(params?.page) || 1;
   const itemsPerPage = 10;
 

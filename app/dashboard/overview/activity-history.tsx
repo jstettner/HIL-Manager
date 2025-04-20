@@ -4,7 +4,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { ActivityHistory as ActivityHistoryType, EventInfo } from "./types";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { getActivityHistory } from "@/utils/supabase/schema";
+import { getActivityHistory, getCurrentUserOrganization } from "@/utils/supabase/schema";
 
 // TODO: Make this more closely match the actual component
 export function ActivityHistoryLoading() {
@@ -57,7 +57,13 @@ function HistoryItem({
 }
 
 export async function ActivityHistory() {
-  const history = await getActivityHistory();
+  // Get the current user's organization
+  const currentOrg = await getCurrentUserOrganization();
+  if (!currentOrg?.organization_id) {
+    throw new Error("No organization found for current user");
+  }
+  
+  const history = await getActivityHistory(currentOrg.organization_id);
   return (
     <Card className="w-full">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">

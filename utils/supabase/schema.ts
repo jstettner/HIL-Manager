@@ -74,14 +74,12 @@ export const getUserOrganizations = async () => {
   return data;
 };
 
-export const getEnvironments = async (organizationId?: string) => {
+export const getEnvironments = async (organizationId: string) => {
   const supabase = await createClient();
 
-  const query = supabase.from("environment_details").select("*");
-
-  if (organizationId) {
-    query.eq("organization_id", organizationId);
-  }
+  const query = supabase.from("environment_details")
+    .select("*")
+    .eq("organization_id", organizationId);
 
   const { data, error } = await query;
 
@@ -93,14 +91,12 @@ export const getEnvironments = async (organizationId?: string) => {
   return data;
 };
 
-export const getTestcases = async (organizationId?: string) => {
+export const getTestcases = async (organizationId: string) => {
   const supabase = await createClient();
 
-  const query = supabase.from("testcase_details").select("*");
-
-  if (organizationId) {
-    query.eq("organization_id", organizationId);
-  }
+  const query = supabase.from("testcase_details")
+    .select("*")
+    .eq("organization_id", organizationId);
 
   const { data, error } = await query;
 
@@ -112,14 +108,12 @@ export const getTestcases = async (organizationId?: string) => {
   return data;
 };
 
-export const getChangesets = async (organizationId?: string) => {
+export const getChangesets = async (organizationId: string) => {
   const supabase = await createClient();
 
-  const query = supabase.from("changeset_simple").select("*");
-
-  if (organizationId) {
-    query.eq("organization_id", organizationId);
-  }
+  const query = supabase.from("changeset_simple")
+    .select("*")
+    .eq("organization_id", organizationId);
 
   const { data, error } = await query;
 
@@ -465,16 +459,14 @@ export const addEnvironmentToTestcase = async (
 // New API functions for dashboard overview components
 
 export const getSystemStatus = async (
-  organizationId?: string,
+  organizationId: string,
 ): Promise<SystemStatus> => {
   const supabase = await createClient();
 
   // Get environments for health status counts
-  const query = supabase.from("environment_details").select("*");
-
-  if (organizationId) {
-    query.eq("organization_id", organizationId);
-  }
+  const query = supabase.from("environment_details")
+    .select("*")
+    .eq("organization_id", organizationId);
 
   const { data: environments, error: envError } = await query;
 
@@ -582,16 +574,14 @@ export const getSystemStatus = async (
 };
 
 export const getResolutionStats = async (
-  organizationId?: string,
+  organizationId: string,
 ): Promise<ResolutionStats> => {
   const supabase = await createClient();
 
   // Get testcases and their durations
-  const query = supabase.from("testcase_details").select("duration");
-
-  if (organizationId) {
-    query.eq("organization_id", organizationId);
-  }
+  const query = supabase.from("testcase_details")
+    .select("duration")
+    .eq("organization_id", organizationId);
 
   const { data: testcases, error: testError } = await query;
 
@@ -668,7 +658,7 @@ export const getResolutionStats = async (
 };
 
 export const getActivityHistory = async (
-  organizationId?: string,
+  organizationId: string,
 ): Promise<ActivityHistory> => {
   const supabase = await createClient();
 

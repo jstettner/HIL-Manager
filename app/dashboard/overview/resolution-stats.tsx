@@ -3,7 +3,7 @@ import { ClockFading, TrendingDown, TrendingUp } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import { ResolutionStats as ResolutionStatsType } from "./types";
-import { getResolutionStats } from "@/utils/supabase/schema";
+import { getResolutionStats, getCurrentUserOrganization } from "@/utils/supabase/schema";
 
 export function ResolutionStatsLoading() {
   return (
@@ -53,7 +53,13 @@ function StatContainer({
 }
 
 export async function ResolutionStats() {
-  const stats: ResolutionStatsType = await getResolutionStats();
+  // Get the current user's organization
+  const currentOrg = await getCurrentUserOrganization();
+  if (!currentOrg?.organization_id) {
+    throw new Error("No organization found for current user");
+  }
+  
+  const stats: ResolutionStatsType = await getResolutionStats(currentOrg.organization_id);
   return (
     <Card className="w-full">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
