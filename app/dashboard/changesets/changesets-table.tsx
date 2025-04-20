@@ -1,5 +1,5 @@
 import { Skeleton } from "@/components/ui/skeleton";
-import { ChangesetRow, UIChangeset } from "./changeset-row";
+import { ChangesetRow } from "./changeset-row";
 import { CHANGESET_PAGE_SIZE } from "./constants";
 import { ChangesetsPagination } from "./pagination";
 import {
@@ -109,7 +109,7 @@ export async function ChangesetsTable({
     // no difference since this is a server component?
     const startIndex = (page - 1) * CHANGESET_PAGE_SIZE;
     const endIndex = startIndex + CHANGESET_PAGE_SIZE;
-    const paginatedChangesets = filteredChangesets.slice(startIndex, endIndex);
+    const paginatedChangesets = filteredChangesets.snlice(startIndex, endIndex);
     const totalPages = Math.ceil(
       filteredChangesets.length / CHANGESET_PAGE_SIZE,
     );

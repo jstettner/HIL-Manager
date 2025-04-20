@@ -1,10 +1,13 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Activity, ChevronRight, Circle } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
-import { ActivityHistory as ActivityHistoryType, EventInfo } from "./types";
+import { EventInfo } from "./types";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { getActivityHistory, getCurrentUserOrganization } from "@/utils/supabase/schema";
+import {
+  getActivityHistory,
+  getCurrentUserOrganization,
+} from "@/utils/supabase/schema";
 
 // TODO: Make this more closely match the actual component
 export function ActivityHistoryLoading() {
@@ -62,7 +65,7 @@ export async function ActivityHistory() {
   if (!currentOrg?.organization_id) {
     throw new Error("No organization found for current user");
   }
-  
+
   const history = await getActivityHistory(currentOrg.organization_id);
   return (
     <Card className="w-full">

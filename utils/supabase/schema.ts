@@ -77,7 +77,8 @@ export const getUserOrganizations = async () => {
 export const getEnvironments = async (organizationId: string) => {
   const supabase = await createClient();
 
-  const query = supabase.from("environment_details")
+  const query = supabase
+    .from("environment_details")
     .select("*")
     .eq("organization_id", organizationId);
 
@@ -94,7 +95,8 @@ export const getEnvironments = async (organizationId: string) => {
 export const getTestcases = async (organizationId: string) => {
   const supabase = await createClient();
 
-  const query = supabase.from("testcase_details")
+  const query = supabase
+    .from("testcase_details")
     .select("*")
     .eq("organization_id", organizationId);
 
@@ -111,7 +113,8 @@ export const getTestcases = async (organizationId: string) => {
 export const getChangesets = async (organizationId: string) => {
   const supabase = await createClient();
 
-  const query = supabase.from("changeset_simple")
+  const query = supabase
+    .from("changeset_simple")
     .select("*")
     .eq("organization_id", organizationId);
 
@@ -464,7 +467,8 @@ export const getSystemStatus = async (
   const supabase = await createClient();
 
   // Get environments for health status counts
-  const query = supabase.from("environment_details")
+  const query = supabase
+    .from("environment_details")
     .select("*")
     .eq("organization_id", organizationId);
 
@@ -579,7 +583,8 @@ export const getResolutionStats = async (
   const supabase = await createClient();
 
   // Get testcases and their durations
-  const query = supabase.from("testcase_details")
+  const query = supabase
+    .from("testcase_details")
     .select("duration")
     .eq("organization_id", organizationId);
 

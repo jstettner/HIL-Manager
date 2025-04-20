@@ -15,6 +15,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 - **Imports**: Use absolute imports with `@/` prefix
 - **Types**: Use strict TypeScript, explicitly type React components and props
+- **Don't use type any**: Make sure to never use type `any`.
 - **Components**: Use functional components with React hooks
 - **Naming**: Use PascalCase for components, camelCase for variables and functions
 - **React**: Use Next.js App Router and React Server Components where appropriate

@@ -10,9 +10,12 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-import { SystemStatus as SystemStatusType, StatusInfo } from "./types";
+import { StatusInfo } from "./types";
 import { Skeleton } from "@/components/ui/skeleton";
-import { getSystemStatus, getCurrentUserOrganization } from "@/utils/supabase/schema";
+import {
+  getSystemStatus,
+  getCurrentUserOrganization,
+} from "@/utils/supabase/schema";
 
 function EventBanner({
   className,
@@ -73,7 +76,7 @@ export async function SystemStatus() {
   if (!currentOrg?.organization_id) {
     throw new Error("No organization found for current user");
   }
-  
+
   const status = await getSystemStatus(currentOrg.organization_id);
   return (
     <Card className="w-full">

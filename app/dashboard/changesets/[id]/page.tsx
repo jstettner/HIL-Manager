@@ -9,19 +9,57 @@ import {
   Library,
 } from "lucide-react";
 import PageHeader from "@/components/page-header";
-import { testCases } from "@/data/sample-data";
 import {
   getChangesetDetails,
   getCurrentUserOrganization,
 } from "@/utils/supabase/schema";
-import { Changeset } from "@/utils/supabase/types";
+import { Database } from "@/utils/supabase/types";
 import { redirect } from "next/navigation";
 
 type PageProps = {
   id: string;
 };
 
-function ChangesetOverview({ changeset }: { changeset: any }) {
+type FormattedChangeset = {
+  id: string;
+  title: string;
+  description: string;
+  testStatus: string;
+  author: string;
+  status: string;
+  createdAt: string;
+  updatedAt: string;
+  impactedSubsystems: {
+    name: string;
+    riskLevel: string;
+    description: string;
+  }[];
+  verificationObjectives: {
+    objective: string;
+    status: string;
+    notes?: string;
+  }[];
+  plausibleFallout: {
+    scenario: string;
+    severity: string;
+    mitigation: string;
+  }[];
+  changedFiles: {
+    path: string;
+    changeType: string;
+    linesAdded: number;
+    linesRemoved: number;
+  }[];
+  bespoke_tests: {
+    id: string;
+    name: string;
+    description: string;
+    status: string;
+    priority: string;
+  }[];
+};
+
+function ChangesetOverview({ changeset }: { changeset: FormattedChangeset }) {
   return (
     <div>
       <div className="flex items-center gap-4 mt-2 text-sm text-muted-foreground">
@@ -63,6 +101,36 @@ function ChangesetInfoCard({
   );
 }
 
+type AssociatedTest = {
+  id: string;
+  name: string;
+  duration: number;
+  status: string;
+};
+
+type ChangesetData = {
+  changeset: Database["public"]["Views"]["changeset_simple"]["Row"];
+  testcases: Array<{
+    testcase: {
+      id: string;
+      name: string;
+      duration: number;
+    };
+    status: Database["public"]["Enums"]["test_status"];
+  }>;
+  bespokeTests: Array<{
+    id: string;
+    name: string;
+    description: string | null;
+    status: string;
+    priority: string;
+  }>;
+  impactedSubsystems: Database["public"]["Tables"]["impacted_subsystems"]["Row"][];
+  verificationObjectives: Database["public"]["Tables"]["verification_objectives"]["Row"][];
+  plausibleFallout: Database["public"]["Tables"]["plausible_fallout"]["Row"][];
+  changedFiles: Database["public"]["Tables"]["changed_files"]["Row"][];
+};
+
 export default async function ChangesetPage({
   params,
 }: {
@@ -74,7 +142,7 @@ export default async function ChangesetPage({
     if (!currentOrg?.organization_id) {
       redirect("/sign-in");
     }
-  } catch (error) {
+  } catch (error: unknown) {
     console.error("Error checking user organization:", error);
     redirect("/sign-in");
   }
@@ -83,20 +151,20 @@ export default async function ChangesetPage({
   const changesetId = pageParams.id;
 
   // Fetch changeset details from Supabase
-  let changesetData;
+  let changesetData: ChangesetData;
   try {
     changesetData = await getChangesetDetails(changesetId);
 
     if (!changesetData.changeset) {
       return <div>Changeset {changesetId} not found</div>;
     }
-  } catch (error) {
+  } catch (error: unknown) {
     console.error("Error fetching changeset details:", error);
     return <div>Error loading changeset {changesetId}</div>;
   }
 
   // Adapt data for the UI
-  const changeset = {
+  const changeset: FormattedChangeset = {
     id: changesetData.changeset.id || "",
     title: changesetData.changeset.title || "",
     description: changesetData.changeset.description || "",
@@ -136,15 +204,17 @@ export default async function ChangesetPage({
   };
 
   // Get associated testcases
-  const associatedTests = changesetData.testcases.map((testResult) => {
-    const testcase = testResult.testcase;
-    return {
-      id: testcase.id,
-      name: testcase.name,
-      duration: testcase.duration,
-      status: testResult.status,
-    };
-  });
+  const associatedTests: AssociatedTest[] = changesetData.testcases.map(
+    (testResult) => {
+      const testcase = testResult.testcase;
+      return {
+        id: testcase.id,
+        name: testcase.name,
+        duration: testcase.duration,
+        status: testResult.status,
+      };
+    },
+  );
 
   return (
     <div className="p-6">
