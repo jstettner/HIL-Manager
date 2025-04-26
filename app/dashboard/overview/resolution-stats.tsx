@@ -3,29 +3,10 @@ import { ClockFading, TrendingDown, TrendingUp } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import { ResolutionStats as ResolutionStatsType } from "./types";
-
-const sampleResolutionStats: ResolutionStatsType = {
-  stats: [
-    {
-      id: "1",
-      title: "Average Time to Resolution",
-      description: "~2.5hr",
-      trend: "up",
-    },
-    {
-      id: "2",
-      title: "Average Testcase Duration",
-      description: "~1.8hr",
-      trend: "up",
-    },
-    {
-      id: "3",
-      title: "Average Testcase Overhead",
-      description: "~10m",
-      trend: "none",
-    },
-  ],
-};
+import {
+  getResolutionStats,
+  getCurrentUserOrganization,
+} from "@/utils/supabase/schema";
 
 export function ResolutionStatsLoading() {
   return (
@@ -74,14 +55,16 @@ function StatContainer({
   );
 }
 
-// Mocked API
-const fetchResolutionStats: () => Promise<ResolutionStatsType> = async () => {
-  await new Promise((resolve) => setTimeout(resolve, 400));
-  return sampleResolutionStats;
-};
-
 export async function ResolutionStats() {
-  const stats: ResolutionStatsType = await fetchResolutionStats();
+  // Get the current user's organization
+  const currentOrg = await getCurrentUserOrganization();
+  if (!currentOrg?.organization_id) {
+    throw new Error("No organization found for current user");
+  }
+
+  const stats: ResolutionStatsType = await getResolutionStats(
+    currentOrg.organization_id,
+  );
   return (
     <Card className="w-full">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">

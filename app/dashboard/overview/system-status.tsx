@@ -10,42 +10,12 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-import { SystemStatus as SystemStatusType, StatusInfo } from "./types";
+import { StatusInfo } from "./types";
 import { Skeleton } from "@/components/ui/skeleton";
-
-const sampleSystemStatus: SystemStatusType = {
-  counts: {
-    Critical: 1,
-    Warning: 1,
-    Healthy: 42,
-  },
-  outages: [
-    {
-      id: "1",
-      title: "Host Offline - TM-STATION-001",
-      description:
-        "Environment server is currently unreachable (122.170.31.17).",
-      date: "03:31, 2025-03-30",
-      priority: "high",
-    },
-  ],
-  warnings: [
-    {
-      id: "1",
-      title: "High Failure Rate - TM-SUIT-001",
-      description:
-        "7 out of the last 10 test cases failed on this host. Diagnostics recommended.",
-      date: "12:50, 2025-03-30",
-      priority: "high",
-    },
-  ],
-};
-
-// Mocked API
-const fetchSystemStatus: () => Promise<SystemStatusType> = async () => {
-  await new Promise((resolve) => setTimeout(resolve, 400));
-  return sampleSystemStatus;
-};
+import {
+  getSystemStatus,
+  getCurrentUserOrganization,
+} from "@/utils/supabase/schema";
 
 function EventBanner({
   className,
@@ -101,7 +71,13 @@ export function SystemStatusLoading() {
 }
 
 export async function SystemStatus() {
-  const status = await fetchSystemStatus();
+  // Get the current user's organization
+  const currentOrg = await getCurrentUserOrganization();
+  if (!currentOrg?.organization_id) {
+    throw new Error("No organization found for current user");
+  }
+
+  const status = await getSystemStatus(currentOrg.organization_id);
   return (
     <Card className="w-full">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
