@@ -9,51 +9,6 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      bespoke_tests: {
-        Row: {
-          changeset_id: string;
-          created_at: string;
-          description: string | null;
-          id: string;
-          name: string;
-          status: Database["public"]["Enums"]["test_status"];
-          updated_at: string;
-        };
-        Insert: {
-          changeset_id: string;
-          created_at?: string;
-          description?: string | null;
-          id?: string;
-          name: string;
-          status?: Database["public"]["Enums"]["test_status"];
-          updated_at?: string;
-        };
-        Update: {
-          changeset_id?: string;
-          created_at?: string;
-          description?: string | null;
-          id?: string;
-          name?: string;
-          status?: Database["public"]["Enums"]["test_status"];
-          updated_at?: string;
-        };
-        Relationships: [
-          {
-            foreignKeyName: "bespoke_tests_changeset_id_fkey";
-            columns: ["changeset_id"];
-            isOneToOne: false;
-            referencedRelation: "changeset_simple";
-            referencedColumns: ["id"];
-          },
-          {
-            foreignKeyName: "bespoke_tests_changeset_id_fkey";
-            columns: ["changeset_id"];
-            isOneToOne: false;
-            referencedRelation: "changesets";
-            referencedColumns: ["id"];
-          },
-        ];
-      };
       changed_files: {
         Row: {
           change_type: Database["public"]["Enums"]["file_change_type"];
@@ -102,65 +57,6 @@ export type Database = {
           },
         ];
       };
-      changeset_testcases: {
-        Row: {
-          changeset_id: string;
-          created_at: string;
-          id: string;
-          last_run: string | null;
-          status: Database["public"]["Enums"]["test_status"];
-          testcase_id: string;
-          updated_at: string;
-        };
-        Insert: {
-          changeset_id: string;
-          created_at?: string;
-          id?: string;
-          last_run?: string | null;
-          status?: Database["public"]["Enums"]["test_status"];
-          testcase_id: string;
-          updated_at?: string;
-        };
-        Update: {
-          changeset_id?: string;
-          created_at?: string;
-          id?: string;
-          last_run?: string | null;
-          status?: Database["public"]["Enums"]["test_status"];
-          testcase_id?: string;
-          updated_at?: string;
-        };
-        Relationships: [
-          {
-            foreignKeyName: "changeset_testcases_changeset_id_fkey";
-            columns: ["changeset_id"];
-            isOneToOne: false;
-            referencedRelation: "changeset_simple";
-            referencedColumns: ["id"];
-          },
-          {
-            foreignKeyName: "changeset_testcases_changeset_id_fkey";
-            columns: ["changeset_id"];
-            isOneToOne: false;
-            referencedRelation: "changesets";
-            referencedColumns: ["id"];
-          },
-          {
-            foreignKeyName: "changeset_testcases_testcase_id_fkey";
-            columns: ["testcase_id"];
-            isOneToOne: false;
-            referencedRelation: "testcase_details";
-            referencedColumns: ["id"];
-          },
-          {
-            foreignKeyName: "changeset_testcases_testcase_id_fkey";
-            columns: ["testcase_id"];
-            isOneToOne: false;
-            referencedRelation: "testcases";
-            referencedColumns: ["id"];
-          },
-        ];
-      };
       changesets: {
         Row: {
           author: string;
@@ -202,13 +98,6 @@ export type Database = {
             isOneToOne: false;
             referencedRelation: "organizations";
             referencedColumns: ["id"];
-          },
-          {
-            foreignKeyName: "changesets_organization_id_fkey";
-            columns: ["organization_id"];
-            isOneToOne: false;
-            referencedRelation: "user_organizations";
-            referencedColumns: ["organization_id"];
           },
         ];
       };
@@ -259,13 +148,6 @@ export type Database = {
             isOneToOne: false;
             referencedRelation: "organizations";
             referencedColumns: ["id"];
-          },
-          {
-            foreignKeyName: "environments_organization_id_fkey";
-            columns: ["organization_id"];
-            isOneToOne: false;
-            referencedRelation: "user_organizations";
-            referencedColumns: ["organization_id"];
           },
         ];
       };
@@ -347,27 +229,6 @@ export type Database = {
             referencedRelation: "organizations";
             referencedColumns: ["id"];
           },
-          {
-            foreignKeyName: "organization_members_organization_id_fkey";
-            columns: ["organization_id"];
-            isOneToOne: false;
-            referencedRelation: "user_organizations";
-            referencedColumns: ["organization_id"];
-          },
-          {
-            foreignKeyName: "organization_members_user_id_fkey";
-            columns: ["user_id"];
-            isOneToOne: false;
-            referencedRelation: "user_current_organization";
-            referencedColumns: ["user_id"];
-          },
-          {
-            foreignKeyName: "organization_members_user_id_fkey";
-            columns: ["user_id"];
-            isOneToOne: false;
-            referencedRelation: "user_organizations";
-            referencedColumns: ["user_id"];
-          },
         ];
       };
       organizations: {
@@ -444,6 +305,7 @@ export type Database = {
           email: string | null;
           full_name: string | null;
           id: string;
+          organization_id: string;
           updated_at: string;
         };
         Insert: {
@@ -453,6 +315,7 @@ export type Database = {
           email?: string | null;
           full_name?: string | null;
           id: string;
+          organization_id: string;
           updated_at?: string;
         };
         Update: {
@@ -462,6 +325,7 @@ export type Database = {
           email?: string | null;
           full_name?: string | null;
           id?: string;
+          organization_id?: string;
           updated_at?: string;
         };
         Relationships: [
@@ -473,25 +337,11 @@ export type Database = {
             referencedColumns: ["id"];
           },
           {
-            foreignKeyName: "profiles_default_organization_id_fkey";
-            columns: ["default_organization_id"];
+            foreignKeyName: "profiles_organization_id_fkey";
+            columns: ["organization_id"];
             isOneToOne: false;
-            referencedRelation: "user_organizations";
-            referencedColumns: ["organization_id"];
-          },
-          {
-            foreignKeyName: "profiles_id_fkey";
-            columns: ["id"];
-            isOneToOne: true;
-            referencedRelation: "user_current_organization";
-            referencedColumns: ["user_id"];
-          },
-          {
-            foreignKeyName: "profiles_id_fkey";
-            columns: ["id"];
-            isOneToOne: true;
-            referencedRelation: "user_organizations";
-            referencedColumns: ["user_id"];
+            referencedRelation: "organizations";
+            referencedColumns: ["id"];
           },
         ];
       };
@@ -500,18 +350,21 @@ export type Database = {
           created_at: string;
           environment_id: string;
           id: string;
+          organization_id: string;
           testcase_id: string;
         };
         Insert: {
           created_at?: string;
           environment_id: string;
           id?: string;
+          organization_id: string;
           testcase_id: string;
         };
         Update: {
           created_at?: string;
           environment_id?: string;
           id?: string;
+          organization_id?: string;
           testcase_id?: string;
         };
         Relationships: [
@@ -530,10 +383,24 @@ export type Database = {
             referencedColumns: ["id"];
           },
           {
+            foreignKeyName: "testcase_environments_organization_id_fkey";
+            columns: ["organization_id"];
+            isOneToOne: false;
+            referencedRelation: "organizations";
+            referencedColumns: ["id"];
+          },
+          {
             foreignKeyName: "testcase_environments_testcase_id_fkey";
             columns: ["testcase_id"];
             isOneToOne: false;
             referencedRelation: "testcase_details";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "testcase_environments_testcase_id_fkey";
+            columns: ["testcase_id"];
+            isOneToOne: false;
+            referencedRelation: "testcase_details_view";
             referencedColumns: ["id"];
           },
           {
@@ -545,8 +412,114 @@ export type Database = {
           },
         ];
       };
+      testcase_instances: {
+        Row: {
+          changeset_id: string | null;
+          completed_at: string | null;
+          created_at: string;
+          duration: number | null;
+          environment_id: string;
+          id: string;
+          logs: string | null;
+          organization_id: string;
+          result: Json | null;
+          started_at: string | null;
+          status: Database["public"]["Enums"]["test_status"];
+          testcase_id: string;
+          updated_at: string;
+        };
+        Insert: {
+          changeset_id?: string | null;
+          completed_at?: string | null;
+          created_at?: string;
+          duration?: number | null;
+          environment_id: string;
+          id?: string;
+          logs?: string | null;
+          organization_id: string;
+          result?: Json | null;
+          started_at?: string | null;
+          status?: Database["public"]["Enums"]["test_status"];
+          testcase_id: string;
+          updated_at?: string;
+        };
+        Update: {
+          changeset_id?: string | null;
+          completed_at?: string | null;
+          created_at?: string;
+          duration?: number | null;
+          environment_id?: string;
+          id?: string;
+          logs?: string | null;
+          organization_id?: string;
+          result?: Json | null;
+          started_at?: string | null;
+          status?: Database["public"]["Enums"]["test_status"];
+          testcase_id?: string;
+          updated_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "testcase_invocations_changeset_id_fkey";
+            columns: ["changeset_id"];
+            isOneToOne: false;
+            referencedRelation: "changeset_simple";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "testcase_invocations_changeset_id_fkey";
+            columns: ["changeset_id"];
+            isOneToOne: false;
+            referencedRelation: "changesets";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "testcase_invocations_environment_id_fkey";
+            columns: ["environment_id"];
+            isOneToOne: false;
+            referencedRelation: "environment_details";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "testcase_invocations_environment_id_fkey";
+            columns: ["environment_id"];
+            isOneToOne: false;
+            referencedRelation: "environments";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "testcase_invocations_organization_id_fkey";
+            columns: ["organization_id"];
+            isOneToOne: false;
+            referencedRelation: "organizations";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "testcase_invocations_testcase_id_fkey";
+            columns: ["testcase_id"];
+            isOneToOne: false;
+            referencedRelation: "testcase_details";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "testcase_invocations_testcase_id_fkey";
+            columns: ["testcase_id"];
+            isOneToOne: false;
+            referencedRelation: "testcase_details_view";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "testcase_invocations_testcase_id_fkey";
+            columns: ["testcase_id"];
+            isOneToOne: false;
+            referencedRelation: "testcases";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       testcases: {
         Row: {
+          changeset_id: string | null;
           created_at: string;
           description: string | null;
           duration: number;
@@ -558,6 +531,7 @@ export type Database = {
           updated_at: string;
         };
         Insert: {
+          changeset_id?: string | null;
           created_at?: string;
           description?: string | null;
           duration?: number;
@@ -569,6 +543,7 @@ export type Database = {
           updated_at?: string;
         };
         Update: {
+          changeset_id?: string | null;
           created_at?: string;
           description?: string | null;
           duration?: number;
@@ -581,18 +556,25 @@ export type Database = {
         };
         Relationships: [
           {
-            foreignKeyName: "testcases_organization_id_fkey";
-            columns: ["organization_id"];
+            foreignKeyName: "testcases_changeset_id_fkey";
+            columns: ["changeset_id"];
             isOneToOne: false;
-            referencedRelation: "organizations";
+            referencedRelation: "changeset_simple";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "testcases_changeset_id_fkey";
+            columns: ["changeset_id"];
+            isOneToOne: false;
+            referencedRelation: "changesets";
             referencedColumns: ["id"];
           },
           {
             foreignKeyName: "testcases_organization_id_fkey";
             columns: ["organization_id"];
             isOneToOne: false;
-            referencedRelation: "user_organizations";
-            referencedColumns: ["organization_id"];
+            referencedRelation: "organizations";
+            referencedColumns: ["id"];
           },
         ];
       };
@@ -664,13 +646,6 @@ export type Database = {
             referencedRelation: "organizations";
             referencedColumns: ["id"];
           },
-          {
-            foreignKeyName: "changesets_organization_id_fkey";
-            columns: ["organization_id"];
-            isOneToOne: false;
-            referencedRelation: "user_organizations";
-            referencedColumns: ["organization_id"];
-          },
         ];
       };
       environment_details: {
@@ -696,13 +671,6 @@ export type Database = {
             referencedRelation: "organizations";
             referencedColumns: ["id"];
           },
-          {
-            foreignKeyName: "environments_organization_id_fkey";
-            columns: ["organization_id"];
-            isOneToOne: false;
-            referencedRelation: "user_organizations";
-            referencedColumns: ["organization_id"];
-          },
         ];
       };
       testcase_details: {
@@ -727,12 +695,144 @@ export type Database = {
             referencedRelation: "organizations";
             referencedColumns: ["id"];
           },
+        ];
+      };
+      testcase_details_view: {
+        Row: {
+          bespoke_changeset_title: string | null;
+          changeset_id: string | null;
+          compatible_environment_ids: string[] | null;
+          compatible_environment_names: string[] | null;
+          created_at: string | null;
+          description: string | null;
+          duration: number | null;
+          id: string | null;
+          is_bespoke: boolean | null;
+          last_invocation: string | null;
+          last_run: string | null;
+          name: string | null;
+          organization_id: string | null;
+          organization_name: string | null;
+          priority: Database["public"]["Enums"]["priority_level"] | null;
+          updated_at: string | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "testcases_changeset_id_fkey";
+            columns: ["changeset_id"];
+            isOneToOne: false;
+            referencedRelation: "changeset_simple";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "testcases_changeset_id_fkey";
+            columns: ["changeset_id"];
+            isOneToOne: false;
+            referencedRelation: "changesets";
+            referencedColumns: ["id"];
+          },
           {
             foreignKeyName: "testcases_organization_id_fkey";
             columns: ["organization_id"];
             isOneToOne: false;
-            referencedRelation: "user_organizations";
-            referencedColumns: ["organization_id"];
+            referencedRelation: "organizations";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      testcase_invocations_view: {
+        Row: {
+          bespoke_testcase_changeset_id: string | null;
+          changeset_id: string | null;
+          changeset_title: string | null;
+          completed_at: string | null;
+          created_at: string | null;
+          duration: number | null;
+          environment_id: string | null;
+          environment_name: string | null;
+          id: string | null;
+          is_bespoke: boolean | null;
+          logs: string | null;
+          organization_id: string | null;
+          organization_name: string | null;
+          result: Json | null;
+          started_at: string | null;
+          status: Database["public"]["Enums"]["test_status"] | null;
+          testcase_description: string | null;
+          testcase_id: string | null;
+          testcase_name: string | null;
+          updated_at: string | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "testcase_invocations_changeset_id_fkey";
+            columns: ["changeset_id"];
+            isOneToOne: false;
+            referencedRelation: "changeset_simple";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "testcase_invocations_changeset_id_fkey";
+            columns: ["changeset_id"];
+            isOneToOne: false;
+            referencedRelation: "changesets";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "testcase_invocations_environment_id_fkey";
+            columns: ["environment_id"];
+            isOneToOne: false;
+            referencedRelation: "environment_details";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "testcase_invocations_environment_id_fkey";
+            columns: ["environment_id"];
+            isOneToOne: false;
+            referencedRelation: "environments";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "testcase_invocations_organization_id_fkey";
+            columns: ["organization_id"];
+            isOneToOne: false;
+            referencedRelation: "organizations";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "testcase_invocations_testcase_id_fkey";
+            columns: ["testcase_id"];
+            isOneToOne: false;
+            referencedRelation: "testcase_details";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "testcase_invocations_testcase_id_fkey";
+            columns: ["testcase_id"];
+            isOneToOne: false;
+            referencedRelation: "testcase_details_view";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "testcase_invocations_testcase_id_fkey";
+            columns: ["testcase_id"];
+            isOneToOne: false;
+            referencedRelation: "testcases";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "testcases_changeset_id_fkey";
+            columns: ["bespoke_testcase_changeset_id"];
+            isOneToOne: false;
+            referencedRelation: "changeset_simple";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "testcases_changeset_id_fkey";
+            columns: ["bespoke_testcase_changeset_id"];
+            isOneToOne: false;
+            referencedRelation: "changesets";
+            referencedColumns: ["id"];
           },
         ];
       };
@@ -745,35 +845,36 @@ export type Database = {
         };
         Relationships: [
           {
-            foreignKeyName: "profiles_default_organization_id_fkey";
+            foreignKeyName: "organization_members_organization_id_fkey";
             columns: ["organization_id"];
             isOneToOne: false;
             referencedRelation: "organizations";
             referencedColumns: ["id"];
           },
-          {
-            foreignKeyName: "profiles_default_organization_id_fkey";
-            columns: ["organization_id"];
-            isOneToOne: false;
-            referencedRelation: "user_organizations";
-            referencedColumns: ["organization_id"];
-          },
         ];
-      };
-      user_organizations: {
-        Row: {
-          full_name: string | null;
-          is_default: boolean | null;
-          organization_id: string | null;
-          organization_name: string | null;
-          role: Database["public"]["Enums"]["user_role"] | null;
-          user_email: string | null;
-          user_id: string | null;
-        };
-        Relationships: [];
       };
     };
     Functions: {
+      check_organization_access: {
+        Args: {
+          org_id: string;
+          required_roles: Database["public"]["Enums"]["user_role"][];
+        };
+        Returns: boolean;
+      };
+      check_same_organization: {
+        Args: { check_user_id: string; check_org_id: string };
+        Returns: boolean;
+      };
+      complete_testcase_run: {
+        Args: {
+          p_invocation_id: string;
+          p_status: Database["public"]["Enums"]["test_status"];
+          p_result?: Json;
+          p_logs?: string;
+        };
+        Returns: string;
+      };
       create_sample_data: {
         Args: { org_id: string };
         Returns: undefined;
@@ -786,14 +887,44 @@ export type Database = {
         Args: { input_string: string };
         Returns: string;
       };
-      import_bespoke_test: {
-        Args: {
+      get_test_stats: {
+        Args: { p_organization_id: string; p_time_range?: string };
+        Returns: Json;
+      };
+      get_testcase_invocations: {
+        Args: Record<PropertyKey, never>;
+        Returns: {
+          id: string;
+          testcase_id: string;
+          testcase_name: string;
+          environment_id: string;
+          environment_name: string;
           changeset_id: string;
-          name: string;
-          description: string;
+          changeset_title: string;
           status: Database["public"]["Enums"]["test_status"];
-        };
-        Returns: string;
+          started_at: string;
+          completed_at: string;
+          duration_seconds: number;
+          result: Json;
+          logs: string;
+          is_bespoke_test: boolean;
+        }[];
+      };
+      get_user_organizations: {
+        Args: Record<PropertyKey, never>;
+        Returns: {
+          user_id: string;
+          user_email: string;
+          full_name: string;
+          organization_id: string;
+          organization_name: string;
+          role: Database["public"]["Enums"]["user_role"];
+          is_default: boolean;
+        }[];
+      };
+      import_all_changesets: {
+        Args: Record<PropertyKey, never>;
+        Returns: undefined;
       };
       import_changed_file: {
         Args: {
@@ -817,6 +948,10 @@ export type Database = {
           updated_at: string;
         };
         Returns: string;
+      };
+      import_changeset_data: {
+        Args: Record<PropertyKey, never>;
+        Returns: undefined;
       };
       import_changeset_testcase: {
         Args: {
@@ -859,7 +994,50 @@ export type Database = {
         };
         Returns: string;
       };
+      import_pr_tm001: {
+        Args: Record<PropertyKey, never>;
+        Returns: undefined;
+      };
+      import_pr_tm002: {
+        Args: Record<PropertyKey, never>;
+        Returns: undefined;
+      };
+      import_simple_testcase: {
+        Args: {
+          org_id: string;
+          testcase_id: string;
+          testcase_name: string;
+          description: string;
+          changeset_id: string;
+        };
+        Returns: string;
+      };
       import_testcase: {
+        Args:
+          | {
+              org_id: string;
+              testcase_id: string;
+              testcase_name: string;
+              testcase_description: string;
+              duration: number;
+              last_run: string;
+              priority: Database["public"]["Enums"]["priority_level"];
+              compatible_environments: string[];
+            }
+          | {
+              org_id: string;
+              testcase_id: string;
+              testcase_name: string;
+              testcase_description: string;
+              duration: number;
+              last_run: string;
+              priority: Database["public"]["Enums"]["priority_level"];
+              compatible_environments: string[];
+              changeset_id?: string;
+            };
+        Returns: string;
+      };
+      import_testcase_with_changeset: {
         Args: {
           org_id: string;
           testcase_id: string;
@@ -869,6 +1047,7 @@ export type Database = {
           last_run: string;
           priority: Database["public"]["Enums"]["priority_level"];
           compatible_environments: string[];
+          changeset_id: string;
         };
         Returns: string;
       };
@@ -880,6 +1059,26 @@ export type Database = {
           notes: string;
         };
         Returns: string;
+      };
+      run_testcase: {
+        Args: {
+          p_testcase_id: string;
+          p_environment_id?: string;
+          p_changeset_id?: string;
+        };
+        Returns: string;
+      };
+      same_organization: {
+        Args: { target_user_id: string };
+        Returns: boolean;
+      };
+      user_belongs_to_organization: {
+        Args: { org_id: string };
+        Returns: boolean;
+      };
+      user_can_access_changeset: {
+        Args: { changeset_id: string };
+        Returns: boolean;
       };
       user_is_in_changeset_organization: {
         Args: { changeset_id: string };
@@ -893,7 +1092,13 @@ export type Database = {
       file_change_type: "added" | "modified" | "deleted";
       priority_level: "low" | "medium" | "high";
       risk_level: "low" | "medium" | "high" | "critical";
-      test_status: "passed" | "failed" | "running" | "pending";
+      test_status:
+        | "passed"
+        | "failed"
+        | "running"
+        | "pending"
+        | "proposed"
+        | "queued";
       user_role: "owner" | "admin" | "member";
       verification_status: "verified" | "pending" | "failed";
     };
@@ -903,43 +1108,130 @@ export type Database = {
   };
 };
 
-export type Tables<T extends keyof Database["public"]["Tables"]> =
-  Database["public"]["Tables"][T]["Row"];
-export type Enums<T extends keyof Database["public"]["Enums"]> =
-  Database["public"]["Enums"][T];
+type DefaultSchema = Database[Extract<keyof Database, "public">];
 
-// Simplified type definitions for common usage
-export type Environment = Tables<"environments">;
-export type EnvironmentDetails =
-  Database["public"]["Views"]["environment_details"]["Row"];
-export type Testcase = Tables<"testcases">;
-export type TestcaseDetails =
-  Database["public"]["Views"]["testcase_details"]["Row"];
-export type Changeset = Tables<"changesets">;
-export type ChangesetSimple =
-  Database["public"]["Views"]["changeset_simple"]["Row"];
-export type Organization = Tables<"organizations">;
-export type OrganizationMember = Tables<"organization_members">;
-export type UserOrganization =
-  Database["public"]["Views"]["user_organizations"]["Row"];
-export type UserCurrentOrganization =
-  Database["public"]["Views"]["user_current_organization"]["Row"];
-export type Profile = Tables<"profiles">;
-export type BespokeTest = Tables<"bespoke_tests">;
-export type ChangedFile = Tables<"changed_files">;
-export type ImpactedSubsystem = Tables<"impacted_subsystems">;
-export type PlausibleFallout = Tables<"plausible_fallout">;
-export type VerificationObjective = Tables<"verification_objectives">;
-export type ChangesetTestcase = Tables<"changeset_testcases">;
-export type TestcaseEnvironment = Tables<"testcase_environments">;
+export type Tables<
+  DefaultSchemaTableNameOrOptions extends
+    | keyof (DefaultSchema["Tables"] & DefaultSchema["Views"])
+    | { schema: keyof Database },
+  TableName extends DefaultSchemaTableNameOrOptions extends {
+    schema: keyof Database;
+  }
+    ? keyof (Database[DefaultSchemaTableNameOrOptions["schema"]]["Tables"] &
+        Database[DefaultSchemaTableNameOrOptions["schema"]]["Views"])
+    : never = never,
+> = DefaultSchemaTableNameOrOptions extends { schema: keyof Database }
+  ? (Database[DefaultSchemaTableNameOrOptions["schema"]]["Tables"] &
+      Database[DefaultSchemaTableNameOrOptions["schema"]]["Views"])[TableName] extends {
+      Row: infer R;
+    }
+    ? R
+    : never
+  : DefaultSchemaTableNameOrOptions extends keyof (DefaultSchema["Tables"] &
+        DefaultSchema["Views"])
+    ? (DefaultSchema["Tables"] &
+        DefaultSchema["Views"])[DefaultSchemaTableNameOrOptions] extends {
+        Row: infer R;
+      }
+      ? R
+      : never
+    : never;
 
-// Enums
-export type ChangesetStatus = Enums<"changeset_status">;
-export type EnvironmentStatus = Enums<"environment_status">;
-export type EnvironmentType = Enums<"environment_type">;
-export type FileChangeType = Enums<"file_change_type">;
-export type PriorityLevel = Enums<"priority_level">;
-export type RiskLevel = Enums<"risk_level">;
-export type TestStatus = Enums<"test_status">;
-export type UserRole = Enums<"user_role">;
-export type VerificationStatus = Enums<"verification_status">;
+export type TablesInsert<
+  DefaultSchemaTableNameOrOptions extends
+    | keyof DefaultSchema["Tables"]
+    | { schema: keyof Database },
+  TableName extends DefaultSchemaTableNameOrOptions extends {
+    schema: keyof Database;
+  }
+    ? keyof Database[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]
+    : never = never,
+> = DefaultSchemaTableNameOrOptions extends { schema: keyof Database }
+  ? Database[DefaultSchemaTableNameOrOptions["schema"]]["Tables"][TableName] extends {
+      Insert: infer I;
+    }
+    ? I
+    : never
+  : DefaultSchemaTableNameOrOptions extends keyof DefaultSchema["Tables"]
+    ? DefaultSchema["Tables"][DefaultSchemaTableNameOrOptions] extends {
+        Insert: infer I;
+      }
+      ? I
+      : never
+    : never;
+
+export type TablesUpdate<
+  DefaultSchemaTableNameOrOptions extends
+    | keyof DefaultSchema["Tables"]
+    | { schema: keyof Database },
+  TableName extends DefaultSchemaTableNameOrOptions extends {
+    schema: keyof Database;
+  }
+    ? keyof Database[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]
+    : never = never,
+> = DefaultSchemaTableNameOrOptions extends { schema: keyof Database }
+  ? Database[DefaultSchemaTableNameOrOptions["schema"]]["Tables"][TableName] extends {
+      Update: infer U;
+    }
+    ? U
+    : never
+  : DefaultSchemaTableNameOrOptions extends keyof DefaultSchema["Tables"]
+    ? DefaultSchema["Tables"][DefaultSchemaTableNameOrOptions] extends {
+        Update: infer U;
+      }
+      ? U
+      : never
+    : never;
+
+export type Enums<
+  DefaultSchemaEnumNameOrOptions extends
+    | keyof DefaultSchema["Enums"]
+    | { schema: keyof Database },
+  EnumName extends DefaultSchemaEnumNameOrOptions extends {
+    schema: keyof Database;
+  }
+    ? keyof Database[DefaultSchemaEnumNameOrOptions["schema"]]["Enums"]
+    : never = never,
+> = DefaultSchemaEnumNameOrOptions extends { schema: keyof Database }
+  ? Database[DefaultSchemaEnumNameOrOptions["schema"]]["Enums"][EnumName]
+  : DefaultSchemaEnumNameOrOptions extends keyof DefaultSchema["Enums"]
+    ? DefaultSchema["Enums"][DefaultSchemaEnumNameOrOptions]
+    : never;
+
+export type CompositeTypes<
+  PublicCompositeTypeNameOrOptions extends
+    | keyof DefaultSchema["CompositeTypes"]
+    | { schema: keyof Database },
+  CompositeTypeName extends PublicCompositeTypeNameOrOptions extends {
+    schema: keyof Database;
+  }
+    ? keyof Database[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"]
+    : never = never,
+> = PublicCompositeTypeNameOrOptions extends { schema: keyof Database }
+  ? Database[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"][CompositeTypeName]
+  : PublicCompositeTypeNameOrOptions extends keyof DefaultSchema["CompositeTypes"]
+    ? DefaultSchema["CompositeTypes"][PublicCompositeTypeNameOrOptions]
+    : never;
+
+export const Constants = {
+  public: {
+    Enums: {
+      changeset_status: ["open", "merged", "closed"],
+      environment_status: ["active", "inactive", "maintenance"],
+      environment_type: ["physical", "virtual"],
+      file_change_type: ["added", "modified", "deleted"],
+      priority_level: ["low", "medium", "high"],
+      risk_level: ["low", "medium", "high", "critical"],
+      test_status: [
+        "passed",
+        "failed",
+        "running",
+        "pending",
+        "proposed",
+        "queued",
+      ],
+      user_role: ["owner", "admin", "member"],
+      verification_status: ["verified", "pending", "failed"],
+    },
+  },
+} as const;

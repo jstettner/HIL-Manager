@@ -133,7 +133,7 @@ export const getChangesetDetails = async (changesetId: string) => {
   const [
     changesetData,
     testcasesData,
-    bespokeTestsData,
+    changesetSpecificTestcases,
     impactedSubsystemsData,
     verificationObjectivesData,
     plausibleFalloutData,
@@ -149,8 +149,8 @@ export const getChangesetDetails = async (changesetId: string) => {
         return data;
       }),
     supabase
-      .from("changeset_testcases")
-      .select("*, testcase:testcases(*)")
+      .from("testcase_invocations_view")
+      .select("*")
       .eq("changeset_id", changesetId)
       .then(({ data, error }) => {
         if (error) throw error;
@@ -235,7 +235,7 @@ export const getChangesetDetails = async (changesetId: string) => {
   return {
     changeset: changesetData,
     testcases: testcasesData,
-    bespokeTests: bespokeTestsData,
+    bespokeTests: changesetSpecificTestcases, // Keep the name for backward compatibility
     impactedSubsystems: impactedSubsystemsData,
     verificationObjectives: verificationObjectivesData,
     plausibleFallout: plausibleFalloutData,
@@ -327,7 +327,7 @@ export const createTestcase = async (
   return data;
 };
 
-export const createBespokeTest = async (bespokeTest: {
+export const createTestcaseForChangeset = async (testcase: {
   name: string;
   description?: string;
   priority?: Database["public"]["Enums"]["priority_level"];
@@ -335,23 +335,23 @@ export const createBespokeTest = async (bespokeTest: {
   changeset_id: string;
   organization_id: string;
 }) => {
-  // Bespoke tests are now just testcases with a changeset_id
+  // This creates a testcase that is specifically for a changeset by setting changeset_id
   const supabase = await createClient();
   const { data, error } = await supabase
     .from("testcases")
     .insert({
-      name: bespokeTest.name,
-      description: bespokeTest.description,
-      priority: bespokeTest.priority || "medium",
-      duration: bespokeTest.duration || 0,
-      changeset_id: bespokeTest.changeset_id,
-      organization_id: bespokeTest.organization_id,
+      name: testcase.name,
+      description: testcase.description,
+      priority: testcase.priority || "medium",
+      duration: testcase.duration || 0,
+      changeset_id: testcase.changeset_id,
+      organization_id: testcase.organization_id,
     })
     .select()
     .single();
 
   if (error) {
-    console.error("Error creating bespoke test:", error);
+    console.error("Error creating testcase for changeset:", error);
     throw error;
   }
 
@@ -379,15 +379,32 @@ export const createChangeset = async (
 export const addTestcaseToChangeset = async (
   changesetId: string,
   testcaseId: string,
+  environmentId: string,
   status: Database["public"]["Enums"]["test_status"] = "pending",
 ) => {
   const supabase = await createClient();
+
+  // Get organization ID from the testcase
+  const { data: testcase, error: testcaseError } = await supabase
+    .from("testcases")
+    .select("organization_id")
+    .eq("id", testcaseId)
+    .single();
+
+  if (testcaseError) {
+    console.error("Error getting testcase organization:", testcaseError);
+    throw testcaseError;
+  }
+
+  // Create a testcase invocation for this changeset
   const { data, error } = await supabase
-    .from("changeset_testcases")
+    .from("testcase_invocations")
     .insert({
       changeset_id: changesetId,
       testcase_id: testcaseId,
+      environment_id: environmentId,
       status,
+      organization_id: testcase.organization_id,
     })
     .select()
     .single();
@@ -401,22 +418,38 @@ export const addTestcaseToChangeset = async (
 };
 
 export const updateTestcaseStatus = async (
-  changesetId: string,
-  testcaseId: string,
+  invocationId: string,
   status: Database["public"]["Enums"]["test_status"],
 ) => {
   const supabase = await createClient();
   const { data, error } = await supabase
-    .from("changeset_testcases")
-    .update({ status, last_run: new Date().toISOString() })
-    .eq("changeset_id", changesetId)
-    .eq("testcase_id", testcaseId)
+    .from("testcase_invocations")
+    .update({
+      status,
+      completed_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+    })
+    .eq("id", invocationId)
     .select()
     .single();
 
   if (error) {
     console.error("Error updating testcase status:", error);
     throw error;
+  }
+
+  // Also update the testcase's last_run time
+  const { data: invocation } = await supabase
+    .from("testcase_invocations")
+    .select("testcase_id")
+    .eq("id", invocationId)
+    .single();
+
+  if (invocation?.testcase_id) {
+    await supabase
+      .from("testcases")
+      .update({ last_run: new Date().toISOString() })
+      .eq("id", invocation.testcase_id);
   }
 
   return data;
@@ -515,8 +548,8 @@ export const getSystemStatus = async (
 
   // Get testcase status to check for high failure rates
   const { data: testcases, error: testError } = await supabase
-    .from("changeset_testcases")
-    .select("*, testcase:testcases(name, id)")
+    .from("testcase_invocations_view")
+    .select("*")
     .order("created_at", { ascending: false })
     .limit(100);
 
@@ -532,15 +565,21 @@ export const getSystemStatus = async (
   >();
 
   testcases.forEach((tc) => {
-    // This is simplified - in a real implementation, you would have a relationship
-    // between testcases and the environments they ran on
-    const envId = tc.testcase.id.substring(0, 5); // Just using a substring of the ID as an example
+    // Now we use the actual environment_id from the invocation
+    const envId = tc.environment_id;
+
+    // Skip if environment_id is not present (should not happen after our migration)
+    if (!envId) {
+      console.warn("Missing environment_id in test invocation", tc.id);
+      return;
+    }
 
     if (!envFailureMap.has(envId)) {
       envFailureMap.set(envId, {
         failed: 0,
         total: 0,
-        name: `TM-${envId.toUpperCase()}`,
+        name:
+          tc.environment_name || `Env-${envId.substring(0, 5).toUpperCase()}`,
       });
     }
 
@@ -595,11 +634,11 @@ export const getResolutionStats = async (
     throw testError;
   }
 
-  // Get changeset_testcases for timing data
+  // Get testcase invocations for timing data
   const { data: testResults, error: resultError } = await supabase
-    .from("changeset_testcases")
-    .select("status, created_at, last_run")
-    .not("last_run", "is", null);
+    .from("testcase_invocations_view")
+    .select("status, created_at, completed_at")
+    .not("completed_at", "is", null);
 
   if (resultError) {
     console.error(
@@ -609,12 +648,12 @@ export const getResolutionStats = async (
     throw resultError;
   }
 
-  // Calculate resolution time (difference between created_at and last_run)
+  // Calculate resolution time (difference between created_at and completed_at)
   const resolutionTimes: number[] = [];
   testResults.forEach((result) => {
-    if (result.last_run && result.created_at) {
+    if (result.completed_at && result.created_at) {
       const created = new Date(result.created_at).getTime();
-      const resolved = new Date(result.last_run).getTime();
+      const resolved = new Date(result.completed_at).getTime();
       const diffInHours = (resolved - created) / (1000 * 60 * 60);
       resolutionTimes.push(diffInHours);
     }
@@ -682,11 +721,11 @@ export const getActivityHistory = async (
 
     // Get recent testcase runs
     supabase
-      .from("changeset_testcases")
+      .from("testcase_invocations_view")
       .select(
-        "id, status, last_run, testcase_id, changeset_id, testcase:testcases(name)",
+        "id, status, completed_at, testcase_id, changeset_id, testcase_name",
       )
-      .order("last_run", { ascending: false })
+      .order("completed_at", { ascending: false })
       .limit(5)
       .then(({ data, error }) => {
         if (error) throw error;
@@ -737,26 +776,26 @@ export const getActivityHistory = async (
 
   // Testcase events
   testcases.forEach((test) => {
-    if (!test.last_run) return;
+    if (!test.completed_at) return;
 
     const event: EventInfo = {
       id: `test-${test.id}`,
       title: "",
       description: "",
-      date: formatTimeAgo(test.last_run),
+      date: formatTimeAgo(test.completed_at),
       sentiment: "neutral",
     };
 
     if (test.status === "passed") {
-      event.title = `Test Passed - ${(test.testcase as { name?: string })?.name || "Unknown Test"}`;
+      event.title = `Test Passed - ${test.testcase_name || "Unknown Test"}`;
       event.description = `Test case passed successfully for changeset #${test.changeset_id}.`;
       event.sentiment = "positive";
     } else if (test.status === "failed") {
-      event.title = `Test Failed - ${(test.testcase as { name?: string })?.name || "Unknown Test"}`;
+      event.title = `Test Failed - ${test.testcase_name || "Unknown Test"}`;
       event.description = `Test case failed for changeset #${test.changeset_id}.`;
       event.sentiment = "negative";
     } else if (test.status === "running") {
-      event.title = `Test Running - ${(test.testcase as { name?: string })?.name || "Unknown Test"}`;
+      event.title = `Test Running - ${test.testcase_name || "Unknown Test"}`;
       event.description = `Test case is currently running for changeset #${test.changeset_id}.`;
       event.sentiment = "neutral";
     }

@@ -6,47 +6,6 @@ import {
   GitPullRequestArrow,
 } from "lucide-react";
 
-// Types for the arrays in the UIChangeset interface
-type TestCase = {
-  id: string;
-  name: string;
-  duration: number;
-  status: string;
-};
-
-type BespokeTest = {
-  id: string;
-  name: string;
-  description: string;
-  status: string;
-  priority: string;
-};
-
-type ImpactedSubsystem = {
-  name: string;
-  riskLevel: string;
-  description: string;
-};
-
-type VerificationObjective = {
-  objective: string;
-  status: string;
-  notes?: string;
-};
-
-type PlausibleFallout = {
-  scenario: string;
-  severity: string;
-  mitigation: string;
-};
-
-type ChangedFile = {
-  path: string;
-  changeType: string;
-  linesAdded: number;
-  linesRemoved: number;
-};
-
 // Adapted Changeset type to match the UI expectations
 export interface UIChangeset {
   id: string;
@@ -57,12 +16,6 @@ export interface UIChangeset {
   status: ChangesetStatus;
   createdAt: string;
   updatedAt: string;
-  testCases: TestCase[]; // Not needed for row display but typed properly
-  bespoke_tests: BespokeTest[];
-  impactedSubsystems: ImpactedSubsystem[];
-  verificationObjectives: VerificationObjective[];
-  plausibleFallout: PlausibleFallout[];
-  changedFiles: ChangedFile[];
 }
 
 function ChangesetStatusCircle({

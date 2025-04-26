@@ -40,12 +40,6 @@ function adaptChangesets(changesets: ChangesetSimple[]) {
     status: cs.status || "open",
     createdAt: cs.created_at || new Date().toISOString(),
     updatedAt: cs.updated_at || new Date().toISOString(),
-    testCases: [], // These fields aren't needed for the list view
-    bespoke_tests: [],
-    impactedSubsystems: [],
-    verificationObjectives: [],
-    plausibleFallout: [],
-    changedFiles: [],
   }));
 }
 
